@@ -15,6 +15,11 @@ namespace ActivityTracker2.Data
         {
         }
 
+        public DbSet<ApplicationUser> ApplicationUsers { get; set; }
+        public DbSet<Group> Groups { get; set; }
+        public DbSet<Activity> Activities { get; set; }
+        public DbSet<LogEntry> LogEntries { get; set; }
+
         protected override void OnModelCreating(ModelBuilder builder)
         {
             base.OnModelCreating(builder);

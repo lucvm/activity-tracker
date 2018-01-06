@@ -9,5 +9,17 @@ namespace ActivityTracker2.Models
     // Add profile data for application users by adding properties to the ApplicationUser class
     public class ApplicationUser : IdentityUser
     {
+        public int? TeacherID { get; set; }
+
+        public string UserType { get; set; }
+        public string FirstName { get; set; }
+        public string Prefix { get; set; }
+        public string LastName { get; set; }
+        public string Notes { get; set; }
+        public DateTime LastActive { get; set; }
+
+        public ICollection<Activity> Activities { get; set; }
+        public ICollection<UserGroup> UserGroups { get; set; }
+        public ICollection<ApplicationUser> Students { get; set; }
     }
 }
