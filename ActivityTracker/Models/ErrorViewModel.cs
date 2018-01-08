@@ -1,6 +1,6 @@
 using System;
 
-namespace ActivityTracker2.Models
+namespace ActivityTracker.Models
 {
     public class ErrorViewModel
     {

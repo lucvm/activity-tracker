@@ -2,7 +2,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
-using ActivityTracker2.Controllers;
+using ActivityTracker.Controllers;
 
 namespace Microsoft.AspNetCore.Mvc
 {

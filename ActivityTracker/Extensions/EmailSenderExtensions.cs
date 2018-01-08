@@ -3,9 +3,9 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text.Encodings.Web;
 using System.Threading.Tasks;
-using ActivityTracker2.Services;
+using ActivityTracker.Services;
 
-namespace ActivityTracker2.Services
+namespace ActivityTracker.Services
 {
     public static class EmailSenderExtensions
     {

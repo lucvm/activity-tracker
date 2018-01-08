@@ -4,9 +4,9 @@ using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
-using ActivityTracker2.Models;
+using ActivityTracker.Models;
 
-namespace ActivityTracker2.Data
+namespace ActivityTracker.Data
 {
     public class ApplicationDbContext : IdentityDbContext<ApplicationUser>
     {

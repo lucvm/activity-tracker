@@ -1,4 +1,4 @@
-﻿@using ActivityTracker2.Views.Manage
+﻿@using ActivityTracker.Views.Manage
 @inject SignInManager<ApplicationUser> SignInManager
 @{
     var hasExternalLogins = (await SignInManager.GetExternalAuthenticationSchemesAsync()).Any();

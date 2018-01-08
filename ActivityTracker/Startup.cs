@@ -8,11 +8,11 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
-using ActivityTracker2.Data;
-using ActivityTracker2.Models;
-using ActivityTracker2.Services;
+using ActivityTracker.Data;
+using ActivityTracker.Models;
+using ActivityTracker.Services;
 
-namespace ActivityTracker2
+namespace ActivityTracker
 {
     public class Startup
     {

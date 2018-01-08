@@ -5,7 +5,7 @@ using System.Threading.Tasks;
 using Microsoft.AspNetCore.Authentication;
 using Microsoft.AspNetCore.Identity;
 
-namespace ActivityTracker2.Models.ManageViewModels
+namespace ActivityTracker.Models.ManageViewModels
 {
     public class ExternalLoginsViewModel
     {

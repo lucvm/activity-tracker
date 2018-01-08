@@ -3,7 +3,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 using System;
 using System.Collections.Generic;
 
-namespace ActivityTracker2.Data.Migrations
+namespace ActivityTracker.Data.Migrations
 {
     public partial class CreateProfileData : Migration
     {

@@ -10,11 +10,11 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.Extensions.Logging;
 using Microsoft.Extensions.Options;
-using ActivityTracker2.Models;
-using ActivityTracker2.Models.AccountViewModels;
-using ActivityTracker2.Services;
+using ActivityTracker.Models;
+using ActivityTracker.Models.AccountViewModels;
+using ActivityTracker.Services;
 
-namespace ActivityTracker2.Controllers
+namespace ActivityTracker.Controllers
 {
     [Authorize]
     [Route("[controller]/[action]")]

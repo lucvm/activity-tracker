@@ -10,11 +10,11 @@ using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
 using Microsoft.Extensions.Options;
-using ActivityTracker2.Models;
-using ActivityTracker2.Models.ManageViewModels;
-using ActivityTracker2.Services;
+using ActivityTracker.Models;
+using ActivityTracker.Models.ManageViewModels;
+using ActivityTracker.Services;
 
-namespace ActivityTracker2.Controllers
+namespace ActivityTracker.Controllers
 {
     [Authorize]
     [Route("[controller]/[action]")]
@@ -495,7 +495,7 @@ namespace ActivityTracker2.Controllers
         {
             return string.Format(
                 AuthenicatorUriFormat,
-                _urlEncoder.Encode("ActivityTracker2"),
+                _urlEncoder.Encode("ActivityTracker"),
                 _urlEncoder.Encode(email),
                 unformattedKey);
         }

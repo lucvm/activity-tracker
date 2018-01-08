@@ -4,7 +4,7 @@ using System.ComponentModel.DataAnnotations;
 using System.Linq;
 using System.Threading.Tasks;
 
-namespace ActivityTracker2.Models.AccountViewModels
+namespace ActivityTracker.Models.AccountViewModels
 {
     public class LoginWithRecoveryCodeViewModel
     {

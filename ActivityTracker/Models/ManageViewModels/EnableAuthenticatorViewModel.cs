@@ -5,7 +5,7 @@ using System.ComponentModel.DataAnnotations;
 using System.Linq;
 using System.Threading.Tasks;
 
-namespace ActivityTracker2.Models.ManageViewModels
+namespace ActivityTracker.Models.ManageViewModels
 {
     public class EnableAuthenticatorViewModel
     {

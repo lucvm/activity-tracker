@@ -4,10 +4,10 @@ using System.Diagnostics;
 using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
-using ActivityTracker2.Models;
+using ActivityTracker.Models;
 using Microsoft.AspNetCore.Authorization;
 
-namespace ActivityTracker2.Controllers
+namespace ActivityTracker.Controllers
 {
     public class HomeController : Controller
     {
