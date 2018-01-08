@@ -9,7 +9,7 @@ namespace ActivityTracker.Models
     // Add profile data for application users by adding properties to the ApplicationUser class
     public class ApplicationUser : IdentityUser
     {
-        public int? TeacherID { get; set; }
+        public string TeacherID { get; set; }
 
         public string UserType { get; set; }
         public string FirstName { get; set; }

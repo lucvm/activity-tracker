@@ -72,7 +72,7 @@ namespace ActivityTracker.Data.Migrations
                 table: "User",
                 nullable: true);
 
-            migrationBuilder.AddColumn<int>(
+            migrationBuilder.AddColumn<string>(
                 name: "TeacherID",
                 table: "User",
                 nullable: true);
@@ -94,13 +94,13 @@ namespace ActivityTracker.Data.Migrations
                     ID = table.Column<int>(nullable: false)
                         .Annotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn),
                     ApplicationUserID = table.Column<string>(nullable: true),
-                    Complete = table.Column<bool>(nullable: false),
-                    Difficulty = table.Column<int>(nullable: false),
-                    FunFactor = table.Column<int>(nullable: false),
+                    Complete = table.Column<bool>(nullable: true),
+                    Difficulty = table.Column<int>(nullable: true),
+                    FunFactor = table.Column<int>(nullable: true),
                     Name = table.Column<string>(nullable: true),
                     Notes = table.Column<string>(nullable: true),
                     StartDate = table.Column<DateTime>(nullable: false),
-                    TimeSpent = table.Column<int>(nullable: false)
+                    TimeSpent = table.Column<int>(nullable: true)
                 },
                 constraints: table =>
                 {
@@ -135,7 +135,7 @@ namespace ActivityTracker.Data.Migrations
                     ActivityID = table.Column<int>(nullable: false),
                     Date = table.Column<DateTime>(nullable: false),
                     Notes = table.Column<string>(nullable: true),
-                    TimeSpent = table.Column<int>(nullable: false)
+                    TimeSpent = table.Column<int>(nullable: true)
                 },
                 constraints: table =>
                 {

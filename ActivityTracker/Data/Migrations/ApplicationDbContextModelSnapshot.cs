@@ -27,11 +27,11 @@ namespace ActivityTracker.Data.Migrations
 
                     b.Property<string>("ApplicationUserID");
 
-                    b.Property<bool>("Complete");
+                    b.Property<bool?>("Complete");
 
-                    b.Property<int>("Difficulty");
+                    b.Property<int?>("Difficulty");
 
-                    b.Property<int>("FunFactor");
+                    b.Property<int?>("FunFactor");
 
                     b.Property<string>("Name");
 
@@ -39,7 +39,7 @@ namespace ActivityTracker.Data.Migrations
 
                     b.Property<DateTime>("StartDate");
 
-                    b.Property<int>("TimeSpent");
+                    b.Property<int?>("TimeSpent");
 
                     b.HasKey("ID");
 
@@ -93,7 +93,7 @@ namespace ActivityTracker.Data.Migrations
 
                     b.Property<string>("SecurityStamp");
 
-                    b.Property<int?>("TeacherID");
+                    b.Property<string>("TeacherID");
 
                     b.Property<bool>("TwoFactorEnabled");
 
@@ -140,7 +140,7 @@ namespace ActivityTracker.Data.Migrations
 
                     b.Property<string>("Notes");
 
-                    b.Property<int>("TimeSpent");
+                    b.Property<int?>("TimeSpent");
 
                     b.HasKey("ID");
 

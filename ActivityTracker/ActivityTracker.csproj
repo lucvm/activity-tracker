@@ -16,6 +16,8 @@
     <Compile Remove="Data\Migrations\20180107204650_AddProfileData.Designer.cs" />
     <Compile Remove="Data\Migrations\20180107225659_CreateProfileData.cs" />
     <Compile Remove="Data\Migrations\20180107225659_CreateProfileData.Designer.cs" />
+    <Compile Remove="Data\Migrations\20180108004811_CreateProfileData.cs" />
+    <Compile Remove="Data\Migrations\20180108004811_CreateProfileData.Designer.cs" />
   </ItemGroup>
 
 
