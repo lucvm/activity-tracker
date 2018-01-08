@@ -1,0 +1,69 @@
+﻿@model ActivityTracker.Models.Activity
+
+@{
+    ViewData["Title"] = "Edit";
+}
+
+<h2>Edit</h2>
+
+<h4>Activity</h4>
+<hr />
+<div class="row">
+    <div class="col-md-4">
+        <form asp-action="Edit">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <input type="hidden" asp-for="ID" />
+            <div class="form-group">
+                <label asp-for="ApplicationUserID" class="control-label"></label>
+                <select asp-for="ApplicationUserID" class="form-control" asp-items="ViewBag.ApplicationUserID"></select>
+                <span asp-validation-for="ApplicationUserID" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Name" class="control-label"></label>
+                <input asp-for="Name" class="form-control" />
+                <span asp-validation-for="Name" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="StartDate" class="control-label"></label>
+                <input asp-for="StartDate" class="form-control" />
+                <span asp-validation-for="StartDate" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="TimeSpent" class="control-label"></label>
+                <input asp-for="TimeSpent" class="form-control" />
+                <span asp-validation-for="TimeSpent" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Complete" class="control-label"></label>
+                <input asp-for="Complete" class="form-control" />
+                <span asp-validation-for="Complete" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="FunFactor" class="control-label"></label>
+                <input asp-for="FunFactor" class="form-control" />
+                <span asp-validation-for="FunFactor" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Difficulty" class="control-label"></label>
+                <input asp-for="Difficulty" class="form-control" />
+                <span asp-validation-for="Difficulty" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Notes" class="control-label"></label>
+                <input asp-for="Notes" class="form-control" />
+                <span asp-validation-for="Notes" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <input type="submit" value="Save" class="btn btn-default" />
+            </div>
+        </form>
+    </div>
+</div>
+
+<div>
+    <a asp-action="Index">Back to List</a>
+</div>
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}

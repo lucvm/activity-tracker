@@ -11,13 +11,11 @@ namespace ActivityTracker.Controllers
 {
     public class HomeController : Controller
     {
-        [Authorize]
         public IActionResult Index()
         {
             return View();
         }
         
-        [Authorize]
         public IActionResult About()
         {
             ViewData["Message"] = "Your application description page.";
