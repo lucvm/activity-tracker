@@ -1,60 +1,55 @@
 ﻿@model ActivityTracker.Models.Activity
 
 @{
-    ViewData["Title"] = "Details";
+    ViewData["Title"] = "Edit";
 }
 
-<h2>Details</h2>
+<h2>Edit</h2>
+
+<h4>Activity</h4>
+<hr />
+<div class="row">
+    <div class="col-md-4">
+        <form asp-action="Edit">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <div class="form-group">
+                <label asp-for="Name" class="control-label"></label>
+                <input asp-for="Name" class="form-control" />
+                <span asp-validation-for="Name" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <div class="checkbox">
+                    <label>
+                        <input asp-for="Complete" /> @Html.DisplayNameFor(model => model.Complete)
+                    </label>
+                </div>
+            </div>
+            <div class="form-group">
+                <label asp-for="FunFactor" class="control-label"></label>
+                <input asp-for="FunFactor" class="form-control" />
+                <span asp-validation-for="FunFactor" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Difficulty" class="control-label"></label>
+                <input asp-for="Difficulty" class="form-control" />
+                <span asp-validation-for="Difficulty" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Notes" class="control-label"></label>
+                <input asp-for="Notes" class="form-control" />
+                <span asp-validation-for="Notes" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <input type="submit" value="Save" class="btn btn-default" />
+            </div>
+        </form>
+    </div>
+</div>
 
 <div>
-    <h4>Activity</h4>
-    <hr />
-    <dl class="dl-horizontal">
-        <dt>
-            @Html.DisplayNameFor(model => model.Name)
-        </dt>
-        <dd>
-            @Html.DisplayFor(model => model.Name)
-        </dd>
-        <dt>
-            @Html.DisplayNameFor(model => model.StartDate)
-        </dt>
-        <dd>
-            @Html.DisplayFor(model => model.StartDate)
-        </dd>
-        <dt>
-            @Html.DisplayNameFor(model => model.TimeSpent)
-        </dt>
-        <dd>
-            @Html.DisplayFor(model => model.TimeSpent)
-        </dd>
-        <dt>
-            @Html.DisplayNameFor(model => model.Complete)
-        </dt>
-        <dd>
-            @Html.DisplayFor(model => model.Complete)
-        </dd>
-        <dt>
-            @Html.DisplayNameFor(model => model.FunFactor)
-        </dt>
-        <dd>
-            @Html.DisplayFor(model => model.FunFactor)
-        </dd>
-        <dt>
-            @Html.DisplayNameFor(model => model.Difficulty)
-        </dt>
-        <dd>
-            @Html.DisplayFor(model => model.Difficulty)
-        </dd>
-        <dt>
-            @Html.DisplayNameFor(model => model.Notes)
-        </dt>
-        <dd>
-            @Html.DisplayFor(model => model.Notes)
-        </dd>
-    </dl>
-</div>
-<div>
-    <a asp-action="Edit" asp-route-id="@Model.ID">Edit</a> |
     <a asp-action="Index">Back to List</a>
 </div>
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}

@@ -25,24 +25,6 @@ namespace ActivityTracker.Controllers
             return View(await _context.Activities.ToListAsync());
         }
 
-        // GET: Activities/Details/5
-        public async Task<IActionResult> Details(int? id)
-        {
-            if (id == null)
-            {
-                return NotFound();
-            }
-
-            var activity = await _context.Activities
-                .SingleOrDefaultAsync(m => m.ID == id);
-            if (activity == null)
-            {
-                return NotFound();
-            }
-
-            return View(activity);
-        }
-
         // GET: Activities/Create
         public IActionResult Create()
         {
@@ -65,8 +47,8 @@ namespace ActivityTracker.Controllers
             return View(activity);
         }
 
-        // GET: Activities/Edit/5
-        public async Task<IActionResult> Edit(int? id)
+        // GET: Activities/Details/5
+        public async Task<IActionResult> Details(int? id)
         {
             if (id == null)
             {
