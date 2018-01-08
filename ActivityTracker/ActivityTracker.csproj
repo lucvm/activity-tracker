@@ -5,6 +5,19 @@
     <UserSecretsId>aspnet-ActivityTracker2-F18CCEAE-BAAB-4C2F-9665-09A6697A4EAD</UserSecretsId>
   </PropertyGroup>
 
+  <ItemGroup>
+    <Compile Remove="Data\Migrations\20180105235527_ProfileData.cs" />
+    <Compile Remove="Data\Migrations\20180105235527_ProfileData.Designer.cs" />
+    <Compile Remove="Data\Migrations\20180106025549_UserType.cs" />
+    <Compile Remove="Data\Migrations\20180106025549_UserType.Designer.cs" />
+    <Compile Remove="Data\Migrations\20180107201144_user.cs" />
+    <Compile Remove="Data\Migrations\20180107201144_user.Designer.cs" />
+    <Compile Remove="Data\Migrations\20180107204650_AddProfileData.cs" />
+    <Compile Remove="Data\Migrations\20180107204650_AddProfileData.Designer.cs" />
+    <Compile Remove="Data\Migrations\20180107225659_CreateProfileData.cs" />
+    <Compile Remove="Data\Migrations\20180107225659_CreateProfileData.Designer.cs" />
+  </ItemGroup>
+
 
   <ItemGroup>
     <PackageReference Include="Microsoft.AspNetCore.All" Version="2.0.3" />

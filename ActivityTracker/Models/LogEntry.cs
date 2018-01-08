@@ -11,7 +11,7 @@ namespace ActivityTracker2.Models
         public int ActivityID { get; set; }
 
         public DateTime Date { get; set; }
-        public int TimeSpent { get; set; }
+        public int? TimeSpent { get; set; }
         public string Notes { get; set; }
     }
 }

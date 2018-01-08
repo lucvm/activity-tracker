@@ -11,14 +11,43 @@ using System;
 namespace ActivityTracker2.Data.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    partial class ApplicationDbContextModelSnapshot : ModelSnapshot
+    [Migration("20180108004811_CreateProfileData")]
+    partial class CreateProfileData
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
                 .HasAnnotation("ProductVersion", "2.0.1-rtm-125")
                 .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+            modelBuilder.Entity("ActivityTracker2.Models.Activity", b =>
+                {
+                    b.Property<int>("ID")
+                        .ValueGeneratedOnAdd();
+
+                    b.Property<string>("ApplicationUserID");
+
+                    b.Property<bool>("Complete");
+
+                    b.Property<int>("Difficulty");
+
+                    b.Property<int>("FunFactor");
+
+                    b.Property<string>("Name");
+
+                    b.Property<string>("Notes");
+
+                    b.Property<DateTime>("StartDate");
+
+                    b.Property<int>("TimeSpent");
+
+                    b.HasKey("ID");
+
+                    b.HasIndex("ApplicationUserID");
+
+                    b.ToTable("Activity");
+                });
 
             modelBuilder.Entity("ActivityTracker2.Models.ApplicationUser", b =>
                 {
@@ -26,6 +55,8 @@ namespace ActivityTracker2.Data.Migrations
                         .ValueGeneratedOnAdd();
 
                     b.Property<int>("AccessFailedCount");
+
+                    b.Property<string>("ApplicationUserId");
 
                     b.Property<string>("ConcurrencyStamp")
                         .IsConcurrencyToken();
@@ -74,6 +105,8 @@ namespace ActivityTracker2.Data.Migrations
 
                     b.HasKey("Id");
 
+                    b.HasIndex("ApplicationUserId");
+
                     b.HasIndex("NormalizedEmail")
                         .HasName("EmailIndex");
 
@@ -82,7 +115,52 @@ namespace ActivityTracker2.Data.Migrations
                         .HasName("UserNameIndex")
                         .HasFilter("[NormalizedUserName] IS NOT NULL");
 
-                    b.ToTable("AspNetUsers");
+                    b.ToTable("User");
+                });
+
+            modelBuilder.Entity("ActivityTracker2.Models.Group", b =>
+                {
+                    b.Property<int>("ID")
+                        .ValueGeneratedOnAdd();
+
+                    b.Property<string>("Name");
+
+                    b.HasKey("ID");
+
+                    b.ToTable("Group");
+                });
+
+            modelBuilder.Entity("ActivityTracker2.Models.LogEntry", b =>
+                {
+                    b.Property<int>("ID")
+                        .ValueGeneratedOnAdd();
+
+                    b.Property<int>("ActivityID");
+
+                    b.Property<DateTime>("Date");
+
+                    b.Property<string>("Notes");
+
+                    b.Property<int>("TimeSpent");
+
+                    b.HasKey("ID");
+
+                    b.HasIndex("ActivityID");
+
+                    b.ToTable("LogEntry");
+                });
+
+            modelBuilder.Entity("ActivityTracker2.Models.UserGroup", b =>
+                {
+                    b.Property<string>("ApplicationUserID");
+
+                    b.Property<int>("GroupID");
+
+                    b.HasKey("ApplicationUserID", "GroupID");
+
+                    b.HasIndex("GroupID");
+
+                    b.ToTable("UserGroup");
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRole", b =>
@@ -191,6 +269,41 @@ namespace ActivityTracker2.Data.Migrations
                     b.HasKey("UserId", "LoginProvider", "Name");
 
                     b.ToTable("AspNetUserTokens");
+                });
+
+            modelBuilder.Entity("ActivityTracker2.Models.Activity", b =>
+                {
+                    b.HasOne("ActivityTracker2.Models.ApplicationUser")
+                        .WithMany("Activities")
+                        .HasForeignKey("ApplicationUserID");
+                });
+
+            modelBuilder.Entity("ActivityTracker2.Models.ApplicationUser", b =>
+                {
+                    b.HasOne("ActivityTracker2.Models.ApplicationUser")
+                        .WithMany("Students")
+                        .HasForeignKey("ApplicationUserId");
+                });
+
+            modelBuilder.Entity("ActivityTracker2.Models.LogEntry", b =>
+                {
+                    b.HasOne("ActivityTracker2.Models.Activity")
+                        .WithMany("Log")
+                        .HasForeignKey("ActivityID")
+                        .OnDelete(DeleteBehavior.Cascade);
+                });
+
+            modelBuilder.Entity("ActivityTracker2.Models.UserGroup", b =>
+                {
+                    b.HasOne("ActivityTracker2.Models.ApplicationUser", "Student")
+                        .WithMany("UserGroups")
+                        .HasForeignKey("ApplicationUserID")
+                        .OnDelete(DeleteBehavior.Cascade);
+
+                    b.HasOne("ActivityTracker2.Models.Group", "Group")
+                        .WithMany("UserGroups")
+                        .HasForeignKey("GroupID")
+                        .OnDelete(DeleteBehavior.Cascade);
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRoleClaim<string>", b =>
