@@ -24,11 +24,12 @@ namespace ActivityTracker.Data
         protected override void OnModelCreating(ModelBuilder builder)
         {
             base.OnModelCreating(builder);
-            builder.Entity<UserGroup>().HasKey(ug => new { ug.ApplicationUserID, ug.GroupID });
             builder.Entity<ApplicationUser>().ToTable("User");
             builder.Entity<Group>().ToTable("Group");
             builder.Entity<Activity>().ToTable("Activity");
             builder.Entity<LogEntry>().ToTable("LogEntry");
+            builder.Entity<UserGroup>().ToTable("UserGroup");
+            builder.Entity<UserGroup>().HasKey(ug => new { ug.ApplicationUserID, ug.GroupID });
         }
     }
 }

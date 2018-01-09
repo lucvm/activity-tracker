@@ -34,11 +34,11 @@
 @foreach (var item in Model) {
         <tr>
             <td>
-                @foreach (var group in item.UserGroups)
+                @*@foreach (var group in item.UserGroups)
                 {
                     @Html.DisplayFor(modelItem => group.GroupID)
-                }
-                @*@Html.DisplayNameFor(modelItem => item.UserGroups)*@
+                }*@
+                @Html.DisplayFor(modelItem => item.UserGroups)
             </td>
             <td>
                 @Html.DisplayFor(modelItem => item.LastName)<text>,</text>
