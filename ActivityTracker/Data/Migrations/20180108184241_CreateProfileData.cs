@@ -94,7 +94,7 @@ namespace ActivityTracker.Data.Migrations
                     ID = table.Column<int>(nullable: false)
                         .Annotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn),
                     ApplicationUserID = table.Column<string>(nullable: true),
-                    Complete = table.Column<bool>(nullable: true),
+                    Complete = table.Column<bool>(nullable: false),
                     Difficulty = table.Column<int>(nullable: true),
                     FunFactor = table.Column<int>(nullable: true),
                     Name = table.Column<string>(nullable: true),

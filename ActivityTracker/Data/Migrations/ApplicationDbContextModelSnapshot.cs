@@ -27,7 +27,7 @@ namespace ActivityTracker.Data.Migrations
 
                     b.Property<string>("ApplicationUserID");
 
-                    b.Property<bool?>("Complete");
+                    b.Property<bool>("Complete");
 
                     b.Property<int?>("Difficulty");
 

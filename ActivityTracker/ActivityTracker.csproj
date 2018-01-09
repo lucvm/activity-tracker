@@ -18,6 +18,8 @@
     <Compile Remove="Data\Migrations\20180107225659_CreateProfileData.Designer.cs" />
     <Compile Remove="Data\Migrations\20180108004811_CreateProfileData.cs" />
     <Compile Remove="Data\Migrations\20180108004811_CreateProfileData.Designer.cs" />
+    <Compile Remove="Data\Migrations\20180108173123_CreateProfileData.cs" />
+    <Compile Remove="Data\Migrations\20180108173123_CreateProfileData.Designer.cs" />
   </ItemGroup>
 
 
@@ -31,6 +33,10 @@
     <DotNetCliToolReference Include="Microsoft.EntityFrameworkCore.Tools.DotNet" Version="2.0.1" />
     <DotNetCliToolReference Include="Microsoft.Extensions.SecretManager.Tools" Version="2.0.0" />
     <DotNetCliToolReference Include="Microsoft.VisualStudio.Web.CodeGeneration.Tools" Version="2.0.1" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Folder Include="wwwroot\lib\bootstrap\dist\css\" />
   </ItemGroup>
 
 </Project>

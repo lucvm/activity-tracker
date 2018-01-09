@@ -58,6 +58,11 @@ namespace ActivityTracker.Data
                 new UserGroup{ApplicationUserID="8", GroupID=2},
                 new UserGroup{ApplicationUserID="9", GroupID=3},
             };
+            foreach (UserGroup ug in userGroups)
+            {
+                context.UserGroups.Add(ug);
+            }
+            context.SaveChanges();
 
             var activities = new Activity[]
             {

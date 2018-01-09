@@ -4,9 +4,8 @@
     ViewData["Title"] = "Edit";
 }
 
-<h2>Edit</h2>
+<h2>Activity</h2>
 
-<h4>Activity</h4>
 <hr />
 <div class="row">
     <div class="col-md-4">
@@ -20,7 +19,7 @@
             <div class="form-group">
                 <div class="checkbox">
                     <label>
-                        <input asp-for="Complete" /> @Html.DisplayNameFor(model => model.Complete)
+                        <input type="checkbox" asp-for="Complete" /> @Html.DisplayNameFor(model => model.Complete)
                     </label>
                 </div>
             </div>

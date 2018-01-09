@@ -11,7 +11,7 @@ using System;
 namespace ActivityTracker.Data.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    [Migration("20180108173123_CreateProfileData")]
+    [Migration("20180108184241_CreateProfileData")]
     partial class CreateProfileData
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -28,7 +28,7 @@ namespace ActivityTracker.Data.Migrations
 
                     b.Property<string>("ApplicationUserID");
 
-                    b.Property<bool?>("Complete");
+                    b.Property<bool>("Complete");
 
                     b.Property<int?>("Difficulty");
 

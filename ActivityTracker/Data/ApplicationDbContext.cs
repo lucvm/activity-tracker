@@ -19,6 +19,7 @@ namespace ActivityTracker.Data
         public DbSet<Group> Groups { get; set; }
         public DbSet<Activity> Activities { get; set; }
         public DbSet<LogEntry> LogEntries { get; set; }
+        public DbSet<UserGroup> UserGroups { get; set; }
 
         protected override void OnModelCreating(ModelBuilder builder)
         {
