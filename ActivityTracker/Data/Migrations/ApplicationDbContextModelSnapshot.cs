@@ -119,7 +119,7 @@ namespace ActivityTracker.Data.Migrations
 
             modelBuilder.Entity("ActivityTracker.Models.Group", b =>
                 {
-                    b.Property<int>("ID")
+                    b.Property<string>("ID")
                         .ValueGeneratedOnAdd();
 
                     b.Property<string>("Name");
@@ -153,7 +153,7 @@ namespace ActivityTracker.Data.Migrations
                 {
                     b.Property<string>("ApplicationUserID");
 
-                    b.Property<int>("GroupID");
+                    b.Property<string>("GroupID");
 
                     b.HasKey("ApplicationUserID", "GroupID");
 

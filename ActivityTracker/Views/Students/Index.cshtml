@@ -12,21 +12,21 @@
 <table class="table">
     <thead>
         <tr>
-                <th>
-                    Group(s)
-                </th>
-                <th>
-                    Student
-                </th>
-                <th>
-                    Email
-                </th>
-                <th>
-                    Last Activity
-                </th>
-                <th>
-                    Notes
-                </th>
+            <th>
+                Group(s)
+            </th>
+            <th>
+                Student
+            </th>
+            <th>
+                Email
+            </th>
+            <th>
+                Last Activity
+            </th>
+            <th>
+                Notes
+            </th>
             <th></th>
         </tr>
     </thead>
@@ -34,11 +34,13 @@
 @foreach (var item in Model) {
         <tr>
             <td>
-                @*@foreach (var group in item.UserGroups)
+                @if (item.UserGroups != null)
                 {
-                    @Html.DisplayFor(modelItem => group.GroupID)
-                }*@
-                @Html.DisplayFor(modelItem => item.UserGroups)
+                    @foreach (var userGroup in item.UserGroups)
+                    {
+                        @Html.DisplayFor(ug => userGroup.Group.Name)<text> </text>
+                    }
+                }
             </td>
             <td>
                 @Html.DisplayFor(modelItem => item.LastName)<text>,</text>

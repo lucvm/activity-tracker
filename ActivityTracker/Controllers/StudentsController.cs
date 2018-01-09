@@ -22,7 +22,20 @@ namespace ActivityTracker.Controllers
         // GET: Students
         public async Task<IActionResult> Index()
         {
-            return View(await _context.ApplicationUsers.ToListAsync());
+            var students = await _context.ApplicationUsers.ToListAsync();
+            var groups = await _context.Groups.ToListAsync();
+            var userGroups = await _context.UserGroups.ToListAsync();
+            foreach (var student in students)
+            {
+                foreach (var userGroup in userGroups)
+                {
+                    if (student.Id == userGroup.ApplicationUserID)
+                    {
+                        student.UserGroups.Add(userGroup);
+                    }
+                }
+            }
+            return View(students);
         }
 
         // GET: Students/Details/5

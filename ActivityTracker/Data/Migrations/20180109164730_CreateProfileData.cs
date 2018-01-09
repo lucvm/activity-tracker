@@ -117,8 +117,7 @@ namespace ActivityTracker.Data.Migrations
                 name: "Group",
                 columns: table => new
                 {
-                    ID = table.Column<int>(nullable: false)
-                        .Annotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn),
+                    ID = table.Column<string>(nullable: false),
                     Name = table.Column<string>(nullable: true)
                 },
                 constraints: table =>
@@ -153,7 +152,7 @@ namespace ActivityTracker.Data.Migrations
                 columns: table => new
                 {
                     ApplicationUserID = table.Column<string>(nullable: false),
-                    GroupID = table.Column<int>(nullable: false)
+                    GroupID = table.Column<string>(nullable: false)
                 },
                 constraints: table =>
                 {

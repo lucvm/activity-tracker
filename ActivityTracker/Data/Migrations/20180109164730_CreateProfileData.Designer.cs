@@ -11,7 +11,7 @@ using System;
 namespace ActivityTracker.Data.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    [Migration("20180108184241_CreateProfileData")]
+    [Migration("20180109164730_CreateProfileData")]
     partial class CreateProfileData
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -120,7 +120,7 @@ namespace ActivityTracker.Data.Migrations
 
             modelBuilder.Entity("ActivityTracker.Models.Group", b =>
                 {
-                    b.Property<int>("ID")
+                    b.Property<string>("ID")
                         .ValueGeneratedOnAdd();
 
                     b.Property<string>("Name");
@@ -154,7 +154,7 @@ namespace ActivityTracker.Data.Migrations
                 {
                     b.Property<string>("ApplicationUserID");
 
-                    b.Property<int>("GroupID");
+                    b.Property<string>("GroupID");
 
                     b.HasKey("ApplicationUserID", "GroupID");
 
