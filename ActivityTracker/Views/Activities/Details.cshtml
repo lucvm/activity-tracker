@@ -17,6 +17,15 @@
                 <span asp-validation-for="Name" class="text-danger"></span>
             </div>
             <div class="form-group">
+                <label asp-for="StartDate" class="control-label">Start Date</label>
+                <input asp-for="StartDate" class="form-control" />
+                <span asp-validation-for="StartDate" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label>Last Activity</label><br />
+                @ViewBag.LastActivity
+            </div>
+            <div class="form-group">
                 <div class="checkbox">
                     <label>
                         <input type="checkbox" asp-for="Complete" /> @Html.DisplayNameFor(model => model.Complete)
@@ -45,6 +54,10 @@
     </div>
 </div>
 
+<a asp-action="Delete" asp-route-id="@Model.ID" class="btn btn-default">Delete Activity</a>
+<br />
+<br />
+<a asp-controller="LogEntries" asp-action="Create" asp-route-activityid="@Model.ID" class="btn btn-default">New log entry</a>
 <h2>Log</h2>
 <table class="table">
     <thead>
@@ -56,7 +69,7 @@
                 TimeSpent
             </th>
             <th>
-               Notes
+                Notes
             </th>
             <th></th>
         </tr>

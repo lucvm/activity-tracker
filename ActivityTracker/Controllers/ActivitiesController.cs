@@ -61,6 +61,9 @@ namespace ActivityTracker.Controllers
             }
 
             ViewBag.LogEntries = GetAllLogEntries().Where(le => le.ActivityID == id).ToList();
+            var logEntries = (IEnumerable<dynamic>)ViewBag.LogEntries;
+            ViewBag.LastActivity = logEntries.Max(x => x.Date);
+            ViewBag.TimeSpent = logEntries.Sum(x => x.TimeSpent);
 
             var activity = await _context.Activities.SingleOrDefaultAsync(m => m.ID == id);
             if (activity == null)

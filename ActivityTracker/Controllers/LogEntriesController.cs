@@ -28,6 +28,7 @@ namespace ActivityTracker.Controllers
         // GET: LogEntries/Create
         public IActionResult Create()
         {
+            ViewBag.ActivityId = HttpContext.Request.Query["activityid"];
             return View();
         }
 
@@ -42,7 +43,7 @@ namespace ActivityTracker.Controllers
             {
                 _context.Add(logEntry);
                 await _context.SaveChangesAsync();
-                return RedirectToAction(nameof(Index));
+                return RedirectToAction("Details", "Activities", new { id = logEntry.ActivityID });
             }
             return View(logEntry);
         }
@@ -93,7 +94,7 @@ namespace ActivityTracker.Controllers
                         throw;
                     }
                 }
-                return RedirectToAction(nameof(Index));
+                return RedirectToAction("Details", "Activities", new { id = logEntry.ActivityID });
             }
             return View(logEntry);
         }
