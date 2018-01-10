@@ -25,24 +25,6 @@ namespace ActivityTracker.Controllers
             return View(await _context.LogEntries.ToListAsync());
         }
 
-        // GET: LogEntries/Details/5
-        public async Task<IActionResult> Details(int? id)
-        {
-            if (id == null)
-            {
-                return NotFound();
-            }
-
-            var logEntry = await _context.LogEntries
-                .SingleOrDefaultAsync(m => m.ID == id);
-            if (logEntry == null)
-            {
-                return NotFound();
-            }
-
-            return View(logEntry);
-        }
-
         // GET: LogEntries/Create
         public IActionResult Create()
         {

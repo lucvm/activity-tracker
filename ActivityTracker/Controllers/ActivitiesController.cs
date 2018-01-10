@@ -47,6 +47,11 @@ namespace ActivityTracker.Controllers
             return View(activity);
         }
 
+        public IQueryable<LogEntry> GetAllLogEntries()
+        {
+            return _context.LogEntries.AsQueryable();
+        }
+
         // GET: Activities/Details/5
         public async Task<IActionResult> Details(int? id)
         {
@@ -54,7 +59,9 @@ namespace ActivityTracker.Controllers
             {
                 return NotFound();
             }
-            ViewBag.LogEntries = await _context.LogEntries.ToListAsync();
+
+            ViewBag.LogEntries = GetAllLogEntries().Where(le => le.ActivityID == id).ToList();
+
             var activity = await _context.Activities.SingleOrDefaultAsync(m => m.ID == id);
             if (activity == null)
             {
