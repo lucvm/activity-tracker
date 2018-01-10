@@ -54,7 +54,7 @@ namespace ActivityTracker.Controllers
             {
                 return NotFound();
             }
-
+            ViewBag.LogEntries = await _context.LogEntries.ToListAsync();
             var activity = await _context.Activities.SingleOrDefaultAsync(m => m.ID == id);
             if (activity == null)
             {

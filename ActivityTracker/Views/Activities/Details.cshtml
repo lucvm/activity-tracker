@@ -45,6 +45,47 @@
     </div>
 </div>
 
+<h2>Log</h2>
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                Date
+            </th>
+            <th>
+                TimeSpent
+            </th>
+            <th>
+               Notes
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in ViewBag.LogEntries)
+        {
+            <tr>
+                <td>
+                    @item.Date
+                </td>
+                <td>
+                    @Html.Raw(item.TimeSpent)
+                </td>
+                <td>
+                    @Html.Raw(item.Notes)
+                </td>
+                <td>
+                    <a asp-controller="LogEntries" asp-action="Edit" asp-route-id="@item.ID">Edit</a> |
+                    <a asp-controller="LogEntries" asp-action="Details" asp-route-id="@item.ID">Details</a> |
+                    <a asp-controller="LogEntries" asp-action="Delete" asp-route-id="@item.ID">Delete</a>
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>
+
+
+
 <div>
     <a asp-action="Index">Back to List</a>
 </div>
