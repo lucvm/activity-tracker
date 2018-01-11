@@ -13,6 +13,7 @@ using Microsoft.Extensions.Options;
 using ActivityTracker.Models;
 using ActivityTracker.Models.AccountViewModels;
 using ActivityTracker.Services;
+using ActivityTracker.Data;
 
 namespace ActivityTracker.Controllers
 {
@@ -24,13 +25,18 @@ namespace ActivityTracker.Controllers
         private readonly SignInManager<ApplicationUser> _signInManager;
         private readonly IEmailSender _emailSender;
         private readonly ILogger _logger;
+        private readonly ApplicationDbContext _context;
+
 
         public AccountController(
             UserManager<ApplicationUser> userManager,
             SignInManager<ApplicationUser> signInManager,
             IEmailSender emailSender,
-            ILogger<AccountController> logger)
+            ILogger<AccountController> logger,
+            ApplicationDbContext context
+            )
         {
+            _context = context;
             _userManager = userManager;
             _signInManager = signInManager;
             _emailSender = emailSender;
@@ -249,23 +255,42 @@ namespace ActivityTracker.Controllers
             return View(model);
         }
 
-        [HttpGet]
-        public IActionResult RegisterStudent(string returnUrl = null)
+        public IQueryable<Group> GetAllGroups()
         {
+            return _context.Groups.AsQueryable();
+        }
+        
+        [HttpGet]
+        public async Task<IActionResult> RegisterStudent(string returnUrl = null)
+        {
+            var currentUser = await GetCurrentUserAsync();
+            var currentUserId = currentUser?.Id;
+
             ViewData["ReturnUrl"] = returnUrl;
+            ViewBag.Groups = GetAllGroups().Where(g => g.OwnerID == currentUserId).ToList();
             return View();
         }
 
         private Task<ApplicationUser> GetCurrentUserAsync() => _userManager.GetUserAsync(HttpContext.User);
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> RegisterStudent(RegisterStudentViewModel model, string returnUrl = null)
+        public async Task<IActionResult> RegisterStudent(RegisterStudentViewModel model, List<string> groups, string returnUrl = null)
         {
             ViewData["ReturnUrl"] = returnUrl;
             if (ModelState.IsValid)
             {
                 var currentUser = await GetCurrentUserAsync();
                 var currentUserId = currentUser?.Id;
+
+                var allGroups = GetAllGroups().Where(g => g.OwnerID == currentUserId).ToList();
+                List<Group> assignedGroups = new List<Group>();
+                foreach (var group in allGroups)
+                {
+                    if (groups.Contains(group.Name))
+                    {
+                        assignedGroups.Add(group);
+                    }
+                }
 
                 var user = new ApplicationUser
                 {
@@ -276,11 +301,18 @@ namespace ActivityTracker.Controllers
                     LastName = model.LastName,
                     TeacherID = currentUserId,
                     UserType = "S",
+                    
                 };
 
                 var result = await _userManager.CreateAsync(user, model.Password);
                 if (result.Succeeded)
                 {
+                    foreach (var group in assignedGroups)
+                    {
+                        _context.Add(new UserGroup { ApplicationUserID = user.Id,
+                                                     GroupID = group.ID});
+                    }
+                    await _context.SaveChangesAsync();
                     _logger.LogInformation("Teacher created a new student with password.");
 
                     var code = await _userManager.GenerateEmailConfirmationTokenAsync(user);
