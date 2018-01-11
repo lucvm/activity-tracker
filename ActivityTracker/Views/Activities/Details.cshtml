@@ -18,12 +18,12 @@
             </div>
             <div class="form-group">
                 <label asp-for="StartDate" class="control-label">Start Date</label>
-                <input asp-for="StartDate" class="form-control" />
+                <input type="date" asp-for="StartDate" class="form-control" />
                 <span asp-validation-for="StartDate" class="text-danger"></span>
             </div>
             <div class="form-group">
                 <label>Last Activity</label><br />
-                @ViewBag.LastActivity
+                @ViewBag.LastActivity.ToShortDateString()
             </div>
             <div class="form-group">
                 <div class="checkbox">
@@ -44,7 +44,7 @@
             </div>
             <div class="form-group">
                 <label asp-for="Notes" class="control-label"></label>
-                <input asp-for="Notes" class="form-control" />
+                <textarea asp-for="Notes" class="form-control"></textarea>
                 <span asp-validation-for="Notes" class="text-danger"></span>
             </div>
             <div class="form-group">
@@ -66,7 +66,7 @@
                 Date
             </th>
             <th>
-                TimeSpent
+                Time Spent (h)
             </th>
             <th>
                 Notes
@@ -79,7 +79,7 @@
         {
             <tr>
                 <td>
-                    @item.Date
+                    @item.Date.ToShortDateString()
                 </td>
                 <td>
                     @Html.Raw(item.TimeSpent)
