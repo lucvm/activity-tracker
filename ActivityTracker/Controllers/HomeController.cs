@@ -25,7 +25,11 @@ namespace ActivityTracker.Controllers
         {
             var currentUser = await GetCurrentUserAsync();
             var currentUserId = currentUser?.Id;
-            ViewBag.currentUserId = currentUserId;
+            if (currentUser != null)
+            {
+                ViewBag.currentUserId = currentUserId;
+                ViewBag.currentUserType = currentUser.UserType;
+            }
 
             return View();
         }

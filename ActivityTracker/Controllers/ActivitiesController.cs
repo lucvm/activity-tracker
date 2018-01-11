@@ -30,19 +30,37 @@ namespace ActivityTracker.Controllers
             return _context.Activities.AsQueryable();
         }
 
+        public IQueryable<ApplicationUser> GetAllStudents()
+        {
+            return _context.ApplicationUsers.AsQueryable();
+        }
+
         // GET: Activities
-        public async Task<IActionResult> Index()
+        public async Task<IActionResult> Index(string id)
         {
             var currentUser = await GetCurrentUserAsync();
             string studentId;
 
+            ViewBag.CurrentUserType = currentUser.UserType;
+
             if (currentUser.UserType == "S")
             {
                 studentId = currentUser.Id;
+                ViewBag.studentId = studentId;
             }
             else if (currentUser.UserType == "T")
             {
-                studentId = HttpContext.Request.Query["id"];
+                try
+                {
+                    var student = GetAllStudents().Where(au => au.Id == id).ToList()[0];
+                    studentId = id;
+                    ViewBag.studentId = studentId;
+                    ViewBag.StudentName = String.Format("{0} {1} {2}", student.FirstName, student.Prefix, student.LastName);
+                }
+                catch (ArgumentOutOfRangeException)
+                {
+                    return RedirectToAction("Index", "Home");
+                }
             }
             else
             {
@@ -57,6 +75,7 @@ namespace ActivityTracker.Controllers
         // GET: Activities/Create
         public IActionResult Create()
         {
+            ViewBag.StudentId = HttpContext.Request.Query["id"];
             return View();
         }
 
@@ -75,20 +94,21 @@ namespace ActivityTracker.Controllers
                 if (currentUser.UserType == "S")
                 {
                     studentId = currentUser.Id;
+                    ViewBag.CurrentUserType = "S";
                 }
                 else if (currentUser.UserType == "T")
                 {
                     studentId = HttpContext.Request.Query["id"];
+                    ViewBag.CurrentUserType = "T";
                 }
                 else
                 {
                     throw new ApplicationException("Not a valid UserType");
                 }
-                activity.ApplicationUserID = studentId;
 
                 _context.Add(activity);
                 await _context.SaveChangesAsync();
-                return RedirectToAction(nameof(Index));
+                return RedirectToAction("Index", new { id=activity.ApplicationUserID });
             }
             return View(activity);
         }
