@@ -14,19 +14,44 @@ namespace ActivityTracker.Controllers
     public class ActivitiesController : Controller
     {
         private readonly ApplicationDbContext _context;
-        //private readonly UserManager<ApplicationUser> _userManager;
+        private readonly UserManager<ApplicationUser> _userManager;
 
-        public ActivitiesController(ApplicationDbContext context)
+        public ActivitiesController(ApplicationDbContext context,
+                                    UserManager<ApplicationUser> userManager)
         {
+            _userManager = userManager;
             _context = context;
         }
 
-        //private Task<ApplicationUser> GetCurrentUserAsync() => _userManager.GetUserAsync(HttpContext.User);
+        private Task<ApplicationUser> GetCurrentUserAsync() => _userManager.GetUserAsync(HttpContext.User);
+
+        public IQueryable<Activity> GetAllActivities()
+        {
+            return _context.Activities.AsQueryable();
+        }
 
         // GET: Activities
         public async Task<IActionResult> Index()
         {
-            return View(await _context.Activities.ToListAsync());
+            var currentUser = await GetCurrentUserAsync();
+            string studentId;
+
+            if (currentUser.UserType == "S")
+            {
+                studentId = currentUser.Id;
+            }
+            else if (currentUser.UserType == "T")
+            {
+                studentId = HttpContext.Request.Query["id"];
+            }
+            else
+            {
+                throw new ApplicationException("Not a valid user, try again with another account");
+            }
+
+            ViewBag.Activities = GetAllActivities().Where(a => a.ApplicationUserID == studentId).ToList();
+
+            return View();
         }
 
         // GET: Activities/Create
@@ -40,10 +65,27 @@ namespace ActivityTracker.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("ID,ApplicationUserID,Name,StartDate,TimeSpent,Complete,FunFactor,Difficulty,Notes")] Activity activity)
+        public async Task<IActionResult> Create([Bind("ID,Name,StartDate,TimeSpent,Complete,FunFactor,Difficulty,Notes")] Activity activity)
         {
             if (ModelState.IsValid)
             {
+                var currentUser = await GetCurrentUserAsync();
+                string studentId;
+
+                if (currentUser.UserType == "S")
+                {
+                    studentId = currentUser.Id;
+                }
+                else if (currentUser.UserType == "T")
+                {
+                    studentId = HttpContext.Request.Query["id"];
+                }
+                else
+                {
+                    throw new ApplicationException("Not a valid UserType");
+                }
+                activity.ApplicationUserID = studentId;
+
                 _context.Add(activity);
                 await _context.SaveChangesAsync();
                 return RedirectToAction(nameof(Index));

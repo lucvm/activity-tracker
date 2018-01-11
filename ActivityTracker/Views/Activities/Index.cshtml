@@ -1,4 +1,4 @@
-﻿@model IEnumerable<ActivityTracker.Models.Activity>
+﻿@*@model IEnumerable<ActivityTracker.Models.Activity>*@
 
 @{
     ViewData["Title"] = "Index";
@@ -28,20 +28,20 @@
         </tr>
     </thead>
     <tbody>
-        @foreach (var item in Model)
+        @foreach (var item in ViewBag.Activities)
         {
             <tr>
                 <td>
-                    @Html.DisplayFor(modelItem => item.Name)
+                    @item.Name
                 </td>
                 <td>
-                    @Html.DisplayFor(modelItem => item.FunFactor)
+                    @item.FunFactor
                 </td>
                 <td>
-                    @Html.DisplayFor(modelItem => item.Difficulty)
+                    @item.Difficulty
                 </td>
                 <td>
-                    @Html.DisplayFor(modelItem => item.Notes)
+                    @item.Notes
                 </td>
                 <td>
                     <a asp-action="Details" asp-route-id="@item.ID">Details</a> |
