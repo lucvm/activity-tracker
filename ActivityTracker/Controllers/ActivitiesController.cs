@@ -7,23 +7,26 @@ using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 using ActivityTracker.Data;
 using ActivityTracker.Models;
+using Microsoft.AspNetCore.Identity;
 
 namespace ActivityTracker.Controllers
 {
     public class ActivitiesController : Controller
     {
         private readonly ApplicationDbContext _context;
+        //private readonly UserManager<ApplicationUser> _userManager;
 
         public ActivitiesController(ApplicationDbContext context)
         {
             _context = context;
         }
 
-        //private Task<ApplicationUser> GetCurrentUserAsync() => UserManager.GetUserAsync(HttpContext.User);
+        //private Task<ApplicationUser> GetCurrentUserAsync() => _userManager.GetUserAsync(HttpContext.User);
 
         // GET: Activities
         public async Task<IActionResult> Index()
         {
+            
             return View(await _context.Activities.ToListAsync());
         }
 

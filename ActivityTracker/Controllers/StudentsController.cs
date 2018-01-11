@@ -7,22 +7,36 @@ using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 using ActivityTracker.Data;
 using ActivityTracker.Models;
+using Microsoft.AspNetCore.Identity;
 
 namespace ActivityTracker.Controllers
 {
     public class StudentsController : Controller
     {
         private readonly ApplicationDbContext _context;
+        private readonly UserManager<ApplicationUser> _userManager;
 
-        public StudentsController(ApplicationDbContext context)
+        private Task<ApplicationUser> GetCurrentUserAsync() => _userManager.GetUserAsync(HttpContext.User);
+
+        public StudentsController(ApplicationDbContext context,
+                                  UserManager<ApplicationUser> userManager)
         {
+            _userManager = userManager;
             _context = context;
+        }
+
+        public IQueryable<ApplicationUser> GetAllStudents()
+        {
+            return _context.ApplicationUsers.AsQueryable();
         }
 
         // GET: Students
         public async Task<IActionResult> Index()
         {
-            var students = await _context.ApplicationUsers.ToListAsync();
+            var user = await GetCurrentUserAsync();
+            var userId = user?.Id;
+
+            var students = GetAllStudents().Where(s => s.TeacherID == Convert.ToString(user.Id)).ToList();
             var groups = await _context.Groups.ToListAsync();
             var userGroups = await _context.UserGroups.ToListAsync();
             foreach (var student in students)
@@ -57,8 +71,11 @@ namespace ActivityTracker.Controllers
         }
 
         // GET: Students/Create
-        public IActionResult Create()
+        public async Task<IActionResult> Create()
         {
+            var user = await GetCurrentUserAsync();
+            ViewBag.userId = user?.Id;
+
             return View();
         }
 
