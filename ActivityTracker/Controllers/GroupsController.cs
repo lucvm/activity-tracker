@@ -7,15 +7,18 @@ using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 using ActivityTracker.Data;
 using ActivityTracker.Models;
+using Microsoft.AspNetCore.Identity;
 
 namespace ActivityTracker.Controllers
 {
     public class GroupsController : Controller
     {
         private readonly ApplicationDbContext _context;
+        private readonly UserManager<ApplicationUser> _userManager;
 
-        public GroupsController(ApplicationDbContext context)
+        public GroupsController(ApplicationDbContext context, UserManager<ApplicationUser> userManager)
         {
+            _userManager = userManager;
             _context = context;
         }
 
@@ -49,15 +52,21 @@ namespace ActivityTracker.Controllers
             return View();
         }
 
+
+        private Task<ApplicationUser> GetCurrentUserAsync() => _userManager.GetUserAsync(HttpContext.User);
         // POST: Groups/Create
         // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("ID,OwnerID,Name")] Group @group)
+        public async Task<IActionResult> Create([Bind("ID,Name")] Group @group)
         {
             if (ModelState.IsValid)
             {
+                var currentUser = await GetCurrentUserAsync();
+                var currentUserId = currentUser?.Id;
+                @group.OwnerID = currentUserId;
+
                 _context.Add(@group);
                 await _context.SaveChangesAsync();
                 return RedirectToAction(nameof(Index));
