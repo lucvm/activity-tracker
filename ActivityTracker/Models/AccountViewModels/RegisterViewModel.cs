@@ -12,7 +12,6 @@ namespace ActivityTracker.Models.AccountViewModels
         [Display(Name = "First Name")]
         public string FirstName { get; set; }
 
-        [Required]
         [Display(Name = "Prefix")]
         public string Prefix { get; set; }
 
