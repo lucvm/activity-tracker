@@ -125,7 +125,7 @@ namespace ActivityTracker.Controllers
             var logEntry = await _context.LogEntries.SingleOrDefaultAsync(m => m.ID == id);
             _context.LogEntries.Remove(logEntry);
             await _context.SaveChangesAsync();
-            return RedirectToAction(nameof(Index));
+            return RedirectToAction("Details", "Activities", new { id = logEntry.ActivityID });
         }
 
         private bool LogEntryExists(int id)

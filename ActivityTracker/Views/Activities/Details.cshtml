@@ -23,7 +23,14 @@
             </div>
             <div class="form-group">
                 <label>Last Activity</label><br />
-                @ViewBag.LastActivity.ToShortDateString()
+                @if (@ViewBag.LastActivity != null)
+                {
+                    @ViewBag.LastActivity.ToShortDateString()
+                }
+                else
+                {
+                    <text>-</text>
+                }
             </div>
             <div class="form-group">
                 <div class="checkbox">

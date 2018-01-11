@@ -6,14 +6,18 @@
 {
     <h2>My Activities</h2>
 }
-else
+else if (ViewBag.CurrentUserType == "T")
 {
     <h2>@ViewBag.StudentName</h2>
+}
+else
+{
+    <text></text>
 }
 
 
 <p>
-    <a asp-action="Create" asp-route-id="@ViewBag.StudentId">Create New</a>
+    <a asp-action="Create" asp-route-studentid="@ViewBag.StudentId">Create New</a>
 </p>
 <table class="table table-striped">
     <thead>

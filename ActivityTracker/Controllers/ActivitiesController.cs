@@ -75,7 +75,7 @@ namespace ActivityTracker.Controllers
         // GET: Activities/Create
         public IActionResult Create()
         {
-            ViewBag.StudentId = HttpContext.Request.Query["id"];
+            ViewBag.StudentId = HttpContext.Request.Query["studentid"];
             return View();
         }
 
@@ -84,7 +84,7 @@ namespace ActivityTracker.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("ID,Name,StartDate,TimeSpent,Complete,FunFactor,Difficulty,Notes")] Activity activity)
+        public async Task<IActionResult> Create([Bind("ID,ApplicationUserID,Name,StartDate,TimeSpent,Complete,FunFactor,Difficulty,Notes")] Activity activity)
         {
             if (ModelState.IsValid)
             {
@@ -128,6 +128,8 @@ namespace ActivityTracker.Controllers
 
             ViewBag.LogEntries = GetAllLogEntries().Where(le => le.ActivityID == id).ToList();
             var logEntries = (IEnumerable<dynamic>)ViewBag.LogEntries;
+            ViewBag.LastActivity = logEntries.Max(x => x.Date);
+            ViewBag.TimeSpent = logEntries.Sum(x => x.TimeSpent);
             ViewBag.LastActivity = logEntries.Max(x => x.Date);
             ViewBag.TimeSpent = logEntries.Sum(x => x.TimeSpent);
 
