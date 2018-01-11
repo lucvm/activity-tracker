@@ -19,6 +19,8 @@ namespace ActivityTracker.Controllers
             _context = context;
         }
 
+        //private Task<ApplicationUser> GetCurrentUserAsync() => UserManager.GetUserAsync(HttpContext.User);
+
         // GET: Activities
         public async Task<IActionResult> Index()
         {
