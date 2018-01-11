@@ -6,14 +6,27 @@ using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using ActivityTracker.Models;
 using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Identity;
 
 namespace ActivityTracker.Controllers
 {
     public class HomeController : Controller
     {
-        [AllowAnonymous]
-        public IActionResult Index()
+        private readonly UserManager<ApplicationUser> _userManager;
+        private Task<ApplicationUser> GetCurrentUserAsync() => _userManager.GetUserAsync(HttpContext.User);
+
+        public HomeController(UserManager<ApplicationUser> userManager)
         {
+            _userManager = userManager;
+        }
+
+        [AllowAnonymous]
+        public async Task<IActionResult> Index()
+        {
+            var currentUser = await GetCurrentUserAsync();
+            var currentUserId = currentUser?.Id;
+            ViewBag.currentUserId = currentUserId;
+
             return View();
         }
         
