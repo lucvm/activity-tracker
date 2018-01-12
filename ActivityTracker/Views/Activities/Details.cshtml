@@ -24,13 +24,13 @@
             <div class="form-group">
                 <label>Last Activity</label><br />
                 @if (@ViewBag.LastActivity != null)
-                {
-                    @ViewBag.LastActivity.ToShortDateString()
-                }
-                else
-                {
-                    <text>-</text>
-                }
+        {
+            @ViewBag.LastActivity.ToShortDateString()
+}
+else
+{
+        <text>-</text>
+}
             </div>
             <div class="form-group">
                 <div class="checkbox">
@@ -40,15 +40,22 @@
                 </div>
             </div>
             <div class="form-group">
-                <label asp-for="FunFactor" class="control-label"></label>
-                <input asp-for="FunFactor" class="form-control" />
+                <label asp-for="FunFactor" class="control-label">Fun Factor</label>
+                <input type="range" min="1" max="5" list="tickmarks" asp-for="FunFactor" class="form-control" />
                 <span asp-validation-for="FunFactor" class="text-danger"></span>
             </div>
             <div class="form-group">
                 <label asp-for="Difficulty" class="control-label"></label>
-                <input asp-for="Difficulty" class="form-control" />
+                <input type="range" min="1" max="5" list="tickmarks" step="0.5" asp-for="Difficulty" class="form-control" />
                 <span asp-validation-for="Difficulty" class="text-danger"></span>
             </div>
+            <datalist id="tickmarks">
+                <option value="1" />
+                <option value="2" />
+                <option value="3" />
+                <option value="4" />
+                <option value="5" />
+            </datalist>
             <div class="form-group">
                 <label asp-for="Notes" class="control-label"></label>
                 <textarea asp-for="Notes" class="form-control"></textarea>
