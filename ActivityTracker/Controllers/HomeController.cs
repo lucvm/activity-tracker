@@ -10,6 +10,7 @@ using Microsoft.AspNetCore.Identity;
 
 namespace ActivityTracker.Controllers
 {
+    [AllowAnonymous]
     public class HomeController : Controller
     {
         private readonly UserManager<ApplicationUser> _userManager;
@@ -20,7 +21,6 @@ namespace ActivityTracker.Controllers
             _userManager = userManager;
         }
 
-        [AllowAnonymous]
         public async Task<IActionResult> Index()
         {
             var currentUser = await GetCurrentUserAsync();

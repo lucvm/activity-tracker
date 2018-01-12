@@ -321,7 +321,8 @@ namespace ActivityTracker.Controllers
 
                     //await _signInManager.SignInAsync(user, isPersistent: false);
                     _logger.LogInformation("Teacher created a new student with password.");
-                    return RedirectToLocal(returnUrl);
+                    //return RedirectToLocal(returnUrl);
+                    return RedirectToAction("Index", "Students");
                 }
                 AddErrors(result);
             }

@@ -34,6 +34,12 @@
     <Compile Remove="Data\Migrations\20180109161711_CreateProfileData.Designer.cs" />
   </ItemGroup>
 
+  <ItemGroup>
+    <None Remove="Properties\PublishProfiles\ActivityTracker20180112013041 - Web Deploy.pubxml" />
+    <None Remove="Properties\PublishProfiles\ActivityTrackerITV - Web Deploy.pubxml" />
+    <None Remove="Properties\PublishProfiles\LucsActivityTracker - Web Deploy.pubxml" />
+  </ItemGroup>
+
 
   <ItemGroup>
     <PackageReference Include="Microsoft.AspNetCore.All" Version="2.0.3" />
@@ -45,6 +51,10 @@
     <DotNetCliToolReference Include="Microsoft.EntityFrameworkCore.Tools.DotNet" Version="2.0.1" />
     <DotNetCliToolReference Include="Microsoft.Extensions.SecretManager.Tools" Version="2.0.0" />
     <DotNetCliToolReference Include="Microsoft.VisualStudio.Web.CodeGeneration.Tools" Version="2.0.1" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Folder Include="Properties\PublishProfiles\" />
   </ItemGroup>
 
 </Project>

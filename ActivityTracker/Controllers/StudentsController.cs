@@ -90,7 +90,7 @@ namespace ActivityTracker.Controllers
             {
                 _context.Add(applicationUser);
                 await _context.SaveChangesAsync();
-                return RedirectToAction(nameof(Index));
+                return RedirectToAction("Index", "Students");
             }
             return View(applicationUser);
         }
