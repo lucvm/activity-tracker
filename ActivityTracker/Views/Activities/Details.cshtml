@@ -1,7 +1,7 @@
 ﻿@model ActivityTracker.Models.Activity
 
 @{
-    ViewData["Title"] = "Edit";
+    ViewData["Title"] = "Details";
 }
 
 <h2>Activity</h2>
@@ -11,6 +11,10 @@
     <div class="col-md-4">
         <form asp-action="Edit">
             <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <input type="hidden" asp-for="ID" />
+            <div class="form-group" hidden>
+                <input asp-for="ApplicationUserID" value="@Model.ApplicationUserID" class="form-control" />
+            </div>
             <div class="form-group">
                 <label asp-for="Name" class="control-label"></label>
                 <input asp-for="Name" class="form-control" />
@@ -19,24 +23,24 @@
             <div class="form-group">
                 <label>Start Date</label><br />
                 @if (@ViewBag.StartDate != null)
-                {
-                    @ViewBag.StartDate.ToShortDateString()
-                }
-                else
-                {
-                    <text>-</text>
-                }
+        {
+            @ViewBag.StartDate.ToShortDateString()
+}
+else
+{
+        <text>-</text>
+}
             </div>
             <div class="form-group">
                 <label>Last Activity</label><br />
                 @if (@ViewBag.LastActivity != null)
-                {
-                    @ViewBag.LastActivity.ToShortDateString()
-                }
-                else
-                {
-                    <text>-</text>
-                }
+        {
+            @ViewBag.LastActivity.ToShortDateString()
+}
+else
+{
+        <text>-</text>
+}
             </div>
             <div class="form-group">
                 <div class="checkbox">

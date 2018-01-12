@@ -66,13 +66,13 @@ namespace ActivityTracker.Data
 
             var activities = new Activity[]
             {
-                new Activity{ApplicationUserID="4", Name="Lorem", TimeSpent=1, Complete=true, FunFactor=2, Difficulty=4, Notes="Sit amet"},
-                new Activity{ApplicationUserID="4", Name="Ipsum", TimeSpent=2, Complete=false, FunFactor=3, Difficulty=1, Notes="Lorem ipsum dolor sit amet, consectetur adipiscing elit. Cras feugiat quis lorem eu elementum. Sed ac purus quis elit sagittis porttitor quis eget dui."},
-                new Activity{ApplicationUserID="4", Name="Dolor", TimeSpent=7, Complete=true, FunFactor=4, Difficulty=4, Notes="Mauris ac volutpat eros. Cras sit amet varius libero"},
-                new Activity{ApplicationUserID="5", Name="Lorem", TimeSpent=3, Complete=true, FunFactor=1, Difficulty=4, Notes=""},
-                new Activity{ApplicationUserID="6", Name="Lorem", TimeSpent=4, Complete=false, FunFactor=2, Difficulty=5, Notes=""},
-                new Activity{ApplicationUserID="7", Name="Lorem", TimeSpent=5, Complete=false, FunFactor=0, Difficulty=0, Notes="Duis nec vestibulum ante"},
-                new Activity{ApplicationUserID="7", Name="Ipsum", TimeSpent=6, Complete=true, FunFactor=5, Difficulty=2, Notes=""},
+                new Activity{ApplicationUserID="4", Name="Lorem", Complete=true, FunFactor=2, Difficulty=4, Notes="Sit amet"},
+                new Activity{ApplicationUserID="4", Name="Ipsum", Complete=false, FunFactor=3, Difficulty=1, Notes="Lorem ipsum dolor sit amet, consectetur adipiscing elit. Cras feugiat quis lorem eu elementum. Sed ac purus quis elit sagittis porttitor quis eget dui."},
+                new Activity{ApplicationUserID="4", Name="Dolor", Complete=true, FunFactor=4, Difficulty=4, Notes="Mauris ac volutpat eros. Cras sit amet varius libero"},
+                new Activity{ApplicationUserID="5", Name="Lorem", Complete=true, FunFactor=1, Difficulty=4, Notes=""},
+                new Activity{ApplicationUserID="6", Name="Lorem", Complete=false, FunFactor=2, Difficulty=5, Notes=""},
+                new Activity{ApplicationUserID="7", Name="Lorem", Complete=false, FunFactor=0, Difficulty=0, Notes="Duis nec vestibulum ante"},
+                new Activity{ApplicationUserID="7", Name="Ipsum", Complete=true, FunFactor=5, Difficulty=2, Notes=""},
             };
             foreach (Activity a in activities)
             {

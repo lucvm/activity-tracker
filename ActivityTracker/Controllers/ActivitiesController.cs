@@ -84,7 +84,7 @@ namespace ActivityTracker.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("ID,ApplicationUserID,Name,StartDate,TimeSpent,Complete,FunFactor,Difficulty,Notes")] Activity activity)
+        public async Task<IActionResult> Create([Bind("ID,ApplicationUserID,Name,Complete,FunFactor,Difficulty,Notes")] Activity activity)
         {
             if (ModelState.IsValid)
             {
@@ -126,6 +126,7 @@ namespace ActivityTracker.Controllers
                 return NotFound();
             }
 
+
             ViewBag.LogEntries = GetAllLogEntries().Where(le => le.ActivityID == id).ToList();
             var logEntries = (IEnumerable<dynamic>)ViewBag.LogEntries;
             ViewBag.StartDate = logEntries.Min(x => x.Date);
@@ -146,7 +147,7 @@ namespace ActivityTracker.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(int id, [Bind("IDName,StartDate,TimeSpent,Complete,FunFactor,Difficulty,Notes")] Activity activity)
+        public async Task<IActionResult> Edit(int id, [Bind("ID,ApplicationUserID,Name,Complete,FunFactor,Difficulty,Notes")] Activity activity)
         {
             if (id != activity.ID)
             {
