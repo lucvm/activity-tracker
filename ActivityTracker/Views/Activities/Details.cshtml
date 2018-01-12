@@ -1,14 +1,11 @@
 ﻿@model ActivityTracker.Models.Activity
 
 @{
-    ViewData["Title"] = "Details";
+    ViewData["Title"] = "Details " + Model.Name;
 }
 
-<h2>Activity</h2>
-
-<hr />
 <div class="row">
-    <div class="col-md-4">
+    <div class="col-md-4 detail-column">
         <form asp-action="Edit">
             <div asp-validation-summary="ModelOnly" class="text-danger"></div>
             <input type="hidden" asp-for="ID" />
@@ -16,37 +13,44 @@
                 <input asp-for="ApplicationUserID" value="@Model.ApplicationUserID" class="form-control" />
             </div>
             <div class="form-group">
-                <label asp-for="Name" class="control-label"></label>
-                <input asp-for="Name" class="form-control" />
+                <input asp-for="Name" class="form-control input-lg input-header" />
                 <span asp-validation-for="Name" class="text-danger"></span>
             </div>
-            <div class="form-group">
-                <label>Start Date</label><br />
-                @if (@ViewBag.StartDate != null)
-        {
-            @ViewBag.StartDate.ToShortDateString()
+            <div id="dates">
+                <div class="form-group">
+                    <div>
+                        <label>Start Date</label><br />
+                        @if (ViewBag.StartDate != null)
+            {
+                @ViewBag.StartDate.ToShortDateString()
 }
 else
 {
-        <text>-</text>
+            <text>-</text>
 }
-            </div>
-            <div class="form-group">
-                <label>Last Activity</label><br />
-                @if (@ViewBag.LastActivity != null)
-        {
-            @ViewBag.LastActivity.ToShortDateString()
+                    </div>
+                </div>
+                <div class="form-group">
+                    <div id="last-activity">
+                        <label>Last Activity</label><br />
+                        @if (ViewBag.LastActivity != null)
+            {
+                @ViewBag.LastActivity.ToShortDateString()
 }
 else
 {
-        <text>-</text>
+            <text>-</text>
 }
-            </div>
-            <div class="form-group">
-                <div class="checkbox">
-                    <label>
-                        <input type="checkbox" asp-for="Complete" /> @Html.DisplayNameFor(model => model.Complete)
-                    </label>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label>Complete</label>
+                    <div class="checkbox">
+                        <label class="switch">
+                            <input type="checkbox" asp-for="Complete" />
+                            <span class="slider round"></span>
+                        </label>
+                    </div>
                 </div>
             </div>
             <div class="form-group">
@@ -72,59 +76,56 @@ else
                 <span asp-validation-for="Notes" class="text-danger"></span>
             </div>
             <div class="form-group">
-                <input type="submit" value="Save" class="btn btn-default" />
+                <button type="submit" class="btn btn-default"><span class="glyphicon glyphicon-save"></span> Save</button> |
+                <a asp-action="Index">Back to Activities</a>
             </div>
         </form>
     </div>
-</div>
-
-<a asp-action="Delete" asp-route-id="@Model.ID" class="btn btn-default">Delete Activity</a>
-<br />
-<br />
-<a asp-controller="LogEntries" asp-action="Create" asp-route-activityid="@Model.ID" class="btn btn-default">New log entry</a>
-<h2>Log</h2>
-<table class="table">
-    <thead>
-        <tr>
-            <th>
-                Date
-            </th>
-            <th>
-                Time Spent (h)
-            </th>
-            <th>
-                Notes
-            </th>
-            <th></th>
-        </tr>
-    </thead>
-    <tbody>
-        @foreach (var item in ViewBag.LogEntries)
-        {
-            <tr>
-                <td>
-                    @item.Date.ToShortDateString()
-                </td>
-                <td>
-                    @Html.Raw(item.TimeSpent)
-                </td>
-                <td>
-                    @Html.Raw(item.Notes)
-                </td>
-                <td>
-                    <a asp-controller="LogEntries" asp-action="Edit" asp-route-id="@item.ID">Edit</a> |
-                    <a asp-controller="LogEntries" asp-action="Delete" asp-route-id="@item.ID">Delete</a>
-                </td>
-            </tr>
+    <div id="log" class="col-md-8">
+        <a id="btn-delete" asp-action="Delete" asp-route-id="@Model.ID" 
+           class="btn btn-default detail-column"><span class="glyphicon glyphicon-trash"></span> Delete Activity</a>
+        <h2>Log</h2>
+        <a asp-controller="LogEntries" asp-action="Create" asp-route-activityid="@Model.ID" class="btn btn-default"><span class="glyphicon glyphicon-plus"></span> New Entry</a>
+        <table class="table">
+            <thead>
+                <tr>
+                    <th class="log-column-sm">
+                        Date
+                    </th>
+                    <th class="text-center log-column-sm">
+                        Hours Spent
+                    </th>
+                    <th>
+                        Notes
+                    </th>
+                    <th></th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var item in ViewBag.LogEntries)
+            {
+                <tr>
+                    <td>
+                        @item.Date.ToShortDateString()
+                    </td>
+                    <td class="text-center">
+                        @Html.Raw(item.TimeSpent)
+                    </td>
+                    <td>
+                        @Html.Raw(item.Notes)
+                    </td>
+                    <td>
+                        <a asp-controller="LogEntries" asp-action="Edit" asp-route-id="@item.ID">Edit</a> |
+                        <a asp-controller="LogEntries" asp-action="Delete" asp-route-id="@item.ID">Delete</a>
+                    </td>
+                </tr>
         }
-    </tbody>
-</table>
-
-
-
-<div>
-    <a asp-action="Index">Back to List</a>
+            </tbody>
+        </table>
+    </div>
 </div>
+<br />
+<br />
 
 @section Scripts {
     @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
