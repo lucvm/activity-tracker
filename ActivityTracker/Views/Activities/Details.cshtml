@@ -17,20 +17,26 @@
                 <span asp-validation-for="Name" class="text-danger"></span>
             </div>
             <div class="form-group">
-                <label asp-for="StartDate" class="control-label">Start Date</label>
-                <input type="date" asp-for="StartDate" class="form-control" />
-                <span asp-validation-for="StartDate" class="text-danger"></span>
+                <label>Start Date</label><br />
+                @if (@ViewBag.StartDate != null)
+                {
+                    @ViewBag.StartDate.ToShortDateString()
+                }
+                else
+                {
+                    <text>-</text>
+                }
             </div>
             <div class="form-group">
                 <label>Last Activity</label><br />
                 @if (@ViewBag.LastActivity != null)
-        {
-            @ViewBag.LastActivity.ToShortDateString()
-}
-else
-{
-        <text>-</text>
-}
+                {
+                    @ViewBag.LastActivity.ToShortDateString()
+                }
+                else
+                {
+                    <text>-</text>
+                }
             </div>
             <div class="form-group">
                 <div class="checkbox">

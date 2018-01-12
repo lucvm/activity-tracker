@@ -128,7 +128,7 @@ namespace ActivityTracker.Controllers
 
             ViewBag.LogEntries = GetAllLogEntries().Where(le => le.ActivityID == id).ToList();
             var logEntries = (IEnumerable<dynamic>)ViewBag.LogEntries;
-            ViewBag.LastActivity = logEntries.Max(x => x.Date);
+            ViewBag.StartDate = logEntries.Min(x => x.Date);
             ViewBag.TimeSpent = logEntries.Sum(x => x.TimeSpent);
             ViewBag.LastActivity = logEntries.Max(x => x.Date);
             ViewBag.TimeSpent = logEntries.Sum(x => x.TimeSpent);
@@ -146,7 +146,7 @@ namespace ActivityTracker.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(int id, [Bind("ID,ApplicationUserID,Name,StartDate,TimeSpent,Complete,FunFactor,Difficulty,Notes")] Activity activity)
+        public async Task<IActionResult> Edit(int id, [Bind("IDName,StartDate,TimeSpent,Complete,FunFactor,Difficulty,Notes")] Activity activity)
         {
             if (id != activity.ID)
             {
