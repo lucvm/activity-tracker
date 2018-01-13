@@ -67,7 +67,7 @@ namespace ActivityTracker.Controllers
                 throw new ApplicationException("Not a valid user, try again with another account");
             }
 
-            var activities = GetAllActivities().Where(a => a.ApplicationUserID == studentId).
+            var activities = GetAllActivities().Where(a => a.ApplicationUserID == studentId).OrderBy(a => a.Name).
                 OrderBy(a => a.Complete).ToList();
 
             foreach (var activity in activities)

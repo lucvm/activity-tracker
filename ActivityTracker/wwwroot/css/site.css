@@ -48,6 +48,10 @@
     height: 10px;
 }
 
+.complete {
+    opacity: 0.6;
+}
+
 /* The switch - the box around the slider */
 .switch {
     position: relative;

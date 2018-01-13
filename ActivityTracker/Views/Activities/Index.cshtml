@@ -40,7 +40,7 @@ else
     <tbody>
         @foreach (var item in ViewBag.Activities)
         {
-            <tr>
+            <tr class="@(item.Complete ? "complete" : "")" >
                 <td>
                     @item.Name
                 </td>
@@ -55,7 +55,7 @@ else
                 </td>
                 <td>
                     <div class="text-right">
-                        <a asp-action="Details" asp-route-id="@item.ID">Details</a> |
+                        <a asp-action="Details" asp-route-id="@item.ID">Details</a> <span style="color:black">|</span>
                         <a asp-action="Delete" asp-route-id="@item.ID"><span class="glyphicon glyphicon-trash"></span></a>
                     </div>
                 </td>
