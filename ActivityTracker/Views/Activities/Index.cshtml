@@ -42,7 +42,7 @@ else
         {
             <tr class="@(item.Complete ? "complete" : "")" >
                 <td>
-                    @item.Name
+                    <a id="overview-activity-name" asp-action="Details" asp-route-id="@item.ID">@item.Name</a>
                 </td>
                 <td class="text-center">
                     @item.FunFactor
@@ -55,7 +55,7 @@ else
                 </td>
                 <td>
                     <div class="text-right">
-                        <a asp-action="Details" asp-route-id="@item.ID">Details</a> <span style="color:black">|</span>
+                        <a asp-action="Details" asp-route-id="@item.ID">Details</a> |
                         <a asp-action="Delete" asp-route-id="@item.ID"><span class="glyphicon glyphicon-trash"></span></a>
                     </div>
                 </td>
