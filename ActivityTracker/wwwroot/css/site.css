@@ -38,6 +38,11 @@
     justify-content: space-around;
 }
 
+#notes {
+    max-width: 100%;
+    min-width: 100%;
+    min-height: 100px;
+}
 
 /* The switch - the box around the slider */
 .switch {
