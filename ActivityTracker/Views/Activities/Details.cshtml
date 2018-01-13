@@ -94,10 +94,10 @@
         <table class="table">
             <thead>
                 <tr>
-                    <th class="log-column-sm">
+                    <th class="column-sm">
                         Date
                     </th>
-                    <th class="text-center log-column-sm">
+                    <th class="text-center column-sm">
                         Hours Spent
                     </th>
                     <th>
@@ -119,7 +119,7 @@
                     <td>
                         @Html.Raw(item.Notes)
                     </td>
-                    <td>
+                    <td class="text-right">
                         <a asp-controller="LogEntries" asp-action="Edit" asp-route-id="@item.ID">Edit</a> |
                         <a asp-controller="LogEntries" asp-action="Delete" asp-route-id="@item.ID">Delete</a>
                     </td>
@@ -131,11 +131,6 @@
 </div>
 <br />
 <br />
-<div class="container">
-        <h3>Popover Example</h3>
-        <a href="#" data-toggle="popover" title="Popover Header" data-content="Some content inside the popover">Toggle popover</a>
-    </div>
-
 
 @section Scripts {
     @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}

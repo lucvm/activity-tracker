@@ -24,8 +24,8 @@
     float: right;
 }
 
-.log-column-sm {
-    width: 13.5%
+.column-sm {
+    width: 100px;
 }
 
 #log {
