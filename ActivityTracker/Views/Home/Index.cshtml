@@ -1,18 +1,3 @@
 ﻿@{
     ViewData["Title"] = "Home Page";
 }
-
-@if (ViewBag.currentUserType == null)
-{
-    <a asp-controller="Activities" asp-action="Index" class="btn btn-lg">For Students</a><br />
-    <a asp-controller="Students" asp-action="Index" class="btn btn-lg">For Teachers</a>
-
-}
-@if (ViewBag.currentUserType == "S")
-{
-    <a asp-controller="Activities" asp-action="Index" class="btn btn-lg">Continue to Activity Overview</a><br />
-}
-@if (ViewBag.currentUserType == "T")
-{
-    <a asp-controller="Students" asp-action="Index" class="btn btn-lg">Continue to Student Overview</a>
-}

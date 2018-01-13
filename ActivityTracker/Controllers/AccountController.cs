@@ -57,6 +57,11 @@ namespace ActivityTracker.Controllers
             return View();
         }
 
+        public IQueryable<ApplicationUser> GetAllStudents()
+        {
+            return _context.ApplicationUsers.AsQueryable();
+        }
+
         [HttpPost]
         [AllowAnonymous]
         [ValidateAntiForgeryToken]
@@ -68,10 +73,19 @@ namespace ActivityTracker.Controllers
                 // This doesn't count login failures towards account lockout
                 // To enable password failures to trigger account lockout, set lockoutOnFailure: true
                 var result = await _signInManager.PasswordSignInAsync(model.Email, model.Password, model.RememberMe, lockoutOnFailure: false);
+                var userType = GetAllStudents().Where(s => s.Email == model.Email).SingleOrDefault().UserType;
+
                 if (result.Succeeded)
                 {
                     _logger.LogInformation("User logged in.");
-                    return RedirectToLocal(returnUrl);
+                    if (userType == "S")
+                    {
+                        return RedirectToAction("Index", "Activities");
+                    }
+                    else
+                    {
+                        return RedirectToAction("Index", "Students");
+                    }
                 }
                 if (result.IsLockedOut)
                 {
