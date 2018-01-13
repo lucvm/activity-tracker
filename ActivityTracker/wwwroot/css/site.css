@@ -44,6 +44,10 @@
     min-height: 100px;
 }
 
+#table-notes {
+    height: 10px;
+}
+
 /* The switch - the box around the slider */
 .switch {
     position: relative;
