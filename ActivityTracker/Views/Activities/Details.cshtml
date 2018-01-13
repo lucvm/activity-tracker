@@ -21,26 +21,26 @@
                     <div>
                         <label>Start Date</label><br />
                         @if (ViewBag.StartDate != null)
-            {
-                @ViewBag.StartDate.ToShortDateString()
-}
-else
-{
-            <text>-</text>
-}
+                        {
+                            @ViewBag.StartDate.ToShortDateString()
+                        }
+                        else
+                        {
+                            <text>-</text>
+                        }
                     </div>
                 </div>
                 <div class="form-group">
                     <div id="last-activity">
                         <label>Last Activity</label><br />
                         @if (ViewBag.LastActivity != null)
-            {
-                @ViewBag.LastActivity.ToShortDateString()
-}
-else
-{
-            <text>-</text>
-}
+                        {
+                            @ViewBag.LastActivity.ToShortDateString()
+                        }
+                        else
+                        {
+                            <text>-</text>
+                        }
                     </div>
                 </div>
                 <div class="form-group">
@@ -82,8 +82,13 @@ else
         </form>
     </div>
     <div id="log" class="col-md-8">
-        <a id="btn-delete" asp-action="Delete" asp-route-id="@Model.ID" 
-           class="btn btn-default detail-column"><span class="glyphicon glyphicon-trash"></span> Delete Activity</a>
+        <form asp-action="Delete">
+            <input type="hidden" asp-for="ID" />
+            <button id="btn-delete" onclick="return confirm('Are you sure you want to delete activity @Model.Name?')"
+                    type="submit" value="Delete" class="btn btn-default detail-column">
+                <span class="glyphicon glyphicon-trash"></span> Delete Activity
+            </button>
+        </form>
         <h2>Log</h2>
         <a asp-controller="LogEntries" asp-action="Create" asp-route-activityid="@Model.ID" class="btn btn-default"><span class="glyphicon glyphicon-plus"></span> New Entry</a>
         <table class="table">
@@ -126,6 +131,11 @@ else
 </div>
 <br />
 <br />
+<div class="container">
+        <h3>Popover Example</h3>
+        <a href="#" data-toggle="popover" title="Popover Header" data-content="Some content inside the popover">Toggle popover</a>
+    </div>
+
 
 @section Scripts {
     @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
