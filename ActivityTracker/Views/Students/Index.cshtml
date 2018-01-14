@@ -25,7 +25,7 @@
                 Email
             </th>
             <th>
-                Last Activity
+                Last Active
             </th>
             <th>
                 Notes
@@ -58,15 +58,15 @@
                 @Html.DisplayFor(modelItem => item.Email)
             </td>
             <td>
-                
+                @Html.DisplayFor(modelItem => item.LastActive)
             </td>
             <td>
                 @Html.DisplayFor(modelItem => item.Notes)
             </td>
-            <td>
-                <a asp-controller="Activities" asp-action="Index" asp-route-id="@item.Id">Activities</a> |
-                <a asp-action="Edit" asp-route-id="@item.Id">Edit</a> |
-                <a asp-action="Delete" asp-route-id="@item.Id">Delete</a>
+            <td class="text-right">
+                <a asp-controller="Activities" asp-action="Index" asp-route-id="@item.Id">Activities</a> &nbsp;|&nbsp;
+                <a asp-action="Edit" asp-route-id="@item.Id"><i class="fas fa-edit"></i></a> &nbsp;|&nbsp;
+                <a asp-action="Delete" asp-route-id="@item.Id"><i class="fas fa-trash-alt"></i></a>
             </td>
         </tr>
 }

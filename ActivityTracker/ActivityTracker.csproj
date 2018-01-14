@@ -32,6 +32,8 @@
     <Compile Remove="Data\Migrations\20180109160957_CreateProfileData.Designer.cs" />
     <Compile Remove="Data\Migrations\20180109161711_CreateProfileData.cs" />
     <Compile Remove="Data\Migrations\20180109161711_CreateProfileData.Designer.cs" />
+    <Compile Remove="Data\Migrations\20180114144954_RemoveApplicationUserLastActive.cs" />
+    <Compile Remove="Data\Migrations\20180114144954_RemoveApplicationUserLastActive.Designer.cs" />
   </ItemGroup>
 
   <ItemGroup>

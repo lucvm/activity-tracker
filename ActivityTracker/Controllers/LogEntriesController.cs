@@ -7,15 +7,21 @@ using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 using ActivityTracker.Data;
 using ActivityTracker.Models;
+using Microsoft.AspNetCore.Identity;
 
 namespace ActivityTracker.Controllers
 {
     public class LogEntriesController : Controller
     {
         private readonly ApplicationDbContext _context;
+        private readonly UserManager<ApplicationUser> _userManager;
 
-        public LogEntriesController(ApplicationDbContext context)
+        private Task<ApplicationUser> GetCurrentUserAsync() => _userManager.GetUserAsync(HttpContext.User);
+
+        public LogEntriesController(ApplicationDbContext context,
+                                    UserManager<ApplicationUser> userManager)
         {
+            _userManager = userManager;
             _context = context;
         }
 
@@ -43,6 +49,26 @@ namespace ActivityTracker.Controllers
             {
                 _context.Add(logEntry);
                 await _context.SaveChangesAsync();
+
+                ApplicationUser student;
+                var currentUser = GetCurrentUserAsync().Result;
+
+                if (currentUser.UserType == "S")
+                {
+                    student = await _context.ApplicationUsers.SingleOrDefaultAsync(s => s.Id == currentUser.Id);
+                }
+                else
+                {
+                    var activity = await _context.Activities.SingleOrDefaultAsync(
+                        a => a.ID == logEntry.ActivityID);
+                    student = await _context.ApplicationUsers.SingleOrDefaultAsync(
+                        s => s.Id == activity.ApplicationUserID);
+                }
+
+                student.LastActive = logEntry.Date;
+                _context.Update(student);
+                await _context.SaveChangesAsync();
+
                 return RedirectToAction("Details", "Activities", new { id = logEntry.ActivityID });
             }
             return View(logEntry);
