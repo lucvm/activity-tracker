@@ -10,7 +10,6 @@ using Microsoft.AspNetCore.Identity;
 
 namespace ActivityTracker.Controllers
 {
-    [AllowAnonymous]
     public class HomeController : Controller
     {
         private readonly UserManager<ApplicationUser> _userManager;
