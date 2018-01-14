@@ -4,9 +4,8 @@
     ViewData["Title"] = "Create";
 }
 
-<h2>Create</h2>
+<h2>Create Activity</h2>
 
-<h4>Activity</h4>
 <hr />
 <div class="row">
     <div class="col-md-4">
@@ -21,9 +20,13 @@
                 <span asp-validation-for="Name" class="text-danger"></span>
             </div>
             <div class="form-group">
-                <label asp-for="Complete" class="control-label"></label>
-                <input asp-for="Complete" class="form-control" />
-                <span asp-validation-for="Complete" class="text-danger"></span>
+                <label>Complete</label>
+                <div id="switch" class="checkbox">
+                    <label class="switch">
+                        <input type="checkbox" asp-for="Complete" />
+                        <span class="slider round"></span>
+                    </label>
+                </div>
             </div>
             <div class="form-group">
                 <label asp-for="FunFactor" class="control-label">Fun Factor</label>
@@ -32,7 +35,7 @@
             </div>
             <div class="form-group">
                 <label asp-for="Difficulty" class="control-label"></label>
-                <input type="range"  min="1" max="5" list="tickmarks" asp-for="Difficulty" class="form-control" />
+                <input type="range" min="1" max="5" list="tickmarks" asp-for="Difficulty" class="form-control" />
                 <span asp-validation-for="Difficulty" class="text-danger"></span>
             </div>
             <datalist id="tickmarks" hidden>
@@ -48,14 +51,11 @@
                 <span asp-validation-for="Notes" class="text-danger"></span>
             </div>
             <div class="form-group">
-                <input type="submit" value="Create" class="btn btn-default" />
+                <button type="submit" class="btn btn-default"><i class="far fa-save"></i> Save</button> &nbsp;|&nbsp;
+                <a asp-action="Index"><i class="fas fa-ban"></i> Cancel</a>
             </div>
         </form>
     </div>
-</div>
-
-<div>
-    <a asp-action="Index">Back to List</a>
 </div>
 
 @section Scripts {

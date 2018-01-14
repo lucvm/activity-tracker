@@ -18,7 +18,7 @@
             </div>
             <div id="dates">
                 <div class="form-group">
-                    <div>
+                    <div class="date-control">
                         <label>Start Date</label><br />
                         @if (ViewBag.StartDate != null)
                         {
@@ -31,7 +31,7 @@
                     </div>
                 </div>
                 <div class="form-group">
-                    <div id="last-activity">
+                    <div id="last-activity" class="date-control">
                         <label>Last Activity</label><br />
                         @if (ViewBag.LastActivity != null)
                         {
@@ -43,9 +43,9 @@
                         }
                     </div>
                 </div>
-                <div class="form-group">
+                <div class="form-group date-control">
                     <label>Complete</label>
-                    <div class="checkbox">
+                    <div id="switch" class="checkbox">
                         <label class="switch">
                             <input type="checkbox" asp-for="Complete" />
                             <span class="slider round"></span>
