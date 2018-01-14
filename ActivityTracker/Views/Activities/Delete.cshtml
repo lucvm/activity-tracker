@@ -3,13 +3,13 @@
 @{
     ViewData["Title"] = "Delete";
 }
-
-<h2>Are you sure you want to delete activity "@Model.Name"?</h2>
-
+<h2>Confirm Delete</h2>
+<h3>Are you sure you want to delete activity "@Model.Name"?</h3>
+@*<br />*@
 <div>
     <form asp-action="Delete">
         <input type="hidden" asp-for="ID" />
-        <input type="submit" value="Delete" class="btn btn-default" /> |
-        <a asp-action="Index">Cancel</a>
+        <button type="submit"><i class="fas fa-trash-alt"></i> Delete</button> &nbsp;|&nbsp;
+        <a asp-action="Index"><i class="fas fa-ban"></i> Cancel</a>
     </form>
 </div>
