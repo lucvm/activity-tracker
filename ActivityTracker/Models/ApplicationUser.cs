@@ -20,9 +20,6 @@ namespace ActivityTracker.Models
         public string LastName { get; set; }
         public string Notes { get; set; }
 
-        [DisplayFormat(DataFormatString = "{0:d}")]
-        public DateTime LastActive { get; set; }
-
         public ICollection<Activity> Activities { get; set; }
         public ICollection<UserGroup> UserGroups { get; set; }
         public ICollection<ApplicationUser> Students { get; set; }

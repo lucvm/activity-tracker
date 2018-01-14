@@ -18,17 +18,17 @@ namespace ActivityTracker.Data
             var users = new ApplicationUser[]
             {
                 // Teachers
-                new ApplicationUser{Id="1", FirstName="Teacher", Prefix="", LastName="1", Email="teacher@hotmail.com", UserType="T", Notes="", LastActive=DateTime.Parse("2018-01-02")},
-                new ApplicationUser{Id="2", FirstName="Jan", Prefix="", LastName="Janssen", Email="jan@hotmail.com", UserType="T", Notes="", LastActive=DateTime.Parse("2018-01-02")},
-                new ApplicationUser{Id="3", FirstName="Piet", Prefix="van", LastName="Dijk", Email="piet@gmail.com", UserType="T", Notes="", LastActive=DateTime.Parse("2018-01-02")},
+                new ApplicationUser{Id="1", FirstName="Teacher", Prefix="", LastName="1", Email="teacher@hotmail.com", UserType="T", Notes=""},
+                new ApplicationUser{Id="2", FirstName="Jan", Prefix="", LastName="Janssen", Email="jan@hotmail.com", UserType="T", Notes=""},
+                new ApplicationUser{Id="3", FirstName="Piet", Prefix="van", LastName="Dijk", Email="piet@gmail.com", UserType="T", Notes=""},
                 // Students
-                new ApplicationUser{Id="4", FirstName="Student", Prefix="", LastName="1", TeacherID="1", Email="student@hotmail.com", UserType="S", Notes="", LastActive=DateTime.Parse("2018-01-02")},
-                new ApplicationUser{Id="5", FirstName="Henk", Prefix="van de", LastName="Waard", TeacherID="1", Email="henk@hotmail.com", UserType="S", Notes="Lorem ipsum dolor sit amet", LastActive=DateTime.Parse("2018-01-02")},
-                new ApplicationUser{Id="6", FirstName="Marie", Prefix="", LastName="Smit", TeacherID="1", Email="marie@live.net", UserType="S", Notes="", LastActive=DateTime.Parse("2017-01-02")},
-                new ApplicationUser{Id="7", FirstName="Freek", Prefix="de", LastName="Jong", TeacherID="2", Email="freek@gmail.com", UserType="S", Notes="", LastActive=DateTime.Parse("2016-01-02")},
-                new ApplicationUser{Id="8", FirstName="Cornelia", Prefix="", LastName="Heiniken", TeacherID="2", Email="corrie@hotmail.com", UserType="S", Notes="", LastActive=DateTime.Parse("2015-01-02")},
-                new ApplicationUser{Id="9", FirstName="Piet", Prefix="", LastName="Heijn", TeacherID="3", Email="p.heijn@gmail.com", UserType="S", Notes="", LastActive=DateTime.Parse("2018-01-02")},
-                new ApplicationUser{Id="10", FirstName="Roos", Prefix="", LastName="Bloem", TeacherID="3", Email="roos@gmail.com", UserType="S", Notes="", LastActive=DateTime.Parse("2018-01-02")},
+                new ApplicationUser{Id="4", FirstName="Student", Prefix="", LastName="1", TeacherID="1", Email="student@hotmail.com", UserType="S", Notes=""},
+                new ApplicationUser{Id="5", FirstName="Henk", Prefix="van de", LastName="Waard", TeacherID="1", Email="henk@hotmail.com", UserType="S", Notes="Lorem ipsum dolor sit amet"},
+                new ApplicationUser{Id="6", FirstName="Marie", Prefix="", LastName="Smit", TeacherID="1", Email="marie@live.net", UserType="S", Notes=""},
+                new ApplicationUser{Id="7", FirstName="Freek", Prefix="de", LastName="Jong", TeacherID="2", Email="freek@gmail.com", UserType="S", Notes=""},
+                new ApplicationUser{Id="8", FirstName="Cornelia", Prefix="", LastName="Heiniken", TeacherID="2", Email="corrie@hotmail.com", UserType="S", Notes=""},
+                new ApplicationUser{Id="9", FirstName="Piet", Prefix="", LastName="Heijn", TeacherID="3", Email="p.heijn@gmail.com", UserType="S", Notes=""},
+                new ApplicationUser{Id="10", FirstName="Roos", Prefix="", LastName="Bloem", TeacherID="3", Email="roos@gmail.com", UserType="S", Notes=""},
             };
             foreach (ApplicationUser u in users)
             {
