@@ -23,14 +23,21 @@ namespace ActivityTracker.Controllers
         public async Task<IActionResult> Index()
         {
             var currentUser = await GetCurrentUserAsync();
-            var currentUserId = currentUser?.Id;
             if (currentUser != null)
             {
-                ViewBag.currentUserId = currentUserId;
-                ViewBag.currentUserType = currentUser.UserType;
+                if (currentUser.UserType == "S")
+                {
+                    return RedirectToAction("Index", "Activities");
+                }
+                else
+                {
+                    return RedirectToAction("Index", "Students");
+                }
             }
-
-            return View();
+            else
+            {
+                return View();
+            }
         }
         
         public IActionResult About()

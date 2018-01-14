@@ -200,7 +200,14 @@ namespace ActivityTracker.Controllers
 
                     await _signInManager.SignInAsync(user, isPersistent: false);
                     _logger.LogInformation("User created a new account with password.");
-                    return RedirectToLocal(returnUrl);
+                    if (model.UserType == "S")
+                    {
+                        return RedirectToAction("Index", "Activities");
+                    }
+                    else
+                    {
+                        return RedirectToAction("Index", "Students");
+                    }
                 }
                 AddErrors(result);
             }
