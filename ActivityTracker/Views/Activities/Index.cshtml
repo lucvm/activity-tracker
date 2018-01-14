@@ -17,7 +17,7 @@ else
 
 
 <p>
-    <a asp-action="Create" asp-route-studentid="@ViewBag.StudentId"><i class="fa fa-plus"></i> Add Activity</a>
+    <a class="btn btn-default" asp-action="Create" asp-route-studentid="@ViewBag.StudentId"><i class="fa fa-plus"></i> Add Activity</a>
 </p>
 <table class="table table-striped">
     <thead>
@@ -62,7 +62,7 @@ else
                 <td>
                     <div class="text-right">
                         <a asp-action="Details" asp-route-id="@item.ID">Details</a> |
-                        <a asp-action="Delete" asp-route-id="@item.ID"><span class="fa fa-trash"></span></a>
+                        <a asp-action="Delete" asp-route-id="@item.ID"><span class="fa fa-trash-alt"></span></a>
                     </div>
                 </td>
             </tr>

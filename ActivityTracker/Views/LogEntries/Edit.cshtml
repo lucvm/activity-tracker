@@ -4,10 +4,8 @@
     ViewData["Title"] = "Edit";
 }
 
-<h4>LogEntry</h4>
-<hr />
 <div class="row">
-    <div class="col-md-4">
+    <div class="col-md-4 detail-column">
         <form asp-action="Edit">
             <div asp-validation-summary="ModelOnly" class="text-danger"></div>
             <input type="hidden" asp-for="ID" />
@@ -15,23 +13,25 @@
                 <input asp-for="ActivityID" value="@Model.ActivityID" class="form-control" />
             </div>
             <div class="form-group">
-                <label asp-for="Date" class="control-label"></label>
+                <label asp-for="Date" class="control-label"><i class="fas fa-calendar"></i> Date</label>
                 <input type="date" asp-for="Date" class="form-control" />
                 <span asp-validation-for="Date" class="text-danger"></span>
             </div>
             <div class="form-group">
-                <label asp-for="TimeSpent" class="control-label">Time Spent</label>
+                <label asp-for="TimeSpent" class="control-label"><i class="fas fa-clock"></i> Time Spent</label>
                 <input asp-for="TimeSpent" class="form-control" />
                 <span asp-validation-for="TimeSpent" class="text-danger"></span>
             </div>
             <div class="form-group">
-                <label asp-for="Notes" class="control-label"></label>
+                <label asp-for="Notes" class="control-label"><i class="fas fa-sticky-note"></i> Notes</label>
                 <input asp-for="Notes" class="form-control" />
                 <span asp-validation-for="Notes" class="text-danger"></span>
             </div>
             <div class="form-group">
-                <input type="submit" value="Save" class="btn btn-default" /> |
-                <a asp-action="Details" asp-controller="Activities" asp-route-id="@Model.ActivityID">Cancel</a>
+                <button type="submit" class="btn btn-default"><i class="far fa-save"></i> Save</button> &nbsp;|&nbsp;
+                <a asp-action="Details" asp-controller="Activities" asp-route-id="@Model.ActivityID">
+                    <i class="fas fa-ban"></i> Cancel
+                </a>
             </div>
         </form>
     </div>
