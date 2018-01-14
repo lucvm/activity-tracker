@@ -56,6 +56,22 @@ namespace ActivityTracker.Controllers
                     studentId = id;
                     ViewBag.studentId = studentId;
                     ViewBag.StudentName = String.Format("{0} {1} {2}", student.FirstName, student.Prefix, student.LastName);
+                    ViewBag.Groups = new List<Group>();
+                    var allGroups = await _context.Groups
+                        .Where(group => group.OwnerID == currentUser.Id)
+                        .Include(group => group.UserGroups)
+                            .ThenInclude(userGroup => userGroup.Student)
+                        .ToListAsync();
+                    foreach (var group in allGroups)
+                    {
+                        foreach (var userGroup in group.UserGroups)
+                        {
+                            if (userGroup.Student == student)
+                            {
+                                ViewBag.Groups.Add(group);
+                            }
+                        }
+                    }
                 }
                 catch (ArgumentOutOfRangeException)
                 {
@@ -136,7 +152,7 @@ namespace ActivityTracker.Controllers
             {
                 return NotFound();
             }
-
+            ViewBag.currentUser = await GetCurrentUserAsync();
 
             ViewBag.LogEntries = GetAllLogEntries().Where(le => le.ActivityID == id).
                 OrderByDescending(le => le.Date).ToList();

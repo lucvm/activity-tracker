@@ -39,6 +39,7 @@ namespace ActivityTracker.Controllers
             var students = GetAllStudents().Where(s => s.TeacherID == Convert.ToString(user.Id)).ToList();
             var groups = await _context.Groups.ToListAsync();
             var userGroups = await _context.UserGroups.ToListAsync();
+            var logEntries = await _context.LogEntries.ToListAsync();
             foreach (var student in students)
             {
                 foreach (var userGroup in userGroups)
