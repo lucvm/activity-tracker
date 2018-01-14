@@ -76,7 +76,7 @@
                 <span asp-validation-for="Notes" class="text-danger"></span>
             </div>
             <div class="form-group">
-                <button type="submit" class="btn btn-default"><span class="glyphicon glyphicon-save"></span> Save</button> |
+                <button type="submit" class="btn btn-default"><i class="fa fa-floppy-o"></i> Save</button> |
                 <a asp-action="Index">Back to Activities</a>
             </div>
         </form>
@@ -86,11 +86,12 @@
             <input type="hidden" asp-for="ID" />
             <button id="btn-delete" onclick="return confirm('Are you sure you want to delete activity @Model.Name?')"
                     type="submit" value="Delete" class="btn btn-default detail-column">
-                <span class="glyphicon glyphicon-trash"></span> Delete Activity
+                <i class="fas fa-trash-alt"></i> Delete Activity
             </button>
         </form>
         <h3>Log</h3>
-        <a asp-controller="LogEntries" asp-action="Create" asp-route-activityid="@Model.ID" class="btn btn-default"><span class="glyphicon glyphicon-plus"></span> New Entry</a>
+        <a asp-controller="LogEntries" asp-action="Create" asp-route-activityid="@Model.ID" class="btn btn-default">
+            <i class="fa fa-plus"></i> New Entry</a>
         <table class="table">
             <thead>
                 <tr>
@@ -121,7 +122,7 @@
                     </td>
                     <td class="text-right">
                         <a asp-controller="LogEntries" asp-action="Edit" asp-route-id="@item.ID">Edit</a> |
-                        <a asp-controller="LogEntries" asp-action="Delete" asp-route-id="@item.ID">Delete</a>
+                        <a asp-controller="LogEntries" asp-action="Delete" asp-route-id="@item.ID"><i class="fas fa-trash-alt"></i></a>
                     </td>
                 </tr>
         }

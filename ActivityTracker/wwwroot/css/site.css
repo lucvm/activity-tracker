@@ -10,6 +10,10 @@
     padding-right: 15px;
 }
 
+.fa-star {
+    color: goldenrod;
+}
+
 .input-header {
     border: 0;
     font-size: 32px;

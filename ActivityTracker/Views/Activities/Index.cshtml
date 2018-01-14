@@ -17,7 +17,7 @@ else
 
 
 <p>
-    <a asp-action="Create" asp-route-studentid="@ViewBag.StudentId">Create New</a>
+    <a asp-action="Create" asp-route-studentid="@ViewBag.StudentId"><i class="fa fa-plus"></i> Add Activity</a>
 </p>
 <table class="table table-striped">
     <thead>
@@ -45,10 +45,16 @@ else
                     <a id="overview-activity-name" asp-action="Details" asp-route-id="@item.ID">@item.Name</a>
                 </td>
                 <td class="text-center">
-                    @item.FunFactor
+                    @for (var i = 0; i < item.FunFactor; i++)
+                    {
+                    <i class="fa fa-star"></i>
+                    }
                 </td>
                 <td class="text-center">
-                    @item.Difficulty
+                    @for (var i = 0; i < item.Difficulty; i++)
+                    {
+                    <i class="fa fa-star"></i>
+                    }
                 </td>
                 <td>
                     @item.Notes
@@ -56,7 +62,7 @@ else
                 <td>
                     <div class="text-right">
                         <a asp-action="Details" asp-route-id="@item.ID">Details</a> |
-                        <a asp-action="Delete" asp-route-id="@item.ID"><span class="glyphicon glyphicon-trash"></span></a>
+                        <a asp-action="Delete" asp-route-id="@item.ID"><span class="fa fa-trash"></span></a>
                     </div>
                 </td>
             </tr>
