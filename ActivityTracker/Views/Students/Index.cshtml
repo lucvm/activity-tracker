@@ -39,9 +39,13 @@
             <td>
                 @if (item.UserGroups != null)
                 {
-                    @foreach (var userGroup in item.UserGroups)
+                    @for (int i = 0; i < item.UserGroups.Count; i++)
                     {
-                        @Html.DisplayFor(ug => userGroup.Group.Name)<text> </text>
+                        @item.UserGroups.ElementAt(i).Group.Name;
+                        if (i < item.UserGroups.Count - 1)
+                        {
+                            <text>, </text>
+                        }
                     }
                 }
                 else

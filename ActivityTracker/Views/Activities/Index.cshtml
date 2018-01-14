@@ -6,7 +6,7 @@
 {
     <h2>My Activities</h2>
 }
-else if (ViewBag.CurrentUserType == "T")
+if (ViewBag.CurrentUserType == "T")
 {
     <h2><i class="fas fa-user"></i> @ViewBag.StudentName
     @if (ViewBag.Groups != null)
@@ -14,16 +14,12 @@ else if (ViewBag.CurrentUserType == "T")
         <small>
         @foreach (var group in ViewBag.Groups)
         {
-        <text>&nbsp;</text>
-        @group.Name
+            @group.Name
+            <text> </text>
         }
         </small>
     }
     </h2>
-}
-else
-{
-    <text></text>
 }
 
 
