@@ -3,7 +3,7 @@
 @{
     ViewData["Title"] = "Edit";
 }
-
+<h2>Edit Log Entry @Model.Date.ToShortDateString()</h2>
 <div class="row">
     <div class="col-md-4 detail-column">
         <form asp-action="Edit">
@@ -13,17 +13,17 @@
                 <input asp-for="ActivityID" value="@Model.ActivityID" class="form-control" />
             </div>
             <div class="form-group">
-                <label asp-for="Date" class="control-label"><i class="fas fa-calendar"></i> Date</label>
+                <label asp-for="Date" class="control-label">Date</label>
                 <input type="date" asp-for="Date" class="form-control" />
                 <span asp-validation-for="Date" class="text-danger"></span>
             </div>
             <div class="form-group">
-                <label asp-for="TimeSpent" class="control-label"><i class="fas fa-clock"></i> Time Spent</label>
+                <label asp-for="TimeSpent" class="control-label">Time Spent</label>
                 <input asp-for="TimeSpent" class="form-control" />
                 <span asp-validation-for="TimeSpent" class="text-danger"></span>
             </div>
             <div class="form-group">
-                <label asp-for="Notes" class="control-label"><i class="fas fa-sticky-note"></i> Notes</label>
+                <label asp-for="Notes" class="control-label">Notes</label>
                 <input asp-for="Notes" class="form-control" />
                 <span asp-validation-for="Notes" class="text-danger"></span>
             </div>
