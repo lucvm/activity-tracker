@@ -48,7 +48,7 @@ namespace ActivityTracker.Controllers
                 studentId = currentUser.Id;
                 ViewBag.studentId = studentId;
             }
-            else if (currentUser.UserType == "T")
+            else
             {
                 try
                 {
@@ -77,10 +77,6 @@ namespace ActivityTracker.Controllers
                 {
                     return RedirectToAction("Index", "Home");
                 }
-            }
-            else
-            {
-                throw new ApplicationException("Not a valid user, try again with another account");
             }
 
             var activities = GetAllActivities().Where(a => a.ApplicationUserID == studentId).OrderBy(a => a.Name).
@@ -160,7 +156,6 @@ namespace ActivityTracker.Controllers
             ViewBag.StartDate = logEntries.Min(x => x.Date);
             ViewBag.TimeSpent = logEntries.Sum(x => x.TimeSpent);
             ViewBag.LastActivity = logEntries.Max(x => x.Date);
-            ViewBag.TimeSpent = logEntries.Sum(x => x.TimeSpent);
 
             var activity = await _context.Activities.SingleOrDefaultAsync(m => m.ID == id);
             if (activity == null)

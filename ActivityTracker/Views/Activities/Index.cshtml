@@ -6,7 +6,7 @@
 {
     <h2>My Activities</h2>
 }
-if (ViewBag.CurrentUserType == "T")
+@if (ViewBag.CurrentUserType == "T")
 {
     <h2><i class="fas fa-user"></i> @ViewBag.StudentName
     @if (ViewBag.Groups != null)
