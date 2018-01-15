@@ -124,8 +124,7 @@
                         @Html.Raw(item.Notes)
                     </td>
                     <td class="text-right">
-                        <a asp-controller="LogEntries" asp-action="Edit" asp-route-id="@item.ID"><i class="fas fa-edit"></i></a> &nbsp;|&nbsp;
-                        <a asp-controller="LogEntries" asp-action="Delete" asp-route-id="@item.ID"><i class="fas fa-trash-alt"></i></a>
+                        <a asp-controller="LogEntries" asp-action="Edit" asp-route-id="@item.ID"><i class="fas fa-edit"></i></a>
                     </td>
                 </tr>
         }

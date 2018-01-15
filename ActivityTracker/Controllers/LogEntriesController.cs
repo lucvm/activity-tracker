@@ -26,10 +26,10 @@ namespace ActivityTracker.Controllers
         }
 
         // GET: LogEntries
-        public async Task<IActionResult> Index()
-        {
-            return View(await _context.LogEntries.ToListAsync());
-        }
+        //public async Task<IActionResult> Index()
+        //{
+        //    return View(await _context.LogEntries.ToListAsync());
+        //}
 
         // GET: LogEntries/Create
         public IActionResult Create()

@@ -3,7 +3,20 @@
 @{
     ViewData["Title"] = "Edit";
 }
-<h2>Edit Log Entry @Model.Date.ToShortDateString()</h2>
+
+<div class="row">
+    <h3 class="col-md-6">Edit log entry @Model.Date.ToShortDateString()</h3>
+    <div class="text-right detail-column">
+        <form asp-action="Delete">
+            <input type="hidden" asp-for="ID" />
+            <button type="submit" class="btn btn-default" 
+                    onclick="return confirm('Are you sure you want to delete log entry @Model.Date.ToShortDateString()?')">
+                <i class="fas fa-trash-alt"></i> Delete Log Entry
+            </button>
+        </form>
+    </div>
+</div>
+<hr />
 <div class="row">
     <div class="col-md-4 detail-column">
         <form asp-action="Edit">
