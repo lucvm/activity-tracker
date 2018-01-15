@@ -8,17 +8,18 @@
 }
 @if (ViewBag.CurrentUserType == "T")
 {
-    <h2><i class="fas fa-user"></i> @ViewBag.StudentName
-    @if (ViewBag.Groups != null)
-    {
-        <small>
-        @foreach (var group in ViewBag.Groups)
+    <h2>
+        <i class="fas fa-user"></i> @ViewBag.StudentName
+        @if (ViewBag.Groups != null)
         {
-            @group.Name
-            <text> </text>
+            <small>
+                @foreach (var group in ViewBag.Groups)
+                {
+                    @group.Name
+                    <text> </text>
+                }
+            </small>
         }
-        </small>
-    }
     </h2>
 }
 
@@ -47,20 +48,20 @@
     <tbody>
         @foreach (var item in ViewBag.Activities)
         {
-            <tr class="@(item.Complete ? "complete" : "")" >
+            <tr class="@(item.Complete ? "complete" : "")">
                 <td>
                     <a id="overview-activity-name" asp-action="Details" asp-route-id="@item.ID">@item.Name</a>
                 </td>
                 <td class="text-center">
                     @for (var i = 0; i < item.FunFactor; i++)
                     {
-                    <i class="fa fa-star"></i>
+                        <i class="fa fa-star"></i>
                     }
                 </td>
                 <td class="text-center">
                     @for (var i = 0; i < item.Difficulty; i++)
                     {
-                    <i class="fa fa-star"></i>
+                        <i class="fa fa-star"></i>
                     }
                 </td>
                 <td>
@@ -76,3 +77,8 @@
         }
     </tbody>
 </table>
+<br />
+@if (ViewBag.CurrentUserType == "T")
+{
+    <a asp-action="Index" asp-controller="Students"><i class="fas fa-arrow-up"></i> Back to Students</a>
+}
