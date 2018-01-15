@@ -62,7 +62,7 @@
                 @Html.DisplayFor(modelItem => item.Email)
             </td>
             <td>
-                @Html.DisplayFor(modelItem => item.LastActive)
+                @((item.LastActive > new DateTime(0001, 01, 01)) ? item.LastActive.ToShortDateString() : "-")
             </td>
             <td>
                 @Html.DisplayFor(modelItem => item.Notes)
