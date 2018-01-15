@@ -16,6 +16,8 @@ namespace ActivityTracker.Controllers
         private readonly ApplicationDbContext _context;
         private readonly UserManager<ApplicationUser> _userManager;
 
+        private Task<ApplicationUser> GetCurrentUserAsync() => _userManager.GetUserAsync(HttpContext.User);
+
         public GroupsController(ApplicationDbContext context, UserManager<ApplicationUser> userManager)
         {
             _userManager = userManager;
@@ -25,7 +27,12 @@ namespace ActivityTracker.Controllers
         // GET: Groups
         public async Task<IActionResult> Index()
         {
-            return View(await _context.Groups.ToListAsync());
+            var currentUser = await GetCurrentUserAsync();
+            var currentUserId = currentUser?.Id;
+
+            var groups = await _context.Groups.Where(g => g.OwnerID == currentUser.Id).ToListAsync();
+
+            return View(groups);
         }
 
         // GET: Groups/Details/5
@@ -53,7 +60,6 @@ namespace ActivityTracker.Controllers
         }
 
 
-        private Task<ApplicationUser> GetCurrentUserAsync() => _userManager.GetUserAsync(HttpContext.User);
         // POST: Groups/Create
         // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
