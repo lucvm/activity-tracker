@@ -71,6 +71,7 @@ namespace ActivityTracker.Controllers
 
                 return RedirectToAction("Details", "Activities", new { id = logEntry.ActivityID });
             }
+            ViewBag.ActivityId = logEntry.ActivityID;
             return View(logEntry);
         }
 
