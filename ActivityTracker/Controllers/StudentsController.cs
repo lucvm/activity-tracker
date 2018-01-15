@@ -99,6 +99,26 @@ namespace ActivityTracker.Controllers
         // GET: Students/Edit/5
         public async Task<IActionResult> Edit(string id)
         {
+            var currentUser = await GetCurrentUserAsync();
+            var currentUserId = currentUser?.Id;
+
+            ViewBag.CurrentGroups = new List<Group>();
+
+            ViewBag.Groups = _context.Groups.AsQueryable().Where(g => g.OwnerID == currentUserId)
+                .Include(g => g.UserGroups)
+                .ToList();
+
+            foreach (var group in ViewBag.Groups)
+            {
+                foreach (var ug in group.UserGroups)
+                {
+                    if (ug.ApplicationUserID == id)
+                    {
+                        ViewBag.CurrentGroups.Add(group);
+                    }
+                }
+            }
+
             if (id == null)
             {
                 return NotFound();
@@ -117,7 +137,7 @@ namespace ActivityTracker.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(string id, [Bind("TeacherID,UserType,FirstName,Prefix,LastName,Notes,LastActive,Id,UserName,NormalizedUserName,Email,NormalizedEmail,EmailConfirmed,PasswordHash,SecurityStamp,ConcurrencyStamp,PhoneNumber,PhoneNumberConfirmed,TwoFactorEnabled,LockoutEnd,LockoutEnabled,AccessFailedCount")] ApplicationUser applicationUser)
+        public async Task<IActionResult> Edit(string id, List<string> groups, [Bind("TeacherID,UserType,FirstName,Prefix,LastName,Notes,LastActive,Id,UserName,NormalizedUserName,Email,NormalizedEmail,EmailConfirmed,PasswordHash,SecurityStamp,ConcurrencyStamp,PhoneNumber,PhoneNumberConfirmed,TwoFactorEnabled,LockoutEnd,LockoutEnabled,AccessFailedCount")] ApplicationUser applicationUser)
         {
             if (id != applicationUser.Id)
             {
@@ -129,6 +149,18 @@ namespace ActivityTracker.Controllers
                 try
                 {
                     _context.Update(applicationUser);
+
+                    _context.Database.ExecuteSqlCommand($"DELETE FROM UserGroup WHERE ApplicationUserID = {id}");
+                    await _context.SaveChangesAsync();
+
+                    foreach (var group in groups)
+                    {
+                        _context.Add(new UserGroup
+                        {
+                            ApplicationUserID = id,
+                            GroupID = group
+                        });
+                    }
                     await _context.SaveChangesAsync();
                 }
                 catch (DbUpdateConcurrencyException)

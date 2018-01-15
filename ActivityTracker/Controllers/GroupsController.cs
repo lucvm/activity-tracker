@@ -75,7 +75,7 @@ namespace ActivityTracker.Controllers
 
                 _context.Add(@group);
                 await _context.SaveChangesAsync();
-                return RedirectToAction("Index", "Students");
+                return RedirectToAction("Index", "Groups");
             }
             return View(@group);
         }
