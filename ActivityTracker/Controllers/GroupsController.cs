@@ -28,7 +28,6 @@ namespace ActivityTracker.Controllers
         public async Task<IActionResult> Index()
         {
             var currentUser = await GetCurrentUserAsync();
-            var currentUserId = currentUser?.Id;
 
             var groups = await _context.Groups.Where(g => g.OwnerID == currentUser.Id).ToListAsync();
 
@@ -43,14 +42,19 @@ namespace ActivityTracker.Controllers
                 return NotFound();
             }
 
+            var currentUser = await GetCurrentUserAsync();
             var @group = await _context.Groups
                 .SingleOrDefaultAsync(m => m.ID == id);
+
             if (@group == null)
             {
                 return NotFound();
             }
 
-            return View(@group);
+            if (currentUser.Id == @group.OwnerID)
+                return View(@group);
+            else
+                return Unauthorized();
         }
 
         // GET: Groups/Create
@@ -73,9 +77,14 @@ namespace ActivityTracker.Controllers
                 var currentUserId = currentUser?.Id;
                 @group.OwnerID = currentUserId;
 
-                _context.Add(@group);
-                await _context.SaveChangesAsync();
-                return RedirectToAction("Index", "Groups");
+                if (currentUser.Id == @group.OwnerID)
+                {
+                    _context.Add(@group);
+                    await _context.SaveChangesAsync();
+                    return RedirectToAction("Index", "Groups");
+                }
+                else
+                    return Unauthorized();
             }
             return View(@group);
         }
@@ -88,12 +97,18 @@ namespace ActivityTracker.Controllers
                 return NotFound();
             }
 
+            var currentUser = await GetCurrentUserAsync();
             var @group = await _context.Groups.SingleOrDefaultAsync(m => m.ID == id);
+
             if (@group == null)
             {
                 return NotFound();
             }
-            return View(@group);
+
+            if (currentUser.Id == @group.OwnerID)
+                return View(@group);
+            else
+                return Unauthorized();
         }
 
         // POST: Groups/Edit/5
@@ -112,8 +127,15 @@ namespace ActivityTracker.Controllers
             {
                 try
                 {
-                    _context.Update(@group);
-                    await _context.SaveChangesAsync();
+                    var currentUser = await GetCurrentUserAsync();
+
+                    if (currentUser.Id == @group.OwnerID)
+                    {
+                        _context.Update(@group);
+                        await _context.SaveChangesAsync();
+                    }
+                    else
+                        return Unauthorized();
                 }
                 catch (DbUpdateConcurrencyException)
                 {
@@ -139,6 +161,7 @@ namespace ActivityTracker.Controllers
                 return NotFound();
             }
 
+            var currentUser = await GetCurrentUserAsync();
             var @group = await _context.Groups
                 .SingleOrDefaultAsync(m => m.ID == id);
             if (@group == null)
@@ -146,7 +169,10 @@ namespace ActivityTracker.Controllers
                 return NotFound();
             }
 
-            return View(@group);
+            if (currentUser.Id == @group.OwnerID)
+                return View(@group);
+            else
+                return Unauthorized();
         }
 
         // POST: Groups/Delete/5
@@ -154,10 +180,17 @@ namespace ActivityTracker.Controllers
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> DeleteConfirmed(string id)
         {
+            var currentUser = await GetCurrentUserAsync();
             var @group = await _context.Groups.SingleOrDefaultAsync(m => m.ID == id);
-            _context.Groups.Remove(@group);
-            await _context.SaveChangesAsync();
-            return RedirectToAction(nameof(Index));
+
+            if (currentUser.Id == @group.OwnerID)
+            {
+                _context.Groups.Remove(@group);
+                await _context.SaveChangesAsync();
+                return RedirectToAction(nameof(Index));
+            }
+            else
+                return Unauthorized();
         }
 
         private bool GroupExists(string id)
