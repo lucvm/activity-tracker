@@ -284,6 +284,7 @@ namespace ActivityTracker.Controllers
                     //return RedirectToLocal(returnUrl);
                     return RedirectToAction("Index", "Students");
                 }
+                ViewBag.Groups = GetAllGroups().Where(g => g.OwnerID == currentUserId).ToList();
                 AddErrors(result);
             }
 
