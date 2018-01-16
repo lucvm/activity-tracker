@@ -132,7 +132,7 @@ namespace ActivityTracker.Controllers
 
                 _context.Add(activity);
                 await _context.SaveChangesAsync();
-                return RedirectToAction("Index", new { id=activity.ApplicationUserID });
+                return RedirectToAction("Index", new { id = activity.ApplicationUserID });
             }
             return View(activity);
         }
@@ -168,21 +168,7 @@ namespace ActivityTracker.Controllers
                 return NotFound();
             }
 
-            //if (currentUser.UserType == "S")
-            //{
-            //    if (activity.ApplicationUserID != currentUser.Id)
-            //    {
-            //        return Unauthorized();
-            //    }
-            //}
-            //else
-            //{
-            //    if (currentUser.Id != activity.Student.TeacherID)
-            //    {
-            //        return Unauthorized();
-            //    }
-            //}
-            if (Activity.AuthorizeActivityUser(currentUser, activity))
+            if (Activity.AuthorizeActivityUser(activity, currentUser))
                 return View(activity);
             else
                 return Unauthorized();
@@ -199,28 +185,35 @@ namespace ActivityTracker.Controllers
             {
                 return NotFound();
             }
+            var currentUser = await GetCurrentUserAsync();
 
-            if (ModelState.IsValid)
+            if (activity.ApplicationUserID == currentUser.Id)
             {
-                try
+                if (ModelState.IsValid)
                 {
-                    _context.Update(activity);
-                    await _context.SaveChangesAsync();
-                }
-                catch (DbUpdateConcurrencyException)
-                {
-                    if (!ActivityExists(activity.ID))
+                    try
                     {
-                        return NotFound();
+                        _context.Update(activity);
+                        await _context.SaveChangesAsync();
                     }
-                    else
+                    catch (DbUpdateConcurrencyException)
                     {
-                        throw;
+                        if (!ActivityExists(activity.ID))
+                        {
+                            return NotFound();
+                        }
+                        else
+                        {
+                            throw;
+                        }
                     }
+                    return RedirectToAction(nameof(Index));
                 }
-                return RedirectToAction(nameof(Index));
+                return View(activity);
             }
-            return View(activity);
+            else
+                return Unauthorized();
+
         }
 
         // GET: Activities/Delete/5
@@ -238,7 +231,14 @@ namespace ActivityTracker.Controllers
                 return NotFound();
             }
 
-            return View(activity);
+            var currentUser = await GetCurrentUserAsync();
+
+            if (activity.ApplicationUserID == currentUser.Id)
+            {
+                return View(activity);
+            }
+            else
+                return Unauthorized();
         }
 
         // POST: Activities/Delete/5
@@ -247,9 +247,16 @@ namespace ActivityTracker.Controllers
         public async Task<IActionResult> DeleteConfirmed(int id)
         {
             var activity = await _context.Activities.SingleOrDefaultAsync(m => m.ID == id);
-            _context.Activities.Remove(activity);
-            await _context.SaveChangesAsync();
-            return RedirectToAction(nameof(Index));
+            var currentUser = await GetCurrentUserAsync();
+
+            if (activity.ApplicationUserID == currentUser.Id)
+            {
+                    _context.Activities.Remove(activity);
+                await _context.SaveChangesAsync();
+                return RedirectToAction(nameof(Index));
+            }
+            else
+                return Unauthorized();
         }
 
         private bool ActivityExists(int id)

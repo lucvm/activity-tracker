@@ -22,7 +22,7 @@ namespace ActivityTracker.Models
 
         public ICollection<LogEntry> Log { get; set; }
 
-        public static bool AuthorizeActivityUser(ApplicationUser currentUser, Activity activity)
+        public static bool AuthorizeActivityUser(Activity activity, ApplicationUser currentUser)
         {
             if (currentUser.UserType == "S")
             {

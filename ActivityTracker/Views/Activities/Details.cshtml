@@ -76,25 +76,34 @@
                 <span asp-validation-for="Notes" class="text-danger"></span>
             </div>
             <div class="form-group">
-                <button type="submit" class="btn btn-default"><i class="far fa-save"></i> Save</button> &nbsp;|&nbsp;
-                <a @((ViewBag.CurrentUser.UserType == "S") ? Html.Raw("href='/Activities/Index'") :
-                        Html.Raw($"href='/Activities/Index/{Model.ApplicationUserID}'"))>
-                <i class="fas fa-arrow-up"></i> Back to Activities</a>
+                @if (ViewBag.CurrentUserType == "S")
+    {
+            <button type="submit" class="btn btn-default"><i class="far fa-save"></i> Save</button> <text>&nbsp;|&nbsp;</text>
+}
+                <a @((ViewBag.CurrentUser.UserType == "S") ? Html.Raw("href='/Activities/Index'") : Html.Raw($"href='/Activities/Index/{Model.ApplicationUserID}'"))>
+                    <i class="fas fa-arrow-up"></i> Back to Activities
+                </a>
             </div>
         </form>
     </div>
     <div id="log" class="col-md-8">
-        <form asp-action="Delete">
-            <input type="hidden" asp-for="ID" />
-            <button id="btn-delete" onclick="return confirm('Are you sure you want to delete activity @Model.Name?')"
-                    type="submit" value="Delete" class="btn btn-default detail-column">
-                <i class="fas fa-trash-alt"></i> Delete Activity
-            </button>
-        </form>
+        @if (ViewBag.CurrentUserType == "S")
+        {
+            <form asp-action="Delete">
+                <input type="hidden" asp-for="ID" />
+                <button id="btn-delete" onclick="return confirm('Are you sure you want to delete activity @Model.Name?')"
+                        type="submit" value="Delete" class="btn btn-default detail-column">
+                    <i class="fas fa-trash-alt"></i> Delete Activity
+                </button>
+            </form>
+        }
         <h3>Log</h3>
+        @if (ViewBag.CurrentUserType == "S")
+    {
         <a asp-controller="LogEntries" asp-action="Create" asp-route-activityid="@Model.ID" class="btn btn-default">
             <i class="fa fa-plus"></i> New Entry
         </a>
+}
         <table class="table">
             <thead>
                 <tr>
@@ -123,9 +132,12 @@
                     <td>
                         @Html.Raw(item.Notes)
                     </td>
-                    <td class="text-right">
+                <td class="text-right">
+                    @if (ViewBag.CurrentUserType == "S")
+                    {
                         <a asp-controller="LogEntries" asp-action="Edit" asp-route-id="@item.ID"><i class="fas fa-edit"></i></a>
-                    </td>
+                    }
+                </td>
                 </tr>
         }
             </tbody>
