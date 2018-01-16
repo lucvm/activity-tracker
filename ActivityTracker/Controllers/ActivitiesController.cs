@@ -163,26 +163,29 @@ namespace ActivityTracker.Controllers
                 .Include(a => a.Student)
                 .SingleOrDefaultAsync(m => m.ID == id);
 
-            if (currentUser.UserType == "S")
-            {
-                if (activity.ApplicationUserID != currentUser.Id)
-                {
-                    return StatusCode(401);
-                }
-            }
-            else
-            {
-                if (currentUser.Id != activity.Student.TeacherID)
-                {
-                    return StatusCode(401);
-                }
-            }
-
             if (activity == null)
             {
                 return NotFound();
             }
-            return View(activity);
+
+            //if (currentUser.UserType == "S")
+            //{
+            //    if (activity.ApplicationUserID != currentUser.Id)
+            //    {
+            //        return Unauthorized();
+            //    }
+            //}
+            //else
+            //{
+            //    if (currentUser.Id != activity.Student.TeacherID)
+            //    {
+            //        return Unauthorized();
+            //    }
+            //}
+            if (Activity.AuthorizeActivityUser(currentUser, activity))
+                return View(activity);
+            else
+                return Unauthorized();
         }
 
         // POST: Activities/Edit/5
