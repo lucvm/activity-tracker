@@ -2,12 +2,15 @@
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.Linq;
+using System.Net.Http;
 using System.Threading.Tasks;
+using Microsoft.AspNetCore.Mvc;
 
 namespace ActivityTracker.Models.ManageViewModels
 {
     public class IndexViewModel
     {
+        [Remote("UsernameExists", "Account", HttpMethod = "POST", ErrorMessage = "Username already registered.")]
         public string Username { get; set; }
 
         public bool IsEmailConfirmed { get; set; }
@@ -15,10 +18,6 @@ namespace ActivityTracker.Models.ManageViewModels
         [Required]
         [EmailAddress]
         public string Email { get; set; }
-
-        [Phone]
-        [Display(Name = "Phone number")]
-        public string PhoneNumber { get; set; }
 
         public string StatusMessage { get; set; }
     }

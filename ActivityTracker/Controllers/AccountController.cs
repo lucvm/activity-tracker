@@ -76,7 +76,7 @@ namespace ActivityTracker.Controllers
 
                 if (result.Succeeded)
                 {
-                    var userType = GetAllStudents().Where(s => s.Email == model.Email).SingleOrDefault().UserType;
+                    var userType = GetAllStudents().Where(s => s.UserName == model.Email).SingleOrDefault().UserType;
                     _logger.LogInformation("User logged in.");
                     if (userType == "S")
                     {
@@ -471,6 +471,15 @@ namespace ActivityTracker.Controllers
             }
             AddErrors(result);
             return View();
+        }
+        private string GetCurrentUser() => _userManager.GetUserId(HttpContext.User);
+
+        public bool UsernameExists(string username)
+        {
+            var user = _context.ApplicationUsers.Where(au => au.UserName == username).FirstOrDefault();
+            
+
+            return (user == null || user.Id == GetCurrentUser());
         }
 
         [HttpGet]

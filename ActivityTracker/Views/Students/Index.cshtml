@@ -11,11 +11,7 @@
         <i class="fas fa-user-plus"></i> Add Student
     </a> &nbsp;|&nbsp;
     <a asp-controller="Groups" asp-action="Index">Groups</a>
-
 </p>
-
-
-<input type="text" id="search-overview" onkeyup="myFunction()" placeholder="Search for names..">
 
 <table id="overview" class="table table-striped">
     <thead>
@@ -35,7 +31,9 @@
             <th>
                 Notes
             </th>
-            <th></th>
+            <th class="text-right">
+                <input type="text" id="search-overview" onkeyup="filter()" placeholder="Search..">
+            </th>
         </tr>
     </thead>
     <tbody>
