@@ -11,6 +11,7 @@ namespace ActivityTracker.Models
         public int ID { get; set; }
         public string ApplicationUserID { get; set; }
 
+
         public string Name { get; set; }
         public bool Complete { get; set; }
         public int? FunFactor { get; set; }
