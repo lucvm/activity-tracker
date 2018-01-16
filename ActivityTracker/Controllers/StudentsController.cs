@@ -61,6 +61,8 @@ namespace ActivityTracker.Controllers
                 return NotFound();
             }
 
+            var currentUser = await GetCurrentUserAsync();
+
             var applicationUser = await _context.ApplicationUsers
                 .SingleOrDefaultAsync(m => m.Id == id);
             if (applicationUser == null)
@@ -68,14 +70,17 @@ namespace ActivityTracker.Controllers
                 return NotFound();
             }
 
-            return View(applicationUser);
+            if (applicationUser.TeacherID == currentUser.Id)
+                return View(applicationUser);
+            else
+                return Unauthorized();
         }
 
         // GET: Students/Create
         public async Task<IActionResult> Create()
         {
-            var user = await GetCurrentUserAsync();
-            ViewBag.userId = user?.Id;
+            var currentUser = await GetCurrentUserAsync();
+            ViewBag.userId = currentUser?.Id;
 
             return View();
         }
@@ -89,9 +94,16 @@ namespace ActivityTracker.Controllers
         {
             if (ModelState.IsValid)
             {
-                _context.Add(applicationUser);
-                await _context.SaveChangesAsync();
-                return RedirectToAction("Index", "Students");
+                var currentUser = await GetCurrentUserAsync();
+
+                if (applicationUser.TeacherID == currentUser.Id)
+                {
+                    _context.Add(applicationUser);
+                    await _context.SaveChangesAsync();
+                    return RedirectToAction("Index", "Students");
+                }
+                else
+                    return Unauthorized();
             }
             return View(applicationUser);
         }
@@ -129,7 +141,10 @@ namespace ActivityTracker.Controllers
             {
                 return NotFound();
             }
-            return View(applicationUser);
+            if (currentUserId == applicationUser.TeacherID)
+                return View(applicationUser);
+            else
+                return Unauthorized();
         }
 
         // POST: Students/Edit/5
@@ -148,20 +163,27 @@ namespace ActivityTracker.Controllers
             {
                 try
                 {
-                    _context.Update(applicationUser);
+                    var currentUser = await GetCurrentUserAsync();
 
-                    _context.Database.ExecuteSqlCommand($"DELETE FROM UserGroup WHERE ApplicationUserID = {id}");
-                    await _context.SaveChangesAsync();
-
-                    foreach (var group in groups)
+                    if (currentUser.Id == applicationUser.TeacherID)
                     {
-                        _context.Add(new UserGroup
+                        _context.Update(applicationUser);
+
+                        _context.Database.ExecuteSqlCommand($"DELETE FROM UserGroup WHERE ApplicationUserID = {id}");
+                        await _context.SaveChangesAsync();
+
+                        foreach (var group in groups)
                         {
-                            ApplicationUserID = id,
-                            GroupID = group
-                        });
+                            _context.Add(new UserGroup
+                            {
+                                ApplicationUserID = id,
+                                GroupID = group
+                            });
+                        }
+                        await _context.SaveChangesAsync();
                     }
-                    await _context.SaveChangesAsync();
+                    else
+                        return Unauthorized();
                 }
                 catch (DbUpdateConcurrencyException)
                 {
@@ -187,14 +209,19 @@ namespace ActivityTracker.Controllers
                 return NotFound();
             }
 
+            var currentUser = await GetCurrentUserAsync();
             var applicationUser = await _context.ApplicationUsers
                 .SingleOrDefaultAsync(m => m.Id == id);
+
             if (applicationUser == null)
             {
                 return NotFound();
             }
 
-            return View(applicationUser);
+            if (currentUser.Id == applicationUser.TeacherID)
+                return View(applicationUser);
+            else
+                return Unauthorized();
         }
 
         // POST: Students/Delete/5
@@ -202,10 +229,17 @@ namespace ActivityTracker.Controllers
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> DeleteConfirmed(string id)
         {
+            var currentUser = await GetCurrentUserAsync();
             var applicationUser = await _context.ApplicationUsers.SingleOrDefaultAsync(m => m.Id == id);
-            _context.ApplicationUsers.Remove(applicationUser);
-            await _context.SaveChangesAsync();
-            return RedirectToAction(nameof(Index));
+
+            if (currentUser.Id == applicationUser.TeacherID)
+            {
+                _context.ApplicationUsers.Remove(applicationUser);
+                await _context.SaveChangesAsync();
+                return RedirectToAction(nameof(Index));
+            }
+            else
+                return Unauthorized();
         }
 
         private bool ApplicationUserExists(string id)
