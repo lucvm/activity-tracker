@@ -13,7 +13,7 @@ namespace ActivityTracker.Models
 
         [DisplayFormat(DataFormatString = "{0:d}")]
         public DateTime Date { get; set; }
-        public int? TimeSpent { get; set; }
+        public float? TimeSpent { get; set; }
         public string Notes { get; set; }
     }
 }
