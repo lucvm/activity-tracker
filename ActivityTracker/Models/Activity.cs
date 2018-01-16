@@ -17,6 +17,8 @@ namespace ActivityTracker.Models
         public int? Difficulty { get; set; }
         public string Notes { get; set; }
 
+        public ApplicationUser Student { get; set; }
+
         public ICollection<LogEntry> Log { get; set; }
     }
 }

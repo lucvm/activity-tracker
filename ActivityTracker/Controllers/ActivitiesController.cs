@@ -8,6 +8,7 @@ using Microsoft.EntityFrameworkCore;
 using ActivityTracker.Data;
 using ActivityTracker.Models;
 using Microsoft.AspNetCore.Identity;
+using System.Net;
 
 namespace ActivityTracker.Controllers
 {
@@ -148,7 +149,8 @@ namespace ActivityTracker.Controllers
             {
                 return NotFound();
             }
-            ViewBag.currentUser = await GetCurrentUserAsync();
+            var currentUser = await GetCurrentUserAsync();
+            ViewBag.CurrentUser = currentUser;
 
             ViewBag.LogEntries = GetAllLogEntries().Where(le => le.ActivityID == id).
                 OrderByDescending(le => le.Date).ToList();
@@ -157,7 +159,25 @@ namespace ActivityTracker.Controllers
             ViewBag.TimeSpent = logEntries.Sum(x => (float)x.TimeSpent);
             ViewBag.LastActivity = logEntries.Max(x => x.Date);
 
-            var activity = await _context.Activities.SingleOrDefaultAsync(m => m.ID == id);
+            var activity = await _context.Activities
+                .Include(a => a.Student)
+                .SingleOrDefaultAsync(m => m.ID == id);
+
+            if (currentUser.UserType == "S")
+            {
+                if (activity.ApplicationUserID != currentUser.Id)
+                {
+                    return StatusCode(401);
+                }
+            }
+            else
+            {
+                if (currentUser.Id != activity.Student.TeacherID)
+                {
+                    return StatusCode(401);
+                }
+            }
+
             if (activity == null)
             {
                 return NotFound();
