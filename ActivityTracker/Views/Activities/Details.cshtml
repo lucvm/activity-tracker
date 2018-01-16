@@ -52,6 +52,10 @@
                         }
                     </div>
                 </div>
+                <div class="form-group date-control">
+                    <label>Time Spent</label><br />
+                    @ViewBag.TimeSpent
+                </div>
             </div>
             <div class="form-group">
                 <label asp-for="FunFactor" class="control-label">Fun Factor</label>
@@ -97,9 +101,16 @@
                 </button>
             </form>
         }
-        <h3>Log &nbsp;<a asp-controller="LogEntries" asp-action="Create" asp-route-activityid="@Model.ID" class="btn btn-default">
-    <i class="fa fa-plus"></i> New Entry
-</a></h3>
+            <h3>
+                Log
+                @if (ViewBag.CurrentUser.UserType == "S")
+    {
+            <text>&nbsp;</text>
+            <a asp-controller="LogEntries" asp-action="Create" asp-route-activityid="@Model.ID" class="btn btn-default">
+                <i class="fa fa-plus"></i> New Entry
+            </a>
+}
+            </h3>
         @if (ViewBag.CurrentUser.UserType == "S")
     {
         
