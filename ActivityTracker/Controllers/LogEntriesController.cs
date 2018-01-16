@@ -58,7 +58,7 @@ namespace ActivityTracker.Controllers
                 }
                 else
                 {
-                    return Unauthorized();
+                    return RedirectToAction("AccessDenied", "Account");
                     //var activity = await _context.Activities.SingleOrDefaultAsync(
                     //    a => a.ID == logEntry.ActivityID);
                     //student = await _context.ApplicationUsers.SingleOrDefaultAsync(
@@ -79,7 +79,7 @@ namespace ActivityTracker.Controllers
                     return RedirectToAction("Details", "Activities", new { id = logEntry.ActivityID });
                 }
                 else
-                    return Unauthorized();
+                    return RedirectToAction("AccessDenied", "Account");
             }
             ViewBag.ActivityId = logEntry.ActivityID;
             return View(logEntry);
@@ -128,7 +128,7 @@ namespace ActivityTracker.Controllers
                         await _context.SaveChangesAsync();
                     }
                     else
-                        return Unauthorized();
+                        return RedirectToAction("AccessDenied", "Account");
                 }
                 catch (DbUpdateConcurrencyException)
                 {
@@ -169,7 +169,7 @@ namespace ActivityTracker.Controllers
                 return View(logEntry);
             }
             else
-                return Unauthorized();
+                return RedirectToAction("AccessDenied", "Account");
         }
 
         // POST: LogEntries/Delete/5
@@ -188,7 +188,7 @@ namespace ActivityTracker.Controllers
                 return RedirectToAction("Details", "Activities", new { id = logEntry.ActivityID });
             }
             else
-                return Unauthorized();
+                return RedirectToAction("AccessDenied", "Account");
         }
 
         private bool LogEntryExists(int id)

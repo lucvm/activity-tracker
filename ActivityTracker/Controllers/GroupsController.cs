@@ -54,7 +54,7 @@ namespace ActivityTracker.Controllers
             if (currentUser.Id == @group.OwnerID)
                 return View(@group);
             else
-                return Unauthorized();
+                return RedirectToAction("AccessDenied", "Account");
         }
 
         // GET: Groups/Create
@@ -84,7 +84,7 @@ namespace ActivityTracker.Controllers
                     return RedirectToAction("Index", "Groups");
                 }
                 else
-                    return Unauthorized();
+                    return RedirectToAction("AccessDenied", "Account");
             }
             return View(@group);
         }
@@ -108,7 +108,7 @@ namespace ActivityTracker.Controllers
             if (currentUser.Id == @group.OwnerID)
                 return View(@group);
             else
-                return Unauthorized();
+                return RedirectToAction("AccessDenied", "Account");
         }
 
         // POST: Groups/Edit/5
@@ -135,7 +135,7 @@ namespace ActivityTracker.Controllers
                         await _context.SaveChangesAsync();
                     }
                     else
-                        return Unauthorized();
+                        return RedirectToAction("AccessDenied", "Account");
                 }
                 catch (DbUpdateConcurrencyException)
                 {
@@ -172,7 +172,7 @@ namespace ActivityTracker.Controllers
             if (currentUser.Id == @group.OwnerID)
                 return View(@group);
             else
-                return Unauthorized();
+                return RedirectToAction("AccessDenied", "Account");
         }
 
         // POST: Groups/Delete/5
@@ -190,7 +190,7 @@ namespace ActivityTracker.Controllers
                 return RedirectToAction(nameof(Index));
             }
             else
-                return Unauthorized();
+                return RedirectToAction("AccessDenied", "Account");
         }
 
         private bool GroupExists(string id)

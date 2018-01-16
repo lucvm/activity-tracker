@@ -171,7 +171,7 @@ namespace ActivityTracker.Controllers
             if (Activity.AuthorizeActivityUser(activity, currentUser))
                 return View(activity);
             else
-                return Unauthorized();
+                return RedirectToAction("AccessDenied", "Account");
         }
 
         // POST: Activities/Edit/5
@@ -212,7 +212,7 @@ namespace ActivityTracker.Controllers
                 return View(activity);
             }
             else
-                return Unauthorized();
+                return RedirectToAction("AccessDenied", "Account");
 
         }
 
@@ -238,7 +238,7 @@ namespace ActivityTracker.Controllers
                 return View(activity);
             }
             else
-                return Unauthorized();
+                return RedirectToAction("AccessDenied", "Account");
         }
 
         // POST: Activities/Delete/5
@@ -256,7 +256,7 @@ namespace ActivityTracker.Controllers
                 return RedirectToAction(nameof(Index));
             }
             else
-                return Unauthorized();
+                return RedirectToAction("AccessDenied", "Account");
         }
 
         private bool ActivityExists(int id)

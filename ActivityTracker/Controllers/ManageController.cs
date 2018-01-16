@@ -129,7 +129,8 @@ namespace ActivityTracker.Controllers
         }
 
         [HttpGet]
-        public async Task<IActionResult> ChangePassword()
+        public async Task<IActionResult> Change
+            ()
         {
             var user = await _userManager.GetUserAsync(User);
             if (user == null)

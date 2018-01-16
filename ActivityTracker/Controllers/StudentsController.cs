@@ -73,7 +73,7 @@ namespace ActivityTracker.Controllers
             if (applicationUser.TeacherID == currentUser.Id)
                 return View(applicationUser);
             else
-                return Unauthorized();
+                return RedirectToAction("AccessDenied", "Account");
         }
 
         // GET: Students/Create
@@ -103,7 +103,7 @@ namespace ActivityTracker.Controllers
                     return RedirectToAction("Index", "Students");
                 }
                 else
-                    return Unauthorized();
+                    return RedirectToAction("AccessDenied", "Account");
             }
             return View(applicationUser);
         }
@@ -144,7 +144,7 @@ namespace ActivityTracker.Controllers
             if (currentUserId == applicationUser.TeacherID)
                 return View(applicationUser);
             else
-                return Unauthorized();
+                return RedirectToAction("AccessDenied", "Account");
         }
 
         // POST: Students/Edit/5
@@ -183,7 +183,7 @@ namespace ActivityTracker.Controllers
                         await _context.SaveChangesAsync();
                     }
                     else
-                        return Unauthorized();
+                        return RedirectToAction("AccessDenied", "Account");
                 }
                 catch (DbUpdateConcurrencyException)
                 {
@@ -221,7 +221,7 @@ namespace ActivityTracker.Controllers
             if (currentUser.Id == applicationUser.TeacherID)
                 return View(applicationUser);
             else
-                return Unauthorized();
+                return RedirectToAction("AccessDenied", "Account");
         }
 
         // POST: Students/Delete/5
@@ -239,7 +239,7 @@ namespace ActivityTracker.Controllers
                 return RedirectToAction(nameof(Index));
             }
             else
-                return Unauthorized();
+                return RedirectToAction("AccessDenied", "Account");
         }
 
         private bool ApplicationUserExists(string id)
