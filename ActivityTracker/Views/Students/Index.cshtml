@@ -13,7 +13,11 @@
     <a asp-controller="Groups" asp-action="Index">Groups</a>
 
 </p>
-<table class="table table-striped">
+
+
+<input type="text" id="search-overview" onkeyup="myFunction()" placeholder="Search for names..">
+
+<table id="overview" class="table table-striped">
     <thead>
         <tr>
             <th>

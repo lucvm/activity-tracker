@@ -87,7 +87,7 @@ namespace ActivityTracker.Controllers
             {
                 if (activity.Notes != null)
                 {
-                    activity.Notes = activity.Notes.Split(new[] { '.', '\r', '\n' }).FirstOrDefault() + '.';
+                    activity.Notes = activity.Notes.Split(new[] { '.', '\r', '\n' }).FirstOrDefault();
                 }
             }
 

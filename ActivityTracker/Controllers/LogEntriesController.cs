@@ -34,6 +34,7 @@ namespace ActivityTracker.Controllers
         // GET: LogEntries/Create
         public IActionResult Create()
         {
+            ViewBag.Today = DateTime.Now.ToString("yyyy-MM-dd");
             ViewBag.ActivityId = HttpContext.Request.Query["activityid"];
 
             return View();

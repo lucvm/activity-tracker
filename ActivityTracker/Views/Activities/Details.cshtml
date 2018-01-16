@@ -76,7 +76,7 @@
                 <span asp-validation-for="Notes" class="text-danger"></span>
             </div>
             <div class="form-group">
-                @if (ViewBag.CurrentUserType == "S")
+                @if (ViewBag.CurrentUser.UserType == "S")
     {
             <button type="submit" class="btn btn-default"><i class="far fa-save"></i> Save</button> <text>&nbsp;|&nbsp;</text>
 }
@@ -87,7 +87,7 @@
         </form>
     </div>
     <div id="log" class="col-md-8">
-        @if (ViewBag.CurrentUserType == "S")
+        @if (ViewBag.CurrentUser.UserType == "S")
         {
             <form asp-action="Delete">
                 <input type="hidden" asp-for="ID" />
@@ -97,12 +97,12 @@
                 </button>
             </form>
         }
-        <h3>Log</h3>
-        @if (ViewBag.CurrentUserType == "S")
+        <h3>Log &nbsp;<a asp-controller="LogEntries" asp-action="Create" asp-route-activityid="@Model.ID" class="btn btn-default">
+    <i class="fa fa-plus"></i> New Entry
+</a></h3>
+        @if (ViewBag.CurrentUser.UserType == "S")
     {
-        <a asp-controller="LogEntries" asp-action="Create" asp-route-activityid="@Model.ID" class="btn btn-default">
-            <i class="fa fa-plus"></i> New Entry
-        </a>
+        
 }
         <table class="table">
             <thead>
@@ -133,7 +133,7 @@
                         @Html.Raw(item.Notes)
                     </td>
                 <td class="text-right">
-                    @if (ViewBag.CurrentUserType == "S")
+                    @if (ViewBag.CurrentUser.UserType == "S")
                     {
                         <a asp-controller="LogEntries" asp-action="Edit" asp-route-id="@item.ID"><i class="fas fa-edit"></i></a>
                     }
