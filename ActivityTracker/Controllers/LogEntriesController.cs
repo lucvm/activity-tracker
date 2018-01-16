@@ -35,6 +35,7 @@ namespace ActivityTracker.Controllers
         public IActionResult Create()
         {
             ViewBag.ActivityId = HttpContext.Request.Query["activityid"];
+
             return View();
         }
 
@@ -47,9 +48,6 @@ namespace ActivityTracker.Controllers
         {
             if (ModelState.IsValid)
             {
-                _context.Add(logEntry);
-                await _context.SaveChangesAsync();
-
                 ApplicationUser student;
                 var currentUser = GetCurrentUserAsync().Result;
 
@@ -59,17 +57,28 @@ namespace ActivityTracker.Controllers
                 }
                 else
                 {
-                    var activity = await _context.Activities.SingleOrDefaultAsync(
-                        a => a.ID == logEntry.ActivityID);
-                    student = await _context.ApplicationUsers.SingleOrDefaultAsync(
-                        s => s.Id == activity.ApplicationUserID);
+                    return Unauthorized();
+                    //var activity = await _context.Activities.SingleOrDefaultAsync(
+                    //    a => a.ID == logEntry.ActivityID);
+                    //student = await _context.ApplicationUsers.SingleOrDefaultAsync(
+                    //    s => s.Id == activity.ApplicationUserID);
                 }
 
-                student.LastActive = logEntry.Date;
-                _context.Update(student);
-                await _context.SaveChangesAsync();
+                var activity = await _context.Activities.SingleOrDefaultAsync(a => a.ID == logEntry.ActivityID);
 
-                return RedirectToAction("Details", "Activities", new { id = logEntry.ActivityID });
+                if (activity.ApplicationUserID == Convert.ToString(currentUser.Id))
+                {
+                    _context.Add(logEntry);
+                    await _context.SaveChangesAsync();
+
+                    student.LastActive = logEntry.Date;
+                    _context.Update(student);
+                    await _context.SaveChangesAsync();
+
+                    return RedirectToAction("Details", "Activities", new { id = logEntry.ActivityID });
+                }
+                else
+                    return Unauthorized();
             }
             ViewBag.ActivityId = logEntry.ActivityID;
             return View(logEntry);
@@ -83,7 +92,9 @@ namespace ActivityTracker.Controllers
                 return NotFound();
             }
 
+            var currentUser = GetCurrentUserAsync().Result;
             var logEntry = await _context.LogEntries.SingleOrDefaultAsync(m => m.ID == id);
+
             if (logEntry == null)
             {
                 return NotFound();
@@ -107,8 +118,16 @@ namespace ActivityTracker.Controllers
             {
                 try
                 {
-                    _context.Update(logEntry);
-                    await _context.SaveChangesAsync();
+                    var currentUser = GetCurrentUserAsync().Result;
+                    var activity = await _context.Activities.SingleOrDefaultAsync(a => a.ID == logEntry.ActivityID);
+
+                    if (activity.ApplicationUserID == Convert.ToString(currentUser.Id))
+                    {
+                        _context.Update(logEntry);
+                        await _context.SaveChangesAsync();
+                    }
+                    else
+                        return Unauthorized();
                 }
                 catch (DbUpdateConcurrencyException)
                 {
@@ -134,14 +153,22 @@ namespace ActivityTracker.Controllers
                 return NotFound();
             }
 
+            var currentUser = GetCurrentUserAsync().Result;
             var logEntry = await _context.LogEntries
                 .SingleOrDefaultAsync(m => m.ID == id);
+            var activity = await _context.Activities.SingleOrDefaultAsync(a => a.ID == logEntry.ActivityID);
+
             if (logEntry == null)
             {
                 return NotFound();
             }
 
-            return View(logEntry);
+            if (activity.ApplicationUserID == Convert.ToString(currentUser.Id))
+            {
+                return View(logEntry);
+            }
+            else
+                return Unauthorized();
         }
 
         // POST: LogEntries/Delete/5
@@ -149,10 +176,18 @@ namespace ActivityTracker.Controllers
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> DeleteConfirmed(int id)
         {
+            var currentUser = GetCurrentUserAsync().Result;
             var logEntry = await _context.LogEntries.SingleOrDefaultAsync(m => m.ID == id);
-            _context.LogEntries.Remove(logEntry);
-            await _context.SaveChangesAsync();
-            return RedirectToAction("Details", "Activities", new { id = logEntry.ActivityID });
+            var activity = await _context.Activities.SingleOrDefaultAsync(a => a.ID == logEntry.ActivityID);
+
+            if (activity.ApplicationUserID == Convert.ToString(currentUser.Id))
+            {
+                _context.LogEntries.Remove(logEntry);
+                await _context.SaveChangesAsync();
+                return RedirectToAction("Details", "Activities", new { id = logEntry.ActivityID });
+            }
+            else
+                return Unauthorized();
         }
 
         private bool LogEntryExists(int id)

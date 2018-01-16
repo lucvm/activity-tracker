@@ -262,7 +262,6 @@ namespace ActivityTracker.Controllers
                     LastName = model.LastName,
                     TeacherID = currentUserId,
                     UserType = "S",
-                    
                 };
 
                 var result = await _userManager.CreateAsync(user, model.Password);
