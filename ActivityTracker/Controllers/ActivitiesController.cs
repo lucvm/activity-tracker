@@ -156,9 +156,17 @@ namespace ActivityTracker.Controllers
                 OrderByDescending(le => le.Date).ToList();
 
             ViewBag.LogEntries = logEntries;
-            ViewBag.StartDate = logEntries.Min(x => x.Date).ToString("dd-MM-yyyy");
-            ViewBag.TimeSpent = logEntries.Sum(x => x.TimeSpent);
-            ViewBag.LastActivity = logEntries.Max(x => x.Date).ToString("dd-MM-yyyy");
+
+            try
+            {
+                ViewBag.StartDate = logEntries.Min(x => x.Date).ToString("dd-MM-yyyy");
+                ViewBag.TimeSpent = logEntries.Sum(x => x.TimeSpent);
+                ViewBag.LastActivity = logEntries.Max(x => x.Date).ToString("dd-MM-yyyy");
+            }
+            catch (InvalidOperationException)
+            {
+                // do nothing
+            }
 
             var activity = await _context.Activities
                 .Include(a => a.Student)
