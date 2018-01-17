@@ -26,7 +26,7 @@ function setTheme(theme) {
     var cssLink = document.getElementById("site-sheet");
 
     if (theme === "dark") {
-        cssLink.href = "/css/site_dark.css";
+        cssLink.href = "/css/site_dark.min.css";
     }
     else {
         cssLink.href = "/css/site.min.css";

@@ -14,7 +14,7 @@
 }
 
 a {
-    color: #52a9d0;
+    color: #6cf;
 }
 
 #logout-button {
@@ -71,15 +71,21 @@ a {
 }
 
 #main-navbar {
-    background: #52a9d0;
+    background: #227097;
 }
 
 .navbar-letters {
-    color: black;
+    color: white;
+}
+
+.nav-pills > li.active > a,
+.nav-pills > li.active > a:hover,
+.nav-pills > li.active > a:focus {
+    background-color: #227097;
 }
 
 .navbar-letters:hover {
-    color: white;
+    color: black;
 }
 
 #notes {
@@ -171,11 +177,11 @@ tbody > tr:nth-child(odd) {
     }
 
 input:checked + .slider {
-    background-color: #52a9d0;
+    background-color: #227097;
 }
 
 input:focus + .slider {
-    box-shadow: 0 0 1px #52a9d0;
+    box-shadow: 0 0 1px #227097;
 }
 
 input:checked + .slider:before {
