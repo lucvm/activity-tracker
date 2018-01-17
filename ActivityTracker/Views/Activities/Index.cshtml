@@ -27,6 +27,11 @@
 <p>
     <a class="btn btn-default" asp-action="Create" asp-route-studentid="@ViewBag.StudentId"><i class="fas fa-plus"></i> Add Activity</a>
 </p>
+<button class="btn btn-default" onclick="setTheme('light')">Light theme</button><br />
+<button class="btn btn-default" onclick="setTheme('dark')">Dark theme</button>
+
+
+
 <table class="table table-striped">
     <thead>
         <tr>
@@ -82,6 +87,8 @@
     </tbody>
 </table>
 <br />
+
+
 @if (ViewBag.CurrentUserType == "T")
 {
     <a asp-action="Index" asp-controller="Students"><i class="fas fa-arrow-up"></i> Back to Students</a>

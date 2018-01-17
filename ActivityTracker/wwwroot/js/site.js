@@ -21,3 +21,15 @@
         }
     }
 }
+
+function setTheme(theme) {
+    var cssLink = document.getElementById("site-sheet");
+
+    if (theme === "dark") {
+        cssLink.href = "/css/site_dark.css";
+    }
+    else {
+        cssLink.href = "/css/site.min.css";
+    }
+    localStorage.setItem('theme', theme);
+}

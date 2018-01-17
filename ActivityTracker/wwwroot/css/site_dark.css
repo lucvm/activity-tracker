@@ -2,7 +2,8 @@
     padding-top: 50px;
     padding-bottom: 20px;
     font-family: 'Nunito Sans', sans-serif;
-    background: #f9f9f9;
+    background: #333;
+    color: #f9f9f9;
 }
 
 /* Wrapping element */
@@ -13,11 +14,12 @@
 }
 
 a {
-    color: #227097; 
+    color: #52a9d0;
 }
-a:hover, button:hover{
-    color: black;
-}
+
+    a:hover, button:hover {
+        color: white;
+    }
 
 #logout-button {
     background-color: transparent;
@@ -27,7 +29,7 @@ a:hover, button:hover{
     color: goldenrod;
 }
 
-.date-control{
+.date-control {
     text-align: center;
 }
 
@@ -73,11 +75,11 @@ a:hover, button:hover{
 }
 
 #main-navbar {
-    background: #227097;
+    background: #52a9d0;
 }
 
 .navbar-letters {
-    color: #f9f9f9; 
+    color: #ccc;
 }
 
 #notes {
@@ -141,26 +143,26 @@ a:hover, button:hover{
     transition: .4s;
 }
 
-.slider:before {
-    position: absolute;
-    content: "";
-    height: 24.5px;
-    width: 24px;
-    left: 3px;
-    bottom: 3px;
-    background-color: white;
-    -webkit-transition: .4s;
-    -moz-transition: .4s;
-    -o-transition: .4s;
-    transition: .4s;
-}
+    .slider:before {
+        position: absolute;
+        content: "";
+        height: 24.5px;
+        width: 24px;
+        left: 3px;
+        bottom: 3px;
+        background-color: white;
+        -webkit-transition: .4s;
+        -moz-transition: .4s;
+        -o-transition: .4s;
+        transition: .4s;
+    }
 
 input:checked + .slider {
-    background-color: #227097;
+    background-color: #52a9d0;
 }
 
 input:focus + .slider {
-    box-shadow: 0 0 1px #227097;
+    box-shadow: 0 0 1px #52a9d0;
 }
 
 input:checked + .slider:before {
@@ -176,6 +178,6 @@ input:checked + .slider:before {
     border-radius: 30px;
 }
 
-.slider.round:before {
-    border-radius: 50%;
-}
+    .slider.round:before {
+        border-radius: 50%;
+    }
