@@ -9,11 +9,13 @@
     <form asp-area="" asp-controller="Account" asp-action="Logout" method="post" id="logoutForm" class="navbar-right">
         <ul class="nav navbar-nav navbar-right">
             <li>
-                <a asp-area="" asp-controller="Manage" asp-action="Index" title="Manage">
-                    <i class="fas fa-user"></i> Logged in as @UserManager.GetUserName(User)</a>
+                <a class="navbar-letters" asp-area="" asp-controller="Manage" asp-action="Index" title="Manage">
+                    <i class="fas fa-user"></i> @UserManager.GetUserName(User)</a>
             </li>
             <li>
-                <button type="submit" class="btn btn-link navbar-btn navbar-link"><i class="fas fa-sign-out-alt"></i> Log out</button>
+                <button type="submit" id="logout-button" class="btn navbar-btn navbar-letters">
+                    <i class="fas fa-sign-out-alt"></i> Log out
+                </button>
             </li>
         </ul>
     </form>

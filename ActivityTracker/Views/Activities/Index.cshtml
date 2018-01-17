@@ -16,7 +16,7 @@
                 @foreach (var group in ViewBag.Groups)
                 {
                     @group.Name
-                    <text> </text>
+                    <text>&nbsp;</text>
                 }
             </small>
         }
@@ -55,13 +55,13 @@
                 <td class="text-center">
                     @for (var i = 0; i < item.FunFactor; i++)
                     {
-                        <i class="fa fa-star"></i>
+                        <i class="fas fa-star"></i>
                     }
                 </td>
                 <td class="text-center">
                     @for (var i = 0; i < item.Difficulty; i++)
                     {
-                        <i class="fa fa-star"></i>
+                        <i class="fas fa-star"></i>
                     }
                 </td>
                 <td>

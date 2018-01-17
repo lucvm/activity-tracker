@@ -3,18 +3,31 @@
 @{
     ViewData["Title"] = "Details " + Model.Name;
 }
-
+<div class="row" id="activity-title">
+    <div id="activity-name-container" class="form-group col-md-10">
+        <input form="activity-form" asp-for="Name" class="form-control input-lg input-header" />
+        <span asp-validation-for="Name" class="text-danger"></span>
+    </div>
+    <div class="col-md-2 text-right">
+        @if (ViewBag.CurrentUser.UserType == "S")
+        {
+        <form asp-action="Delete" id="delete-activity">
+            <input type="hidden" asp-for="ID" />
+            <button id="btn-delete" onclick="return confirm('Are you sure you want to delete activity @Model.Name?')"
+                    type="submit" value="Delete" class="btn btn-default">
+                <i class="fas fa-trash-alt"></i> Delete Activity
+            </button>
+        </form>
+        }
+    </div>
+</div>
 <div class="row">
-    <div class="col-md-4 detail-column">
-        <form asp-action="Edit">
+    <div id="activity-form-container" class="col-md-4 detail-column">
+        <form id="activity-form" asp-action="Edit">
             <div asp-validation-summary="ModelOnly" class="text-danger"></div>
             <input type="hidden" asp-for="ID" />
             <div class="form-group" hidden>
                 <input asp-for="ApplicationUserID" value="@Model.ApplicationUserID" class="form-control" />
-            </div>
-            <div class="form-group">
-                <input asp-for="Name" class="form-control input-lg input-header" />
-                <span asp-validation-for="Name" class="text-danger"></span>
             </div>
             <div id="dates">
                 <div class="form-group">
@@ -22,7 +35,7 @@
                         <label>Start Date</label><br />
                         @if (ViewBag.StartDate != null)
                         {
-                            @ViewBag.StartDate.ToShortDateString()
+                            @ViewBag.StartDate
                         }
                         else
                         {
@@ -91,16 +104,6 @@
         </form>
     </div>
     <div id="log" class="col-md-8">
-        @if (ViewBag.CurrentUser.UserType == "S")
-        {
-            <form asp-action="Delete">
-                <input type="hidden" asp-for="ID" />
-                <button id="btn-delete" onclick="return confirm('Are you sure you want to delete activity @Model.Name?')"
-                        type="submit" value="Delete" class="btn btn-default detail-column">
-                    <i class="fas fa-trash-alt"></i> Delete Activity
-                </button>
-            </form>
-        }
             <h3>
                 Log
                 @if (ViewBag.CurrentUser.UserType == "S")
@@ -111,10 +114,7 @@
             </a>
 }
             </h3>
-        @if (ViewBag.CurrentUser.UserType == "S")
-    {
-        
-}
+       
         <table class="table">
             <thead>
                 <tr>

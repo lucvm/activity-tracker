@@ -2,6 +2,7 @@
     padding-top: 50px;
     padding-bottom: 20px;
     font-family: 'Nunito Sans', sans-serif;
+    background: #f9f9f9;
 }
 
 /* Wrapping element */
@@ -9,6 +10,17 @@
 .body-content {
     padding-left: 15px;
     padding-right: 15px;
+}
+
+a {
+    color: #227097; 
+}
+a:hover, button:hover{
+    color: black;
+}
+
+#logout-button {
+    background-color: transparent;
 }
 
 .fa-star {
@@ -29,6 +41,18 @@
     margin-top: 20px;
 }
 
+#activity-name-container {
+    padding-left: 0;
+}
+
+#activity-title {
+    margin-top: 20px;
+    margin-bottom: 15px;
+    border-bottom: solid 1px #ddd;
+    padding-bottom: 4px;
+    align-items: center;
+}
+
 #btn-delete {
     float: right;
 }
@@ -37,14 +61,23 @@
     width: 111px;
 }
 
-#log {
-    padding-left: 20px;
+#activity-form-container {
+    border-right: 1px solid #ddd;
+    padding-right: 20px;
 }
 
 #dates {
     display: flex;
     width: inherit;
-    justify-content: space-around;
+    justify-content: space-between;
+}
+
+#main-navbar {
+    background: #227097;
+}
+
+.navbar-letters {
+    color: #fafafa; 
 }
 
 #notes {
@@ -111,9 +144,9 @@
 .slider:before {
     position: absolute;
     content: "";
-    height: 24px;
-    width: 22.9px;
-    left: 3.5px;
+    height: 24.5px;
+    width: 24px;
+    left: 3px;
     bottom: 3px;
     background-color: white;
     -webkit-transition: .4s;
@@ -123,19 +156,19 @@
 }
 
 input:checked + .slider {
-    background-color: #2196F3;
+    background-color: #227097;
 }
 
 input:focus + .slider {
-    box-shadow: 0 0 1px #2196F3;
+    box-shadow: 0 0 1px #227097;
 }
 
 input:checked + .slider:before {
-    -webkit-transform: translateX(22.9px);
-    -moz-transform: translateX(22.9px);
-    -o-transform: translateX(22.9px);
-    -ms-transform: translateX(22.9px);
-    transform: translateX(22.9px);
+    -webkit-transform: translateX(23.5px);
+    -moz-transform: translateX(23.5px);
+    -o-transform: translateX(23.5px);
+    -ms-transform: translateX(23.5px);
+    transform: translateX(23.5px);
 }
 
 /* Rounded sliders */
