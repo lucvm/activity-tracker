@@ -17,10 +17,6 @@ a {
     color: #52a9d0;
 }
 
-    a:hover, button:hover {
-        color: white;
-    }
-
 #logout-button {
     background-color: transparent;
 }
@@ -79,7 +75,11 @@ a {
 }
 
 .navbar-letters {
-    color: #ccc;
+    color: black;
+}
+
+.navbar-letters:hover {
+    color: white;
 }
 
 #notes {
@@ -92,16 +92,29 @@ a {
     height: 10px;
 }
 
+table {
+    color: white;
+}
+
+td {
+    /*background-color: #333;*/
+    color: #fafafa !important;
+}
+
 .complete {
     opacity: 0.6;
 }
 
 #overview-activity-name {
-    color: black;
+    color: #fafafa;
 }
 
 #overview {
     margin-top: 1%;
+}
+
+tbody > tr:nth-child(odd) {
+    background-color: #414141 !important;
 }
 
 #search-overview {

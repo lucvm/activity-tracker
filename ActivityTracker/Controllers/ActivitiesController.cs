@@ -155,7 +155,7 @@ namespace ActivityTracker.Controllers
             ViewBag.LogEntries = GetAllLogEntries().Where(le => le.ActivityID == id).
                 OrderByDescending(le => le.Date).ToList();
             var logEntries = (IEnumerable<dynamic>)ViewBag.LogEntries;
-            ViewBag.StartDate = logEntries.Min(x => x.Date).ToShortDateString();
+            ViewBag.StartDate = logEntries.Min(x => x.Date)?.ToShortDateString();
             ViewBag.TimeSpent = logEntries.Sum(x => (float?)x.TimeSpent);
             ViewBag.LastActivity = logEntries.Max(x => x.Date);
 
