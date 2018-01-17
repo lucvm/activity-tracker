@@ -57,7 +57,7 @@
                         <label>Last Activity</label><br />
                         @if (ViewBag.LastActivity != null)
                         {
-                            @ViewBag.LastActivity.ToShortDateString()
+                            @ViewBag.LastActivity
                         }
                         else
                         {
@@ -135,7 +135,7 @@
             {
                 <tr>
                     <td>
-                        @item.Date.ToShortDateString()
+                        @item.Date.ToString("dd-MM-yyyy")
                     </td>
                     <td class="text-center">
                         @Html.Raw(item.TimeSpent)

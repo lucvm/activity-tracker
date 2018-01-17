@@ -152,12 +152,13 @@ namespace ActivityTracker.Controllers
             var currentUser = await GetCurrentUserAsync();
             ViewBag.CurrentUser = currentUser;
 
-            ViewBag.LogEntries = GetAllLogEntries().Where(le => le.ActivityID == id).
+            var logEntries = GetAllLogEntries().Where(le => le.ActivityID == id).
                 OrderByDescending(le => le.Date).ToList();
-            var logEntries = (IEnumerable<dynamic>)ViewBag.LogEntries;
-            ViewBag.StartDate = logEntries.Min(x => x.Date)?.ToShortDateString();
-            ViewBag.TimeSpent = logEntries.Sum(x => (float?)x.TimeSpent);
-            ViewBag.LastActivity = logEntries.Max(x => x.Date);
+
+            ViewBag.LogEntries = logEntries;
+            ViewBag.StartDate = logEntries.Min(x => x.Date).ToString("dd-MM-yyyy");
+            ViewBag.TimeSpent = logEntries.Sum(x => x.TimeSpent);
+            ViewBag.LastActivity = logEntries.Max(x => x.Date).ToString("dd-MM-yyyy");
 
             var activity = await _context.Activities
                 .Include(a => a.Student)
