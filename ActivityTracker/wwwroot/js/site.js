@@ -31,5 +31,9 @@ function setTheme(theme) {
     else {
         cssLink.href = "/css/light_theme.min.css";
     }
-    document.cookie = "theme=" + theme + ";path=/";
+    var now = new Date();
+    var time = now.getTime();
+    var expireTime = time + (3 * 365 * 86400000); // 3 years from now
+    now.setTime(expireTime);
+    document.cookie = "theme=" + theme + ";expires=" + now.toGMTString() + "; path =/";
 }
