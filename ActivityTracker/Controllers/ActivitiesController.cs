@@ -195,8 +195,17 @@ namespace ActivityTracker.Controllers
                 return NotFound();
             }
             var currentUser = await GetCurrentUserAsync();
+            string teacherId = "";
 
-            if (activity.ApplicationUserID == currentUser.Id)
+            if (currentUser.UserType == "T") {
+                teacherId = _context.ApplicationUsers
+                    .Where(au => au.Id == activity.ApplicationUserID)
+                    .FirstOrDefault()
+                    .TeacherID;
+            }
+
+            if (activity.ApplicationUserID == currentUser.Id ||
+                teacherId == currentUser.Id)
             {
                 if (ModelState.IsValid)
                 {
@@ -216,7 +225,10 @@ namespace ActivityTracker.Controllers
                             throw;
                         }
                     }
-                    return RedirectToAction(nameof(Index));
+                    if (currentUser.UserType == "S")
+                        return RedirectToAction(nameof(Index));
+                    else
+                        return RedirectToAction("Index", "Activities", new { id = activity.ApplicationUserID });
                 }
                 return View(activity);
             }

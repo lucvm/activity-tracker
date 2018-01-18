@@ -142,7 +142,7 @@ a:hover {
     .slider:before {
         position: absolute;
         content: "";
-        height: 24.5px;
+        height: 24px;
         width: 24px;
         left: 3px;
         bottom: 3px;
