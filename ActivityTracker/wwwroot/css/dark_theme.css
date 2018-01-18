@@ -7,6 +7,10 @@ a {
     color: #6cf;
 }
 
+    a:hover {
+        color: #f9f9f9;
+    }
+
 .nav-pills > li.active > a,
 .nav-pills > li.active > a:hover,
 .nav-pills > li.active > a:focus {

@@ -13,8 +13,8 @@
     margin-top: -14px;
 }
 
-a {
-    color: #227097;
+a:hover {
+    text-decoration: none;
 }
 
 #logout-button {
