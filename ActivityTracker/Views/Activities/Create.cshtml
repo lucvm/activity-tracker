@@ -16,18 +16,20 @@
             </div>
             <div class="form-group">
                 <label asp-for="Name" class="control-label"></label>
-                <input asp-for="Name" class="form-control" required/>
+                <input asp-for="Name" class="form-control" required />
                 <span asp-validation-for="Name" class="text-danger"></span>
             </div>
-            <div class="form-group">
-                <label>Complete</label>
-                <div id="switch" class="checkbox">
-                    <label class="switch">
-                        <input type="checkbox" asp-for="Complete" />
-                        <span class="slider round"></span>
-                    </label>
-                </div>
+            @if (ViewBag.CurrentUserType == "S")
+            {
+        <div class="form-group">
+            <label>Complete</label>
+            <div id="switch" class="checkbox">
+                <label class="switch">
+                    <input type="checkbox" asp-for="Complete" />
+                    <span class="slider round"></span>
+                </label>
             </div>
+        </div>
             <div class="form-group">
                 <label asp-for="FunFactor" class="control-label">Fun Factor</label>
                 <input type="range" min="1" max="5" list="tickmarks" asp-for="FunFactor" class="form-control">
@@ -45,6 +47,7 @@
                 <option value="4" />
                 <option value="5" />
             </datalist>
+            }
             <div class="form-group">
                 <label asp-for="Notes" class="control-label"></label>
                 <textarea id="notes" asp-for="Notes" class="form-control"></textarea>

@@ -97,8 +97,14 @@ namespace ActivityTracker.Controllers
         }
 
         // GET: Activities/Create
-        public IActionResult Create()
+        public async Task<IActionResult> Create()
         {
+            var currentUser = await GetCurrentUserAsync();
+
+            if (currentUser.UserType == "S")
+            {
+                ViewBag.CurrentUserType = "S";
+            }
             ViewBag.StudentId = HttpContext.Request.Query["studentid"];
             return View();
         }
