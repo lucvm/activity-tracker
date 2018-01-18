@@ -31,5 +31,5 @@ function setTheme(theme) {
     else {
         cssLink.href = "/css/light_theme.min.css";
     }
-    localStorage.setItem("theme", theme);
+    document.cookie = "theme=" + theme + ";path=/";
 }

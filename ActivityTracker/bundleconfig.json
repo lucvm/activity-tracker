@@ -26,5 +26,11 @@
     "inputFiles": [
       "wwwroot/css/site_light.css"
     ]
+  },
+  {
+    "outputFileName": "wwwroot/css/light_theme.min.css",
+    "inputFiles": [
+      "wwwroot/css/light_theme.css"
+    ]
   }
 ]
