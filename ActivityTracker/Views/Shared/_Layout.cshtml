@@ -9,7 +9,7 @@
         <link href="https://fonts.googleapis.com/css?family=Nunito+Sans" rel="stylesheet">
         <link rel="stylesheet" href="~/lib/fontawesome-free-5.0.4/web-fonts-with-css/css/fontawesome-all.min.css" />
         <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.css" />
-        <link id="site-sheet" rel="stylesheet" href="" />
+        <link rel="stylesheet" href="~/css/site.min.css" />
     </environment>
     <environment exclude="Development">
         <link rel="stylesheet" href="https://ajax.aspnetcdn.com/ajax/bootstrap/3.3.7/css/bootstrap.min.css"
@@ -18,18 +18,17 @@
         <link rel="stylesheet" href="~/css/site.min.css" asp-append-version="true" />
     </environment>
     <script type="text/javascript">
-        if (localStorage.getItem['theme'] !== null) {
-            var theme = localStorage.getItem('theme')
-            var cssLink = document.getElementById("site-sheet");
+        if (localStorage.getItem("theme") !== null) {
+            var theme = localStorage.getItem("theme");
             if (theme == "dark") {
-                cssLink.href = "/css/site_dark.min.css";
+                document.write('<link rel="stylesheet" href="/css/dark_theme.min.css" />')
             }
             else {
-                cssLink.href = "/css/site.min.css";
+                document.write('<link rel="stylesheet" href="/css/light_theme.min.css" />')
             }
         }
         else {
-            cssLink.href = "/css/site.min.css";
+            document.write('<link rel="stylesheet" href="/css/light_theme.min.css" />')
         }
     </script>
 </head>

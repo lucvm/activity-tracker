@@ -20,5 +20,11 @@
     "inputFiles": [
       "wwwroot/css/site_dark.css"
     ]
+  },
+  {
+    "outputFileName": "wwwroot/css/site_light.min.css",
+    "inputFiles": [
+      "wwwroot/css/site_light.css"
+    ]
   }
 ]

@@ -2,19 +2,19 @@
     padding-top: 50px;
     padding-bottom: 20px;
     font-family: 'Nunito Sans', sans-serif;
-    background: #333;
-    color: #f9f9f9;
 }
 
-/* Wrapping element */
-/* Set some basic padding to keep content from hitting the edges */
 .body-content {
     padding-left: 15px;
     padding-right: 15px;
 }
 
+#activity-details {
+    margin-top: -14px;
+}
+
 a {
-    color: #6cf;
+    color: #227097;
 }
 
 #logout-button {
@@ -75,18 +75,12 @@ a {
 }
 
 .navbar-letters {
-    color: white;
+    color: #f9f9f9;
 }
 
-.nav-pills > li.active > a,
-.nav-pills > li.active > a:hover,
-.nav-pills > li.active > a:focus {
-    background-color: #227097;
-}
-
-.navbar-letters:hover {
-    color: black;
-}
+    .navbar-letters:hover {
+        color: black;
+    }
 
 #notes {
     max-width: 100%;
@@ -98,29 +92,12 @@ a {
     height: 10px;
 }
 
-table {
-    color: white;
-}
-
-td {
-    /*background-color: #333;*/
-    color: #fafafa !important;
-}
-
 .complete {
     opacity: 0.6;
 }
 
-#overview-activity-name {
-    color: #fafafa;
-}
-
 #overview {
     margin-top: 1%;
-}
-
-tbody > tr:nth-child(odd) {
-    background-color: #414141 !important;
 }
 
 #search-overview {

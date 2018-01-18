@@ -2,31 +2,19 @@
     padding-top: 50px;
     padding-bottom: 20px;
     font-family: 'Nunito Sans', sans-serif;
-    background: #f9f9f9;
 }
 
-/* Wrapping element */
-/* Set some basic padding to keep content from hitting the edges */
 .body-content {
     padding-left: 15px;
     padding-right: 15px;
 }
 
+#activity-details {
+    margin-top: -14px;
+}
+
 a {
-    color: #227097; 
-}
-a:hover, button:hover{
-    color: black;
-}
-
-.nav-pills > li.active > a,
-.nav-pills > li.active > a:hover,
-.nav-pills > li.active > a:focus {
-    background-color: #227097;
-}
-
-tbody > tr:nth-child(odd) {
-    background-color: #f1f1f1 !important;
+    color: #227097;
 }
 
 #logout-button {
@@ -37,7 +25,7 @@ tbody > tr:nth-child(odd) {
     color: goldenrod;
 }
 
-.date-control{
+.date-control {
     text-align: center;
 }
 
@@ -87,7 +75,11 @@ tbody > tr:nth-child(odd) {
 }
 
 .navbar-letters {
-    color: #f9f9f9; 
+    color: #f9f9f9;
+}
+
+.navbar-letters:hover {
+    color: black;
 }
 
 #notes {
@@ -102,10 +94,6 @@ tbody > tr:nth-child(odd) {
 
 .complete {
     opacity: 0.6;
-}
-
-#overview-activity-name {
-    color: black;
 }
 
 #overview {
@@ -151,19 +139,19 @@ tbody > tr:nth-child(odd) {
     transition: .4s;
 }
 
-.slider:before {
-    position: absolute;
-    content: "";
-    height: 24.5px;
-    width: 24px;
-    left: 3px;
-    bottom: 3px;
-    background-color: white;
-    -webkit-transition: .4s;
-    -moz-transition: .4s;
-    -o-transition: .4s;
-    transition: .4s;
-}
+    .slider:before {
+        position: absolute;
+        content: "";
+        height: 24.5px;
+        width: 24px;
+        left: 3px;
+        bottom: 3px;
+        background-color: white;
+        -webkit-transition: .4s;
+        -moz-transition: .4s;
+        -o-transition: .4s;
+        transition: .4s;
+    }
 
 input:checked + .slider {
     background-color: #227097;
@@ -186,6 +174,43 @@ input:checked + .slider:before {
     border-radius: 30px;
 }
 
-.slider.round:before {
-    border-radius: 50%;
+    .slider.round:before {
+        border-radius: 50%;
+    }
+
+
+
+
+
+
+/*
+body {
+    background: #333;
+    color: #f9f9f9;
 }
+
+a {
+    color: #6cf;
+}
+
+.nav-pills > li.active > a,
+.nav-pills > li.active > a:hover,
+.nav-pills > li.active > a:focus {
+    background-color: #227097;
+}
+
+table {
+    color: white;
+}
+
+td {
+    color: #fafafa !important;
+}
+
+#overview-activity-name {
+    color: #fafafa;
+}
+
+tbody > tr:nth-child(odd) {
+    background-color: #414141 !important;
+}*/

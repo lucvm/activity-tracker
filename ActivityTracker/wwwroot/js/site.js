@@ -23,13 +23,13 @@
 }
 
 function setTheme(theme) {
-    var cssLink = document.getElementById("site-sheet");
+    var cssLink = document.getElementById("theme");
 
     if (theme === "dark") {
-        cssLink.href = "/css/site_dark.min.css";
+        cssLink.href = "/css/dark_theme.min.css";
     }
     else {
-        cssLink.href = "/css/site.min.css";
+        cssLink.href = "/css/light_theme.min.css";
     }
-    localStorage.setItem('theme', theme);
+    localStorage.setItem("theme", theme);
 }
