@@ -32,5 +32,11 @@
     "inputFiles": [
       "wwwroot/css/light_theme.css"
     ]
+  },
+  {
+    "outputFileName": "wwwroot/css/dark_theme.min.css",
+    "inputFiles": [
+      "wwwroot/css/dark_theme.css"
+    ]
   }
 ]
