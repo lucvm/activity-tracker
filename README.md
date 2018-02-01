@@ -1,10 +1,7 @@
 # Activity Tracker
 ## What
 Add and track activities in your overview or track your students' activities.<br /> 
-Created in ASP.NET
-
-## Where
-The activity tracker is currently online at http://lucsactivitytracker.azurewebsites.net/ (alpha version)
+Created in ASP.NET Core, with Entity Framework and Bootstrap.
 
 ## How
 #### When Registering:
