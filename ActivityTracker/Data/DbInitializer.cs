@@ -18,20 +18,17 @@ namespace ActivityTracker.Data
             var users = new ApplicationUser[]
             {
                 // Teachers
-                new ApplicationUser{FirstName ="Teacher", Prefix="", LastName="1",
-                    Email="teacher@hotmail.com", UserName="teacher@hotmail.com",
-                    NormalizedEmail="TEACHER@HOTMAIL.COM", NormalizedUserName="TEACHER@HOTMAIL.COM",
-                    SecurityStamp="831e4741-d745-413a-ae08-111a604b4014", UserType ="T", Notes=""},
-                new ApplicationUser{Id="2",  FirstName="Jan", Prefix="", LastName="Janssen", Email="jan@hotmail.com", UserType="T"},
-                new ApplicationUser{Id="3", FirstName="Piet", Prefix="van", LastName="Dijk", Email="piet@gmail.com", UserType="T"},
+                new ApplicationUser{FirstName="Teacher", LastName="1", Email="teacher@example.com", UserType ="T"},
+                new ApplicationUser{Id="2",  FirstName="Jan", LastName="Janssen", Email="jan@example.com", UserType="T"},
+                new ApplicationUser{Id="3", FirstName="Piet", Prefix="van", LastName="Dijk", Email="piet@example.com", UserType="T"},
                 // Students
-                new ApplicationUser{FirstName="Student", LastName="1", TeacherID="1", Email="student@hotmail.com", UserType="S"},
-                new ApplicationUser{FirstName="Henk", Prefix="van de", LastName="Waard", TeacherID="1", Email="henk@hotmail.com", UserType="S", Notes="Lorem ipsum dolor sit amet"},
-                new ApplicationUser{FirstName="Marie", LastName="Smit", TeacherID="1", Email="marie@live.net", UserType="S"},
-                new ApplicationUser{FirstName="Freek", Prefix="de", LastName="Jong", TeacherID="2", Email="freek@gmail.com", UserType="S"},
-                new ApplicationUser{FirstName="Cornelia", LastName="Heiniken", TeacherID="2", Email="corrie@hotmail.com", UserType="S"},
-                new ApplicationUser{FirstName="Piet", LastName="Heijn", TeacherID="3", Email="p.heijn@gmail.com", UserType="S",},
-                new ApplicationUser{FirstName="Roos", LastName="Bloem", TeacherID="3", Email="roos@gmail.com", UserType="S"},
+                new ApplicationUser{FirstName="Student", LastName="1", TeacherID="1", Email="student@example.com", UserType="S"},
+                new ApplicationUser{FirstName="Henk", Prefix="van de", LastName="Waard", TeacherID="1", Email="henk@example.com", UserType="S", Notes="Lorem ipsum dolor sit amet"},
+                new ApplicationUser{FirstName="Marie", LastName="Smit", TeacherID="1", Email="marie@example.net", UserType="S"},
+                new ApplicationUser{FirstName="Freek", Prefix="de", LastName="Jong", TeacherID="2", Email="freek@example.com", UserType="S"},
+                new ApplicationUser{FirstName="Cornelia", LastName="Heiniken", TeacherID="2", Email="corrie@example.com", UserType="S"},
+                new ApplicationUser{FirstName="Piet", LastName="Heijn", TeacherID="3", Email="p.heijn@example.com", UserType="S",},
+                new ApplicationUser{FirstName="Roos", LastName="Bloem", TeacherID="3", Email="roos@example.com", UserType="S"},
             };
             var index = 1;
             foreach (ApplicationUser u in users)
