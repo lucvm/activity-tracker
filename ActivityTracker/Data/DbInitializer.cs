@@ -8,7 +8,7 @@ namespace ActivityTracker.Data
     {
         public static void Initialize(ApplicationDbContext context)
         {
-            //context.Database.EnsureCreated();
+            context.Database.EnsureCreated();
 
             if (context.Users.Any())
             {
@@ -18,20 +18,27 @@ namespace ActivityTracker.Data
             var users = new ApplicationUser[]
             {
                 // Teachers
-                new ApplicationUser{Id="1", FirstName="Teacher", Prefix="", LastName="1", Email="teacher@hotmail.com", UserType="T", Notes=""},
-                new ApplicationUser{Id="2", FirstName="Jan", Prefix="", LastName="Janssen", Email="jan@hotmail.com", UserType="T", Notes=""},
-                new ApplicationUser{Id="3", FirstName="Piet", Prefix="van", LastName="Dijk", Email="piet@gmail.com", UserType="T", Notes=""},
+                new ApplicationUser{Id="1", PasswordHash="AQAAAAEAACcQAAAAEFpdyIhZDeA6u6hUdeT+8BaJ8CvoCllT9xxr4VNvEa8GJMRRAaZOCZDh8D6jti3cIQ==",
+                    FirstName ="Teacher", Prefix="", LastName="1",
+                    Email="teacher@hotmail.com", UserName="teacher@hotmail.com",
+                    NormalizedEmail="TEACHER@HOTMAIL.COM", NormalizedUserName="TEACHER@HOTMAIL.COM",
+                    SecurityStamp="831e4741-d745-413a-ae08-111a604b4014", UserType ="T", Notes=""},
+                new ApplicationUser{Id="2", PasswordHash="AQAAAAEAACcQAAAAEFpdyIhZDeA6u6hUdeT+8BaJ8CvoCllT9xxr4VNvEa8GJMRRAaZOCZDh8D6jti3cIQ==", SecurityStamp="831e4741-d745-413a-ae08-111a604b4014", FirstName="Jan", Prefix="", LastName="Janssen", Email="jan@hotmail.com", UserName="", NormalizedEmail="", NormalizedUserName="", UserType="T", Notes=""},
+                new ApplicationUser{Id="3", PasswordHash="AQAAAAEAACcQAAAAEFpdyIhZDeA6u6hUdeT+8BaJ8CvoCllT9xxr4VNvEa8GJMRRAaZOCZDh8D6jti3cIQ==", SecurityStamp="831e4741-d745-413a-ae08-111a604b4014", FirstName="Piet", Prefix="van", LastName="Dijk", Email="piet@gmail.com", UserName="", NormalizedEmail="", NormalizedUserName="", UserType="T", Notes=""},
                 // Students
-                new ApplicationUser{Id="4", FirstName="Student", Prefix="", LastName="1", TeacherID="1", Email="student@hotmail.com", UserType="S", Notes=""},
-                new ApplicationUser{Id="5", FirstName="Henk", Prefix="van de", LastName="Waard", TeacherID="1", Email="henk@hotmail.com", UserType="S", Notes="Lorem ipsum dolor sit amet"},
-                new ApplicationUser{Id="6", FirstName="Marie", Prefix="", LastName="Smit", TeacherID="1", Email="marie@live.net", UserType="S", Notes=""},
-                new ApplicationUser{Id="7", FirstName="Freek", Prefix="de", LastName="Jong", TeacherID="2", Email="freek@gmail.com", UserType="S", Notes=""},
-                new ApplicationUser{Id="8", FirstName="Cornelia", Prefix="", LastName="Heiniken", TeacherID="2", Email="corrie@hotmail.com", UserType="S", Notes=""},
-                new ApplicationUser{Id="9", FirstName="Piet", Prefix="", LastName="Heijn", TeacherID="3", Email="p.heijn@gmail.com", UserType="S", Notes=""},
-                new ApplicationUser{Id="10", FirstName="Roos", Prefix="", LastName="Bloem", TeacherID="3", Email="roos@gmail.com", UserType="S", Notes=""},
+                new ApplicationUser{Id="4", PasswordHash="AQAAAAEAACcQAAAAEFpdyIhZDeA6u6hUdeT+8BaJ8CvoCllT9xxr4VNvEa8GJMRRAaZOCZDh8D6jti3cIQ==", SecurityStamp="831e4741-d745-413a-ae08-111a604b4014", FirstName="Student", Prefix="", LastName="1", TeacherID="1", Email="student@hotmail.com", UserName="", NormalizedEmail="", NormalizedUserName="", UserType="S", Notes=""},
+                new ApplicationUser{Id="5", PasswordHash="AQAAAAEAACcQAAAAEFpdyIhZDeA6u6hUdeT+8BaJ8CvoCllT9xxr4VNvEa8GJMRRAaZOCZDh8D6jti3cIQ==", SecurityStamp="831e4741-d745-413a-ae08-111a604b4014", FirstName="Henk", Prefix="van de", LastName="Waard", TeacherID="1", Email="henk@hotmail.com", UserName="", NormalizedEmail="", NormalizedUserName="", UserType="S", Notes="Lorem ipsum dolor sit amet"},
+                new ApplicationUser{Id="6", PasswordHash="AQAAAAEAACcQAAAAEFpdyIhZDeA6u6hUdeT+8BaJ8CvoCllT9xxr4VNvEa8GJMRRAaZOCZDh8D6jti3cIQ==", SecurityStamp="831e4741-d745-413a-ae08-111a604b4014", FirstName="Marie", Prefix="", LastName="Smit", TeacherID="1", Email="marie@live.net", UserName="", NormalizedEmail="", NormalizedUserName="", UserType="S", Notes=""},
+                new ApplicationUser{Id="7", PasswordHash="AQAAAAEAACcQAAAAEFpdyIhZDeA6u6hUdeT+8BaJ8CvoCllT9xxr4VNvEa8GJMRRAaZOCZDh8D6jti3cIQ==", SecurityStamp="831e4741-d745-413a-ae08-111a604b4014", FirstName="Freek", Prefix="de", LastName="Jong", TeacherID="2", Email="freek@gmail.com", UserName="", NormalizedEmail="", NormalizedUserName="", UserType="S", Notes=""},
+                new ApplicationUser{Id="8", PasswordHash="AQAAAAEAACcQAAAAEFpdyIhZDeA6u6hUdeT+8BaJ8CvoCllT9xxr4VNvEa8GJMRRAaZOCZDh8D6jti3cIQ==", SecurityStamp="831e4741-d745-413a-ae08-111a604b4014", FirstName="Cornelia", Prefix="", LastName="Heiniken", TeacherID="2", Email="corrie@hotmail.com", UserName="", NormalizedEmail="", NormalizedUserName="", UserType="S", Notes=""},
+                new ApplicationUser{Id="9", PasswordHash="AQAAAAEAACcQAAAAEFpdyIhZDeA6u6hUdeT+8BaJ8CvoCllT9xxr4VNvEa8GJMRRAaZOCZDh8D6jti3cIQ==", SecurityStamp="831e4741-d745-413a-ae08-111a604b4014", FirstName="Piet", Prefix="", LastName="Heijn", TeacherID="3", Email="p.heijn@gmail.com", UserName="", NormalizedEmail="", NormalizedUserName="", UserType="S", Notes=""},
+                new ApplicationUser{Id="10", PasswordHash="AQAAAAEAACcQAAAAEFpdyIhZDeA6u6hUdeT+8BaJ8CvoCllT9xxr4VNvEa8GJMRRAaZOCZDh8D6jti3cIQ==", SecurityStamp="831e4741-d745-413a-ae08-111a604b4014", FirstName="Roos", Prefix="", LastName="Bloem", TeacherID="3", Email="roos@gmail.com", UserName="", NormalizedEmail="", NormalizedUserName="", UserType="S", Notes=""},
             };
             foreach (ApplicationUser u in users)
             {
+                u.UserName = u.Email;
+                u.NormalizedEmail = u.Email.ToUpper();
+                u.NormalizedUserName = u.Email.ToUpper();
                 context.Users.Add(u);
             }
             context.SaveChanges();
