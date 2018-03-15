@@ -53,7 +53,7 @@ namespace ActivityTracker.Controllers
             {
                 try
                 {
-                    var student = GetAllStudents().Where(au => au.Id == id).ToList()[0];
+                    var student = GetAllStudents().Where(u => u.Id == id).ToList()[0];
                     studentId = id;
                     ViewBag.studentId = studentId;
                     ViewBag.StudentName = String.Format("{0} {1} {2}", student.FirstName, student.Prefix, student.LastName);

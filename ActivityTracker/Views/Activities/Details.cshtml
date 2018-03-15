@@ -55,12 +55,12 @@
                 <div class="form-group">
                     <div id="last-activity" class="date-control">
                         <label>Last Activity</label><br />
-                        @((ViewBag.LastActivity != null) ? @ViewBag.LastActivity : "-")
+                        @(ViewBag.LastActivity ?? "-")
                     </div>
                 </div>
                 <div class="form-group date-control">
                     <label>Time Spent</label><br />
-                    @((ViewBag.TimeSpent != null) ? ViewBag.TimeSpent : "-")
+                    @(ViewBag.TimeSpent ?? "-")
                 </div>
             </div>
             <div class="form-group">
@@ -128,7 +128,7 @@
                         @item.Date.ToString("dd-MM-yyyy")
                     </td>
                     <td class="text-center">
-                        @((item.TimeSpent != null) ? item.TimeSpent : "-")
+                        @(item.TimeSpent ?? "-")
                     </td>
                     <td>
                         @Html.Raw(item.Notes)
