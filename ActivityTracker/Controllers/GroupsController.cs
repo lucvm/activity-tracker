@@ -43,16 +43,16 @@ namespace ActivityTracker.Controllers
             }
 
             var currentUser = await GetCurrentUserAsync();
-            var @group = await _context.Groups
+            var group = await _context.Groups
                 .SingleOrDefaultAsync(m => m.ID == id);
 
-            if (@group == null)
+            if (group == null)
             {
                 return NotFound();
             }
 
-            if (currentUser.Id == @group.OwnerID)
-                return View(@group);
+            if (currentUser.Id == group.OwnerID)
+                return View(group);
             else
                 return RedirectToAction("AccessDenied", "Account");
         }
@@ -69,24 +69,24 @@ namespace ActivityTracker.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("ID,Name")] Group @group)
+        public async Task<IActionResult> Create([Bind("ID,Name")] Group group)
         {
             if (ModelState.IsValid)
             {
                 var currentUser = await GetCurrentUserAsync();
                 var currentUserId = currentUser?.Id;
-                @group.OwnerID = currentUserId;
+                group.OwnerID = currentUserId;
 
-                if (currentUser.Id == @group.OwnerID)
+                if (currentUser.Id == group.OwnerID)
                 {
-                    _context.Add(@group);
+                    _context.Add(group);
                     await _context.SaveChangesAsync();
                     return RedirectToAction("Index", "Groups");
                 }
                 else
                     return RedirectToAction("AccessDenied", "Account");
             }
-            return View(@group);
+            return View(group);
         }
 
         // GET: Groups/Edit/5
@@ -98,15 +98,15 @@ namespace ActivityTracker.Controllers
             }
 
             var currentUser = await GetCurrentUserAsync();
-            var @group = await _context.Groups.SingleOrDefaultAsync(m => m.ID == id);
+            var group = await _context.Groups.SingleOrDefaultAsync(m => m.ID == id);
 
-            if (@group == null)
+            if (group == null)
             {
                 return NotFound();
             }
 
-            if (currentUser.Id == @group.OwnerID)
-                return View(@group);
+            if (currentUser.Id == group.OwnerID)
+                return View(group);
             else
                 return RedirectToAction("AccessDenied", "Account");
         }
@@ -116,9 +116,9 @@ namespace ActivityTracker.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(string id, [Bind("ID,OwnerID,Name")] Group @group)
+        public async Task<IActionResult> Edit(string id, [Bind("ID,OwnerID,Name")] Group group)
         {
-            if (id != @group.ID)
+            if (id != group.ID)
             {
                 return NotFound();
             }
@@ -129,9 +129,9 @@ namespace ActivityTracker.Controllers
                 {
                     var currentUser = await GetCurrentUserAsync();
 
-                    if (currentUser.Id == @group.OwnerID)
+                    if (currentUser.Id == group.OwnerID)
                     {
-                        _context.Update(@group);
+                        _context.Update(group);
                         await _context.SaveChangesAsync();
                     }
                     else
@@ -139,7 +139,7 @@ namespace ActivityTracker.Controllers
                 }
                 catch (DbUpdateConcurrencyException)
                 {
-                    if (!GroupExists(@group.ID))
+                    if (!GroupExists(group.ID))
                     {
                         return NotFound();
                     }
@@ -150,7 +150,7 @@ namespace ActivityTracker.Controllers
                 }
                 return RedirectToAction(nameof(Index));
             }
-            return View(@group);
+            return View(group);
         }
 
         // GET: Groups/Delete/5
@@ -162,15 +162,15 @@ namespace ActivityTracker.Controllers
             }
 
             var currentUser = await GetCurrentUserAsync();
-            var @group = await _context.Groups
+            var group = await _context.Groups
                 .SingleOrDefaultAsync(m => m.ID == id);
-            if (@group == null)
+            if (group == null)
             {
                 return NotFound();
             }
 
-            if (currentUser.Id == @group.OwnerID)
-                return View(@group);
+            if (currentUser.Id == group.OwnerID)
+                return View(group);
             else
                 return RedirectToAction("AccessDenied", "Account");
         }
@@ -181,11 +181,11 @@ namespace ActivityTracker.Controllers
         public async Task<IActionResult> DeleteConfirmed(string id)
         {
             var currentUser = await GetCurrentUserAsync();
-            var @group = await _context.Groups.SingleOrDefaultAsync(m => m.ID == id);
+            var group = await _context.Groups.SingleOrDefaultAsync(m => m.ID == id);
 
-            if (currentUser.Id == @group.OwnerID)
+            if (currentUser.Id == group.OwnerID)
             {
-                _context.Groups.Remove(@group);
+                _context.Groups.Remove(group);
                 await _context.SaveChangesAsync();
                 return RedirectToAction(nameof(Index));
             }

@@ -25,12 +25,6 @@ namespace ActivityTracker.Controllers
             _context = context;
         }
 
-        // GET: LogEntries
-        //public async Task<IActionResult> Index()
-        //{
-        //    return View(await _context.LogEntries.ToListAsync());
-        //}
-
         // GET: LogEntries/Create
         public IActionResult Create()
         {
@@ -59,10 +53,6 @@ namespace ActivityTracker.Controllers
                 else
                 {
                     return RedirectToAction("AccessDenied", "Account");
-                    //var activity = await _context.Activities.SingleOrDefaultAsync(
-                    //    a => a.ID == logEntry.ActivityID);
-                    //student = await _context.ApplicationUsers.SingleOrDefaultAsync(
-                    //    s => s.Id == activity.ApplicationUserID);
                 }
 
                 var activity = await _context.Activities.SingleOrDefaultAsync(a => a.ID == logEntry.ActivityID);
