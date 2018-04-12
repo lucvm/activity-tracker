@@ -1,0 +1,17 @@
+{
+  "name": "Activity Tracker",
+  "short_name": "AT",
+  "description": "Track your own or your students' activities",
+  "icons": [
+    {
+      "src": "/images/icon_small.png",
+      "sizes": "192x192"
+    },
+    {
+      "src": "/images/icon_large.png",
+      "sizes": "512x512"
+    }
+  ],
+  "display": "fullscreen",
+  "start_url": "/"
+}
