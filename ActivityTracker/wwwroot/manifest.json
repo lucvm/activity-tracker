@@ -13,5 +13,6 @@
     }
   ],
   "display": "fullscreen",
+  "theme_color": "#227097",
   "start_url": "/"
 }

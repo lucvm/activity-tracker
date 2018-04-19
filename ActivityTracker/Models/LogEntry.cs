@@ -1,8 +1,5 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
-using System.Linq;
-using System.Threading.Tasks;
 
 namespace ActivityTracker.Models
 {
@@ -13,6 +10,7 @@ namespace ActivityTracker.Models
 
         [DisplayFormat(DataFormatString = "{0:d}")]
         public DateTime Date { get; set; }
+
         public float? TimeSpent { get; set; }
         public string Notes { get; set; }
     }

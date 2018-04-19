@@ -1,5 +1,3 @@
-using System;
-
 namespace ActivityTracker.Models
 {
     public class ErrorViewModel

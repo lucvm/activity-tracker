@@ -7,12 +7,12 @@
 <h2>Delete</h2>
 
 <h3>
-    Are you sure you want to delete 
+    Are you sure you want to delete
     @Html.DisplayFor(model => model.FirstName)
     @Html.DisplayFor(model => model.Prefix)
     @Html.DisplayFor(model => model.LastName)<text>?</text>
 </h3>
- <div>   
+ <div>
     <form asp-action="Delete">
         <input type="hidden" asp-for="Id" />
         <input type="submit" value="Delete" class="btn btn-default" /> |

@@ -2,13 +2,11 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
-using Microsoft.AspNetCore.Mvc;
-using Microsoft.AspNetCore.Mvc.Rendering;
-using Microsoft.EntityFrameworkCore;
 using ActivityTracker.Data;
 using ActivityTracker.Models;
 using Microsoft.AspNetCore.Identity;
-using System.Net;
+using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
 
 namespace ActivityTracker.Controllers
 {
@@ -40,10 +38,9 @@ namespace ActivityTracker.Controllers
         public async Task<IActionResult> Index(string id)
         {
             var currentUser = await GetCurrentUserAsync();
-            string studentId;
-
             ViewBag.CurrentUserType = currentUser.UserType;
 
+            string studentId;
             if (currentUser.UserType == "S")
             {
                 studentId = currentUser.Id;
@@ -55,7 +52,7 @@ namespace ActivityTracker.Controllers
                 {
                     var student = GetAllStudents().Where(u => u.Id == id).ToList()[0];
                     studentId = id;
-                    ViewBag.studentId = studentId;
+                    ViewBag.studentId = id;
                     ViewBag.StudentName = String.Format("{0} {1} {2}", student.FirstName, student.Prefix, student.LastName);
                     ViewBag.Groups = new List<Group>();
                     var allGroups = await _context.Groups
@@ -110,7 +107,7 @@ namespace ActivityTracker.Controllers
         }
 
         // POST: Activities/Create
-        // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
+        // To protect from overposting attacks, please enable the specific properties you want to bind to, for
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
@@ -190,7 +187,7 @@ namespace ActivityTracker.Controllers
         }
 
         // POST: Activities/Edit/5
-        // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
+        // To protect from overposting attacks, please enable the specific properties you want to bind to, for
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
@@ -203,7 +200,8 @@ namespace ActivityTracker.Controllers
             var currentUser = await GetCurrentUserAsync();
             string teacherId = "";
 
-            if (currentUser.UserType == "T") {
+            if (currentUser.UserType == "T")
+            {
                 teacherId = _context.ApplicationUsers
                     .Where(au => au.Id == activity.ApplicationUserID)
                     .FirstOrDefault()
@@ -215,32 +213,36 @@ namespace ActivityTracker.Controllers
             {
                 if (ModelState.IsValid)
                 {
-                    try
-                    {
-                        _context.Update(activity);
-                        await _context.SaveChangesAsync();
-                    }
-                    catch (DbUpdateConcurrencyException)
-                    {
-                        if (!ActivityExists(activity.ID))
-                        {
-                            return NotFound();
-                        }
-                        else
-                        {
-                            throw;
-                        }
-                    }
-                    if (currentUser.UserType == "S")
-                        return RedirectToAction(nameof(Index));
-                    else
-                        return RedirectToAction("Index", "Activities", new { id = activity.ApplicationUserID });
+                    return await NewMethod(activity, currentUser);
                 }
                 return View(activity);
             }
             else
                 return RedirectToAction("AccessDenied", "Account");
+        }
 
+        private async Task<IActionResult> NewMethod(Activity activity, ApplicationUser currentUser)
+        {
+            try
+            {
+                _context.Update(activity);
+                await _context.SaveChangesAsync();
+            }
+            catch (DbUpdateConcurrencyException)
+            {
+                if (!ActivityExists(activity.ID))
+                {
+                    return NotFound();
+                }
+                else
+                {
+                    throw;
+                }
+            }
+            if (currentUser.UserType == "S")
+                return RedirectToAction(nameof(Index));
+            else
+                return RedirectToAction("Index", "Activities", new { id = activity.ApplicationUserID });
         }
 
         // GET: Activities/Delete/5
@@ -278,7 +280,7 @@ namespace ActivityTracker.Controllers
 
             if (activity.ApplicationUserID == currentUser.Id)
             {
-                    _context.Activities.Remove(activity);
+                _context.Activities.Remove(activity);
                 await _context.SaveChangesAsync();
                 return RedirectToAction(nameof(Index));
             }

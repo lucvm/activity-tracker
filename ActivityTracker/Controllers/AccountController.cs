@@ -3,17 +3,15 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Security.Claims;
 using System.Threading.Tasks;
+using ActivityTracker.Data;
+using ActivityTracker.Models;
+using ActivityTracker.Models.AccountViewModels;
+using ActivityTracker.Services;
 using Microsoft.AspNetCore.Authentication;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
-using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.Extensions.Logging;
-using Microsoft.Extensions.Options;
-using ActivityTracker.Models;
-using ActivityTracker.Models.AccountViewModels;
-using ActivityTracker.Services;
-using ActivityTracker.Data;
 
 namespace ActivityTracker.Controllers
 {
@@ -180,7 +178,8 @@ namespace ActivityTracker.Controllers
             ViewData["ReturnUrl"] = returnUrl;
             if (ModelState.IsValid)
             {
-                var user = new ApplicationUser {
+                var user = new ApplicationUser
+                {
                     UserName = model.Email,
                     Email = model.Email,
                     FirstName = model.FirstName,
@@ -220,7 +219,7 @@ namespace ActivityTracker.Controllers
         {
             return _context.Groups.AsQueryable();
         }
-        
+
         [HttpGet]
         public async Task<IActionResult> RegisterStudent(string returnUrl = null)
         {
@@ -233,6 +232,7 @@ namespace ActivityTracker.Controllers
         }
 
         private Task<ApplicationUser> GetCurrentUserAsync() => _userManager.GetUserAsync(HttpContext.User);
+
         [HttpPost]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> RegisterStudent(RegisterStudentViewModel model, List<string> groups, string returnUrl = null)
@@ -269,8 +269,11 @@ namespace ActivityTracker.Controllers
                 {
                     foreach (var group in assignedGroups)
                     {
-                        _context.Add(new UserGroup { ApplicationUserID = user.Id,
-                                                     GroupID = group.ID});
+                        _context.Add(new UserGroup
+                        {
+                            ApplicationUserID = user.Id,
+                            GroupID = group.ID
+                        });
                     }
                     await _context.SaveChangesAsync();
                     _logger.LogInformation("Teacher created a new student with password.");
@@ -473,12 +476,13 @@ namespace ActivityTracker.Controllers
             AddErrors(result);
             return View();
         }
+
         private string GetCurrentUser() => _userManager.GetUserId(HttpContext.User);
 
         public bool UsernameExists(string username)
         {
             var user = _context.ApplicationUsers.Where(au => au.UserName == username).FirstOrDefault();
-            
+
 
             return (user == null || user.Id == GetCurrentUser());
         }
@@ -519,6 +523,6 @@ namespace ActivityTracker.Controllers
             }
         }
 
-        #endregion
+        #endregion Helpers
     }
 }

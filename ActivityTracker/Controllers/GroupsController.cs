@@ -1,13 +1,10 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
+﻿using System.Linq;
 using System.Threading.Tasks;
-using Microsoft.AspNetCore.Mvc;
-using Microsoft.AspNetCore.Mvc.Rendering;
-using Microsoft.EntityFrameworkCore;
 using ActivityTracker.Data;
 using ActivityTracker.Models;
 using Microsoft.AspNetCore.Identity;
+using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
 
 namespace ActivityTracker.Controllers
 {
@@ -42,7 +39,6 @@ namespace ActivityTracker.Controllers
                 return NotFound();
             }
 
-            var currentUser = await GetCurrentUserAsync();
             var group = await _context.Groups
                 .SingleOrDefaultAsync(m => m.ID == id);
 
@@ -51,7 +47,7 @@ namespace ActivityTracker.Controllers
                 return NotFound();
             }
 
-            if (currentUser.Id == group.OwnerID)
+            if ((await GetCurrentUserAsync()).Id == group.OwnerID)
                 return View(group);
             else
                 return RedirectToAction("AccessDenied", "Account");
@@ -65,7 +61,7 @@ namespace ActivityTracker.Controllers
 
 
         // POST: Groups/Create
-        // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
+        // To protect from overposting attacks, please enable the specific properties you want to bind to, for
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
@@ -74,8 +70,7 @@ namespace ActivityTracker.Controllers
             if (ModelState.IsValid)
             {
                 var currentUser = await GetCurrentUserAsync();
-                var currentUserId = currentUser?.Id;
-                group.OwnerID = currentUserId;
+                group.OwnerID = currentUser?.Id;
 
                 if (currentUser.Id == group.OwnerID)
                 {
@@ -112,7 +107,7 @@ namespace ActivityTracker.Controllers
         }
 
         // POST: Groups/Edit/5
-        // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
+        // To protect from overposting attacks, please enable the specific properties you want to bind to, for
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]

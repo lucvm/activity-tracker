@@ -1,5 +1,5 @@
 ﻿function filter() {
-    // Declare variables 
+    // Declare variables
     var input, filter, table, tr, td, i;
     input = document.getElementById("search-overview");
     filter = input.value.toUpperCase();
